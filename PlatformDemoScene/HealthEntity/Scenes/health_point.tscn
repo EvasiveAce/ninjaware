@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://wsvdb4844wue"]
+
+[ext_resource type="Texture2D" uid="uid://bccaqmdm3qjtm" path="res://PlatformDemoScene/HealthEntity/Art/Health.png" id="1_kwx36"]
+
+[node name="HealthPoint" type="TextureRect"]
+texture_filter = 1
+texture = ExtResource("1_kwx36")
