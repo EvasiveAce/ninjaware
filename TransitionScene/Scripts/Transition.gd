@@ -14,6 +14,15 @@ func _lose_health() -> void:
 	await get_tree().create_timer(0.1).timeout
 	$TransitionSprite/HPContainer.get_child(0).queue_free()
 
+func _lose_enemy_health() -> void:
+	$TransitionSprite/EnemyHPContainer.get_child(0).visible = false
+	await get_tree().create_timer(0.1).timeout
+	$TransitionSprite/EnemyHPContainer.get_child(0).visible = true
+	await get_tree().create_timer(0.1).timeout
+	$TransitionSprite/EnemyHPContainer.get_child(0).queue_free()
+
+
+
 
 
 func _enemy_laughing() -> void:
@@ -21,6 +30,8 @@ func _enemy_laughing() -> void:
 	%LaughTimer.start()
 	_switch_marker(markersArray[currentArrayIndex])
 
+func _enemy_laughing_stop() -> void:
+	$%LaughTimer.stop()
 
 func _switch_marker(marker : Marker2D) -> void:
 	var textOffset = Vector2(
@@ -28,7 +39,6 @@ func _switch_marker(marker : Marker2D) -> void:
 		randf_range(-32.0, 32.0)
 	)
 	var randomPosition = marker.global_position + textOffset
-	print(randomPosition)
 	PopupText.display_text("HAHA", randomPosition, 32, 4)
 
 func _on_laugh_timer_timeout() -> void:
