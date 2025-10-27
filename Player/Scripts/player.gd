@@ -1,19 +1,19 @@
 extends CharacterBody2D
 
-@export var speedFactor := 4
+var speedFactor := 4.5
 
-@export var max_walk_speed := 75.0 * speedFactor
-@export var max_run_speed := 135.0 * speedFactor
-@export var max_sprint_speed := 180.0 * speedFactor
+var max_walk_speed : float
+var max_run_speed : float
+var max_sprint_speed : float
 
-@export var walk_accel := 337.5 * speedFactor
-@export var stop_decel := 600.0 * speedFactor
+var walk_accel : float
+var stop_decel : float
 
-@export var gravity_without_jump_held := 2000.0 * speedFactor / 1.5
-@export var gravity_with_jump_held := 1000.0 * speedFactor / 1.5
+var gravity_without_jump_held := 2000.0 * 4 / 1.5
+var gravity_with_jump_held := 1000.0 * 4 / 1.5
 
-@export var base_jump_speed := 280.0 * speedFactor / 1.5
-@export var jump_speed_incr:= 9.375 * speedFactor / 1.5
+var base_jump_speed := 280.0 * 4 / 1.5
+var jump_speed_incr:= 9.375 * 4 / 1.5
 
 var jump_buffered := false
 var air_speed := 0.0
@@ -29,6 +29,13 @@ func _ready() -> void:
 	state_machine = anim_tree.get("parameters/playback")
 	
 
+func _process(_delta: float) -> void:
+	max_walk_speed = 75.0 * speedFactor
+	max_run_speed = 135.0 * speedFactor
+	max_sprint_speed = 180.0 * speedFactor
+	walk_accel = 337.5 * speedFactor
+	stop_decel = 600.0 * speedFactor
+
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if GlobalScene.enabledMovement:
@@ -40,11 +47,16 @@ func _physics_process(delta: float) -> void:
 
 		# Handle jump.
 		if Input.is_action_just_pressed("ui_accept"):
-			if is_on_floor():
+			if is_on_floor(): 
 				# Store the current horizontal speed when jumping
 				air_speed = abs(velocity.x)
 				velocity.y = _jump_speed()
-			else :
+			elif !$CoyoteTimeTimer.is_stopped():
+				# Coyote jump - only if timer is active and we're falling
+				air_speed = abs(velocity.x)
+				velocity.y = _jump_speed()
+				PopupText.display_text("Coyote'd!", position, 16, 2)
+			else:
 				if !jump_buffered:
 					$JumpBufferTimer.start()
 					jump_buffered = true
@@ -79,6 +91,11 @@ func _physics_process(delta: float) -> void:
 		var was_on_floor := is_on_floor()
 		move_and_slide()
 		
+		if was_on_floor && !is_on_floor():
+			$CoyoteTimeTimer.start()
+		else:
+			$CoyoteTimeTimer.stop()
+
 		if !was_on_floor && is_on_floor():
 			if jump_buffered:
 				jump_buffered = false
@@ -87,10 +104,11 @@ func _physics_process(delta: float) -> void:
 		
 	# ------------------------
 	# Animation control logic:
-	if not is_on_floor():
+	if not is_on_floor() and GlobalScene.enabledMovement:
 		# Check if we're jumping (moving up) or falling (moving down)
 		if velocity.y < 0:  # Moving up = jumping
 			if state_machine.get_current_node() != "Jump":
+				$JumpPlayer.play()
 				state_machine.travel("Jump")
 		else:  # Moving down = falling
 			if state_machine.get_current_node() != "Fall":
@@ -113,8 +131,8 @@ func _physics_process(delta: float) -> void:
 func _jump_speed():
 	var base_speed := base_jump_speed
 	var speed_incr := jump_speed_incr
-	var velocity := max_run_speed if Input.is_action_pressed('x') else max_walk_speed
-	return -(base_speed + speed_incr * (velocity / 30))
+	var velocityToUse := max_run_speed if Input.is_action_pressed('x') else max_walk_speed
+	return -(base_speed + speed_incr * (velocityToUse / 30))
 
 
 func _on_jump_buffer_timer_timeout() -> void:
