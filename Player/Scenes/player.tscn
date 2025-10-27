@@ -1,10 +1,11 @@
-[gd_scene load_steps=38 format=3 uid="uid://m7u5e3x6nme8"]
+[gd_scene load_steps=39 format=3 uid="uid://m7u5e3x6nme8"]
 
 [ext_resource type="Texture2D" uid="uid://cgngj58w0j5o2" path="res://Player/Art/NinjaSpriteSheet.png" id="1_i823h"]
 [ext_resource type="Script" uid="uid://c1u8hjdnykq7l" path="res://Player/Scripts/player.gd" id="1_rg7kn"]
+[ext_resource type="AudioStream" uid="uid://drgncy66qa4ho" path="res://OpeningScene/NinjaJumpTest.wav" id="3_52sos"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rg7kn"]
-size = Vector2(18.6, 30)
+size = Vector2(21, 30)
 
 [sub_resource type="Animation" id="Animation_xwb2w"]
 resource_name = "Fall"
@@ -229,12 +230,12 @@ animation = &"Run"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_52sos"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_omv0o"]
+nodes/output/position = Vector2(460, 120)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_rg7kn")
 nodes/Animation/position = Vector2(40, 60)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_52sos")
 nodes/TimeScale/position = Vector2(231, 97)
-nodes/output/position = Vector2(460, 120)
-node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_omv0o"]
 animation = &"Walk"
@@ -242,12 +243,12 @@ animation = &"Walk"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_bw35f"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_xwb2w"]
+nodes/output/position = Vector2(420, 80)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_omv0o")
 nodes/Animation/position = Vector2(80, 40)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_bw35f")
 nodes/TimeScale/position = Vector2(240, 60)
-nodes/output/position = Vector2(420, 80)
-node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rg7kn"]
 advance_mode = 2
@@ -310,8 +311,11 @@ hframes = 10
 vframes = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.7, 0)
+position = Vector2(1.5000002, 0)
 shape = SubResource("RectangleShape2D_rg7kn")
+
+[node name="CoyoteTimeTimer" type="Timer" parent="."]
+wait_time = 0.15
 
 [node name="JumpBufferTimer" type="Timer" parent="."]
 wait_time = 0.25
@@ -327,5 +331,8 @@ tree_root = SubResource("AnimationNodeStateMachine_rg7kn")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Run/TimeScale/scale = 8.0
 parameters/Walk/TimeScale/scale = 8.0
+
+[node name="JumpPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_52sos")
 
 [connection signal="timeout" from="JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]
