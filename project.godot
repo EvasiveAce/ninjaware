@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Ninja Ninja"
+config/name="NinjaWare"
 run/main_scene="uid://c6ahriwt65j3v"
 config/features=PackedStringArray("4.5", "Forward Plus")
 
