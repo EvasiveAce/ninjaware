@@ -68,8 +68,10 @@ func _physics_process(delta: float) -> void:
 		if is_on_floor():
 			if Input.is_action_pressed("ui_left"):
 				$PlayerSprite.flip_h = true
+				$CollisionShape2D.position.x = -1.5
 			elif Input.is_action_pressed("ui_right"):
 				$PlayerSprite.flip_h = false
+				$CollisionShape2D.position.x = 1.5
 			# Ground movement - normal behavior
 		if direction:
 			var max_speed := max_walk_speed
@@ -126,7 +128,8 @@ func _physics_process(delta: float) -> void:
 		if state_machine.get_current_node() != "Idle":
 			state_machine.travel("Idle")
 
-
+func _bounce_on_enemy():
+	velocity.y = _jump_speed() * 1.5
 
 func _jump_speed():
 	var base_speed := base_jump_speed

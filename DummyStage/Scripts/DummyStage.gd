@@ -1,30 +1,35 @@
 extends Node2D
 
-@export var defaultHP := 1
+@export var defaultHP := 3
 @export var hpEntity : PackedScene
 
 @export var enemyHP := 3
 @export var enemyHPEntity : PackedScene
 
 var currentLevel := 0
+var currentEnemy := 0
 
 var arrayOfPositions := [
-		Vector2(264.0, 700.0), Vector2(143.0, 700.0), Vector2(143.0, 264.0), Vector2(120.0, 448.0), 
-		Vector2(120.0, 320.0), Vector2(120.0, 320.0), Vector2(120.0, 576.0), Vector2(120.0, 576.0),
-		Vector2(192.0, 768.0), Vector2(92.0, 256.0), Vector2(112.0, 320.0), Vector2(88.0, 448.0)
+		Vector2(264.0, 700.0), Vector2(88.0, 700.0), Vector2(88.0, 252.0), Vector2(88.0, 444.0), 
+		Vector2(88.0, 444.0), Vector2(88.0, 188.0), Vector2(88.0, 508.0), Vector2(88.0, 700.0),
+		Vector2(88.0, 828.0), Vector2(88.0, 764.0), Vector2(88.0, 316.0), Vector2(88.0, 448.0)
 	]
 
 var arrayOfPortals := [
-		Vector2(1832.0, 680.0), Vector2(1832.0, 240.0), Vector2(1832.0, 432.0), Vector2(2220.0, 432.0), 
-		Vector2(1792.0, 304.0), Vector2(1688.0, 560.0), Vector2(1800.0, 560.0), Vector2(2220.0, 432.0),
-		Vector2(1688.0, 240.0), Vector2(1784.0, 272.0), Vector2(1760.0, 424.0), Vector2(2220.0, 432.0)
+		Vector2(1830.0, 692.0), Vector2(1830.0, 244.0), Vector2(1830.0, 436.0), Vector2(2036.0, 436.0), 
+		Vector2(1830.0, 180.0), Vector2(1830.0, 500.0), Vector2(1830.0, 692.0), Vector2(2036.0, 436.0),
+		Vector2(1830.0, 756.0), Vector2(1830.0, 308.0), Vector2(1830.0, 308.0), Vector2(2036.0, 436.0)
 	]
 
-@export var arrayOfLevels : Array[Node]
+var arrayOfLevels : Array[Node]
 
-@export var arrayOfEnemys := [Vector2(1464.0, 304.0), Vector2(1720.0, 752.0), Vector2(1752.0, 560.0)]
+var arrayOfEnemys := [Vector2(1720.0, 432.0), Vector2(1720.0, 816.0), Vector2(1736.0, 752.0)]
 
 var speed := 6.0
+
+var arrayOfPositionsToUse = []
+var arrayOfPortalsToUse = []
+var arrayOfEnemysToUse = []
 
 var anim_tree
 var state_machine
@@ -52,8 +57,8 @@ func _health_set_up():
 		$TransitionIntro/LivesEnemyAdded.play()
 
 	
-	$Player.position = arrayOfPositions[currentLevel]
-	$EndPoint.position = arrayOfPortals[currentLevel]
+	$Player.position = arrayOfPositionsToUse[currentLevel]
+	$EndPoint.position = arrayOfPortalsToUse[currentLevel]
 	arrayOfLevels[currentLevel].enabled = true
 
 	await _battle_intro()
@@ -65,6 +70,7 @@ func _health_set_up():
 func _arrays_reset():
 	arrayOfLevels = []
 	currentLevel = 0
+	currentEnemy = 0
 	$Stage1.enabled = false
 	$Stage2.enabled = false
 	$Stage3.enabled = false
@@ -90,22 +96,14 @@ func _arrays_reset():
 	arrayOfLevels.append($Stage11)
 	arrayOfLevels.append($Stage12)
 
-	arrayOfPositions = []
-	arrayOfPositions = [
-		Vector2(264.0, 700.0), Vector2(143.0, 700.0), Vector2(143.0, 264.0), Vector2(120.0, 448.0), 
-		Vector2(120.0, 320.0), Vector2(120.0, 320.0), Vector2(120.0, 576.0), Vector2(120.0, 576.0),
-		Vector2(192.0, 768.0), Vector2(92.0, 256.0), Vector2(112.0, 320.0), Vector2(88.0, 448.0)
-	]
+	arrayOfPositionsToUse = []
+	arrayOfPositionsToUse = arrayOfPositions.duplicate(true)
 
-	arrayOfPortals = []
-	arrayOfPortals = [
-		Vector2(1832.0, 680.0), Vector2(1832.0, 240.0), Vector2(1832.0, 432.0), Vector2(2220.0, 432.0), 
-		Vector2(1792.0, 304.0), Vector2(1688.0, 560.0), Vector2(1800.0, 560.0), Vector2(2220.0, 432.0),
-		Vector2(1688.0, 240.0), Vector2(1784.0, 272.0), Vector2(1760.0, 424.0), Vector2(2220.0, 432.0)
-	]
+	arrayOfPortalsToUse = []
+	arrayOfPortalsToUse = arrayOfPortals.duplicate(true)
 
-	arrayOfEnemys = []
-	arrayOfEnemys = [Vector2(1464.0, 304.0), Vector2(1720.0, 752.0), Vector2(1752.0, 560.0)]
+	arrayOfEnemysToUse = []
+	arrayOfEnemysToUse = arrayOfEnemys.duplicate(true)
 
 func _revive_set_up():
 	_arrays_reset()
@@ -122,8 +120,8 @@ func _revive_set_up():
 		$TransitionIntro/TransitionSprite/EnemyHPContainer.add_child(enemyHPEntity.instantiate())
 		$TransitionIntro/LivesEnemyAdded.play()
 	
-	$Player.position = arrayOfPositions[currentLevel]
-	$EndPoint.position = arrayOfPortals[currentLevel]
+	$Player.position = arrayOfPositionsToUse[currentLevel]
+	$EndPoint.position = arrayOfPortalsToUse[currentLevel]
 	arrayOfLevels[currentLevel].enabled = true
 
 	await _battle_intro()
@@ -150,16 +148,16 @@ func _on_timer_timeout() -> void:
 				await _player_hit_ouch()
 				arrayOfLevels[currentLevel].enabled = false
 				currentLevel = 0
-				$Player.position = arrayOfPositions[currentLevel]
-				$EndPoint.position = arrayOfPortals[currentLevel]
+				$Player.position = arrayOfPositionsToUse[currentLevel]
+				$EndPoint.position = arrayOfPortalsToUse[currentLevel]
 				arrayOfLevels[currentLevel].enabled = true
 				await _ouch_transition_in()
 			elif hpLeft == 2:
 				await _player_hit_augh()
 				arrayOfLevels[currentLevel].enabled = false
 				currentLevel = 0
-				$Player.position = arrayOfPositions[currentLevel]
-				$EndPoint.position = arrayOfPortals[currentLevel]
+				$Player.position = arrayOfPositionsToUse[currentLevel]
+				$EndPoint.position = arrayOfPortalsToUse[currentLevel]
 				arrayOfLevels[currentLevel].enabled = true
 				await _augh_transition_in()
 			$Timer.start(speed)
@@ -265,73 +263,78 @@ func _on_area_2d_body_entered(_body: Node2D) -> void:
 	await _transition_out()
 	arrayOfLevels[currentLevel].enabled = false
 	currentLevel += 1
+	$Player.position = arrayOfPositionsToUse[currentLevel]
+	$EndPoint.position = arrayOfPortalsToUse[currentLevel]
 	if currentLevel == 3:
+		currentEnemy += 1
+		if currentEnemy == 3:
+			$Dummy.flip_h = true
+		else:
+			$Dummy.flip_h = false
 		$Dummy.visible = true
 		$Dummy/Area2D/CollisionShape2D.disabled = false
-		$Dummy.position = arrayOfEnemys[0]
+		$Dummy.position = arrayOfEnemysToUse[0]
 	arrayOfLevels[currentLevel].enabled = true
-	$Player.position = arrayOfPositions[currentLevel]
-	$EndPoint.position = arrayOfPortals[currentLevel]
 	await _transition_in()
 	$Timer.start(speed)
 	GlobalScene.enabledMovement = true
 	$Player/AnimationTree.active = true
 
 func _on_area_2d_body_entered_dummy(_body: Node2D) -> void:
-	GlobalScene.enabledMovement = false
-	$Player/AnimationTree.active = false
-	$Timer.stop()
-	$TransitionIntro/TransitionSprite/VersusLabel.text = "VERSUS"
-	if $TransitionIntro/TransitionSprite/EnemyHPContainer.get_child_count() == 1:
-		await _transition_out()
-		await _enemy_kill()
-	elif $TransitionIntro/TransitionSprite/EnemyHPContainer.get_child_count() == 2:
-		await _transition_out()
-		await _enemy_hit_second()
-	else:
-		await _transition_out()
-		await _enemy_hit_first()
-	arrayOfLevels[currentLevel].enabled = false
+	if GlobalScene.enabledMovement:
+		GlobalScene.enabledMovement = false
+		$Player/AnimationTree.active = false
+		$Timer.stop()
+		$TransitionIntro/TransitionSprite/VersusLabel.text = "VERSUS"
+		if $TransitionIntro/TransitionSprite/EnemyHPContainer.get_child_count() == 1:
+			await _transition_out()
+			await _enemy_kill()
+		elif $TransitionIntro/TransitionSprite/EnemyHPContainer.get_child_count() == 2:
+			await _transition_out()
+			await _enemy_hit_second()
+		else:
+			await _transition_out()
+			await _enemy_hit_first()
+		arrayOfLevels[currentLevel].enabled = false
 
-	arrayOfLevels.pop_front()
-	arrayOfLevels.pop_front()
-	arrayOfLevels.pop_front()
-	arrayOfLevels.pop_front()
+		arrayOfLevels.pop_front()
+		arrayOfLevels.pop_front()
+		arrayOfLevels.pop_front()
+		arrayOfLevels.pop_front()
 
-	arrayOfPositions.pop_front()
-	arrayOfPositions.pop_front()
-	arrayOfPositions.pop_front()
-	arrayOfPositions.pop_front()
+		arrayOfPositionsToUse.pop_front()
+		arrayOfPositionsToUse.pop_front()
+		arrayOfPositionsToUse.pop_front()
+		arrayOfPositionsToUse.pop_front()
 
-	arrayOfPortals.pop_front()
-	arrayOfPortals.pop_front()
-	arrayOfPortals.pop_front()
-	arrayOfPortals.pop_front()
-	arrayOfEnemys.pop_front()
+		arrayOfPortalsToUse.pop_front()
+		arrayOfPortalsToUse.pop_front()
+		arrayOfPortalsToUse.pop_front()
+		arrayOfPortalsToUse.pop_front()
+		arrayOfEnemysToUse.pop_front()
 
 
-	currentLevel = 0
-	if speed == 5.0:
-		speed = 4.0
-		$Player.speedFactor = 5.5
-	else:
-		speed = 5.0
-		$Player.speedFactor = 5.0
+		currentLevel = 0
+		if speed == 5.0:
+			speed = 4.0
+			$Player.speedFactor = 5.5
+		else:
+			speed = 5.0
+			$Player.speedFactor = 5.0
 
-	
-	$Dummy.visible = false
-	$Dummy/Area2D/CollisionShape2D.disabled = true
-	$Dummy.position = arrayOfEnemys[0]
-	arrayOfLevels[currentLevel].enabled = true
+		$Dummy.visible = false
+		$Dummy/Area2D/CollisionShape2D.disabled = true
+		$Dummy.position = arrayOfEnemysToUse[0]
+		arrayOfLevels[currentLevel].enabled = true
 
-	$Player.position = arrayOfPositions[currentLevel]
-	$EndPoint.position = arrayOfPortals[currentLevel]
+		$Player.position = arrayOfPositionsToUse[currentLevel]
+		$EndPoint.position = arrayOfPortalsToUse[currentLevel]
 
-	if $TransitionIntro/TransitionSprite/EnemyHPContainer.get_child_count() == 2:
-		await _enemy_first_transition_in()
-	else:
-		await _enemy_second_transition_in()
-	
-	$Timer.start(speed)
-	GlobalScene.enabledMovement = true
-	$Player/AnimationTree.active = true
+		if $TransitionIntro/TransitionSprite/EnemyHPContainer.get_child_count() == 2:
+			await _enemy_first_transition_in()
+		else:
+			await _enemy_second_transition_in()
+		
+		$Timer.start(speed)
+		GlobalScene.enabledMovement = true
+		$Player/AnimationTree.active = true
