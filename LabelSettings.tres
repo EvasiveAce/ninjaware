@@ -1,9 +1,0 @@
-[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://d2gk24pdcoddj"]
-
-[ext_resource type="FontFile" uid="uid://b4l4vamirhbk5" path="res://Wariowareinc-BWWdn.ttf" id="1_7888j"]
-
-[resource]
-font = ExtResource("1_7888j")
-font_size = 96
-outline_size = 16
-outline_color = Color(0, 0, 0, 1)
