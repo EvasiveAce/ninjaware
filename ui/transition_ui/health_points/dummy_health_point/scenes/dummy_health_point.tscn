@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5r8q43l8n4wv"]
+
+[ext_resource type="Texture2D" uid="uid://b6yx51oidakdl" path="res://ui/transition_ui/health_points/dummy_health_point/art/dummy_health_point.png" id="1_x0wtg"]
+
+[node name="DummyHealthPoint" type="TextureRect"]
+texture_filter = 1
+texture = ExtResource("1_x0wtg")

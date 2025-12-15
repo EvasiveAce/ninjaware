@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dw4v8e4w3xev1"]
+
+[ext_resource type="Texture2D" uid="uid://cq4erj5ab8ofn" path="res://ui/transition_ui/health_points/potatomous_health_point/art/potatomous_health_point.png" id="1_swrxx"]
+
+[node name="PotatomousHealthPoint" type="TextureRect"]
+texture_filter = 1
+texture = ExtResource("1_swrxx")
+stretch_mode = 3

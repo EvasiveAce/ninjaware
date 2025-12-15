@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://bn8g726ekjkg1"]
+
+[ext_resource type="Texture2D" uid="uid://dsi5iaehrac6l" path="res://stages/potatomous_stage/art/potato_bomb.png" id="1_dgwcx"]
+[ext_resource type="Script" uid="uid://bkcgb8sts2nmc" path="res://stages/potatomous_stage/scripts/potato_bomb_left_facing.gd" id="2_heun1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7m2sc"]
+atlas = ExtResource("1_dgwcx")
+region = Rect2(24, 0, 24, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bvdwu"]
+atlas = ExtResource("1_dgwcx")
+region = Rect2(0, 0, 24, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6xt2g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7m2sc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bvdwu")
+}],
+"loop": false,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cuqko"]
+radius = 12.0
+
+[node name="PotatoBomb" type="AnimatedSprite2D"]
+texture_filter = 1
+position = Vector2(-1, -7)
+rotation = -1.5707964
+sprite_frames = SubResource("SpriteFrames_6xt2g")
+frame = 1
+frame_progress = 1.0
+script = ExtResource("2_heun1")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, 11)
+shape = SubResource("CircleShape2D_cuqko")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

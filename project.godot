@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="NinjaWare"
-run/main_scene="uid://c6ahriwt65j3v"
+run/main_scene="uid://bhknwy2pm2iro"
 config/features=PackedStringArray("4.5", "Forward Plus")
+config/icon="uid://bccaqmdm3qjtm"
 
 [autoload]
 
-GlobalScene="*res://Global/Scripts/global_scene.gd"
-PopupText="*res://Global/Scripts/popup_text.gd"
+GlobalScene="*res://_autoloads/global/scripts/global_scene.gd"
+PopupText="*res://_autoloads/global/scripts/popup_text.gd"
 
 [display]
 
@@ -28,6 +29,10 @@ window/size/borderless=true
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
+
+[global_group]
+
+Player=""
 
 [input]
 
