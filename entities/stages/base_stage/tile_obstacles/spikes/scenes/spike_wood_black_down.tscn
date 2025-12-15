@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cuqmu4sjkqnxe"]
+
+[ext_resource type="Texture2D" uid="uid://b3fxyt3swa7ki" path="res://entities/stages/base_stage/tile_maps/snow/art/jay_leno_tile_sheet.png" id="1_cg6is"]
+[ext_resource type="Script" uid="uid://driff6t5w6g2f" path="res://entities/stages/base_stage/tile_obstacles/spikes/scripts/spike.gd" id="2_1gyl2"]
+[ext_resource type="Texture2D" uid="uid://dofi3g6ayqtt0" path="res://entities/stages/base_stage/tile_maps/snow/art/back_background.png" id="3_4m4s2"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_vlc5k"]
+points = PackedVector2Array(0, -1, -15, 5, -15, 7, 0, 13)
+
+[node name="Spike" type="Sprite2D"]
+texture_filter = 1
+rotation = -1.5707964
+texture = ExtResource("1_cg6is")
+hframes = 24
+vframes = 18
+frame = 269
+script = ExtResource("2_1gyl2")
+
+[node name="SpikeArea2D" type="Area2D" parent="."]
+
+[node name="SpikeCollisionShape2D" type="CollisionShape2D" parent="SpikeArea2D"]
+position = Vector2(8, -6)
+shape = SubResource("ConvexPolygonShape2D_vlc5k")
+
+[node name="BlackBackground" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("3_4m4s2")
+
+[connection signal="body_entered" from="SpikeArea2D" to="." method="_on_spike_area_2d_body_entered"]

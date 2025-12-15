@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://mlgyl1vb3f6s"]
+
+[ext_resource type="Texture2D" uid="uid://bb3s115vclfov" path="res://entities/stages/base_stage/tile_obstacles/start_points/art/start_point.png" id="1_2ohm6"]
+[ext_resource type="Texture2D" uid="uid://dofi3g6ayqtt0" path="res://entities/stages/base_stage/tile_maps/snow/art/back_background.png" id="2_0y6s8"]
+
+[node name="StartPoint" type="Sprite2D"]
+texture_filter = 1
+position = Vector2(3, -3)
+texture = ExtResource("1_2ohm6")
+
+[node name="BlackBackground" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(1.9999988, 3.0000005)
+scale = Vector2(2.625, 2.25)
+texture = ExtResource("2_0y6s8")

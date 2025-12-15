@@ -1,0 +1,106 @@
+[gd_scene load_steps=15 format=3 uid="uid://v8pmbftqy2aw"]
+
+[ext_resource type="Script" uid="uid://b8qmgmb178f56" path="res://entities/stages/potatomous_stage/scripts/potatomous_enemy.gd" id="1_oeko8"]
+[ext_resource type="Texture2D" uid="uid://dxyfh0aswh0fg" path="res://entities/stages/potatomous_stage/art/potatomous_sheet.png" id="2_ddmt7"]
+[ext_resource type="Texture2D" uid="uid://dofi3g6ayqtt0" path="res://entities/stages/base_stage/tile_maps/snow/art/back_background.png" id="3_ddmt7"]
+
+[sub_resource type="Curve2D" id="Curve2D_88sp1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -500, 0)
+}
+point_count = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwcc0"]
+atlas = ExtResource("2_ddmt7")
+region = Rect2(0, 0, 25, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxfwh"]
+atlas = ExtResource("2_ddmt7")
+region = Rect2(25, 0, 25, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8lyf"]
+atlas = ExtResource("2_ddmt7")
+region = Rect2(50, 0, 25, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujeao"]
+atlas = ExtResource("2_ddmt7")
+region = Rect2(75, 0, 25, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2q63q"]
+atlas = ExtResource("2_ddmt7")
+region = Rect2(100, 0, 25, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vclo"]
+atlas = ExtResource("2_ddmt7")
+region = Rect2(125, 0, 25, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rur1d"]
+atlas = ExtResource("2_ddmt7")
+region = Rect2(150, 0, 25, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhqn4"]
+atlas = ExtResource("2_ddmt7")
+region = Rect2(175, 0, 25, 19)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kvnlm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwcc0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gxfwh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r8lyf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ujeao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2q63q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vclo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rur1d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhqn4")
+}],
+"loop": true,
+"name": &"Walking",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_88sp1"]
+
+[node name="PotatomousEnemy1" type="Path2D"]
+texture_filter = 1
+position = Vector2(0, -0.5)
+curve = SubResource("Curve2D_88sp1")
+script = ExtResource("1_oeko8")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+rotation = 3.1415927
+loop = false
+
+[node name="Potatomous" type="AnimatedSprite2D" parent="PathFollow2D"]
+sprite_frames = SubResource("SpriteFrames_kvnlm")
+animation = &"Walking"
+autoplay = "Walking"
+flip_v = true
+
+[node name="Area2D" type="Area2D" parent="PathFollow2D/Potatomous"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/Potatomous/Area2D"]
+shape = SubResource("CircleShape2D_88sp1")
+
+[node name="Black" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(10.000001, -2.5000014)
+scale = Vector2(3.2500002, 2.6249998)
+texture = ExtResource("3_ddmt7")
+
+[connection signal="body_entered" from="PathFollow2D/Potatomous/Area2D" to="." method="_on_area_2d_body_entered"]
