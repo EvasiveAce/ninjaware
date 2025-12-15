@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bq0kdal6cp4xc"]
+
+[ext_resource type="Texture2D" uid="uid://b67sbjlc1aso4" path="res://entities/stages/dummy_stage/art/dummy.png" id="1_x6g0l"]
+[ext_resource type="Script" uid="uid://bre5nh6h1vsvy" path="res://entities/stages/dummy_stage/scripts/dummy.gd" id="2_fil5f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_waejo"]
+radius = 14.758472
+
+[node name="Dummy" type="Sprite2D"]
+texture_filter = 1
+position = Vector2(6, 6)
+texture = ExtResource("1_x6g0l")
+script = ExtResource("2_fil5f")
+
+[node name="DummyArea2D" type="Area2D" parent="."]
+
+[node name="DummyCollisionShape2D" type="CollisionShape2D" parent="DummyArea2D"]
+position = Vector2(1.75, 0)
+shape = SubResource("CircleShape2D_waejo")
+
+[connection signal="body_entered" from="DummyArea2D" to="." method="_on_dummy_area_2d_body_entered"]

@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c68vcvgoof2i3"]
-
-[ext_resource type="Texture2D" uid="uid://bb3s115vclfov" path="res://stages/base_stage/tile_obstacles/start_points/art/start_point.png" id="1_43qnh"]
-
-[node name="StartPoint" type="Sprite2D"]
-z_index = -1
-texture_filter = 1
-position = Vector2(3, -3)
-texture = ExtResource("1_43qnh")
