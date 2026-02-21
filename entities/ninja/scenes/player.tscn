@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://m7u5e3x6nme8"]
+[gd_scene load_steps=47 format=3 uid="uid://m7u5e3x6nme8"]
 
 [ext_resource type="Texture2D" uid="uid://cgngj58w0j5o2" path="res://entities/ninja/art/ninja_sheet.png" id="1_i823h"]
 [ext_resource type="Script" uid="uid://c1u8hjdnykq7l" path="res://entities/ninja/scripts/player.gd" id="1_rg7kn"]
@@ -28,7 +28,7 @@ tracks/1/path = NodePath("PlayerSprite:vframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.0333333),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [14]
@@ -40,7 +40,7 @@ tracks/2/path = NodePath("PlayerSprite:hframes")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.0333333),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [10]
@@ -206,12 +206,52 @@ tracks/2/keys = {
 "values": [17, 16]
 }
 
+[sub_resource type="Animation" id="Animation_qbvq2"]
+resource_name = "Skid"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [18]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerSprite:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_52sos"]
 _data = {
 &"Fall": SubResource("Animation_xwb2w"),
 &"Jump": SubResource("Animation_bw35f"),
 &"RESET": SubResource("Animation_52sos"),
 &"Run": SubResource("Animation_rg7kn"),
+&"Skid": SubResource("Animation_qbvq2"),
 &"Walk": SubResource("Animation_omv0o")
 }
 
@@ -235,6 +275,19 @@ nodes/Animation/node = SubResource("AnimationNodeAnimation_rg7kn")
 nodes/Animation/position = Vector2(40, 60)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_52sos")
 nodes/TimeScale/position = Vector2(231, 97)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qbvq2"]
+animation = &"Skid"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_rk3dc"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ucmnm"]
+graph_offset = Vector2(-98.05176, 78.81464)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_qbvq2")
+nodes/Animation/position = Vector2(-120, 180)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_rk3dc")
+nodes/TimeScale/position = Vector2(155.04308, 213.1961)
 node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_omv0o"]
@@ -287,6 +340,14 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_miu1y"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qbvq2"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rk3dc"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ucmnm"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q0l0r"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_rg7kn"]
 states/Fall/node = SubResource("AnimationNodeAnimation_bw35f")
 states/Fall/position = Vector2(754, 126)
@@ -296,10 +357,13 @@ states/Jump/node = SubResource("AnimationNodeAnimation_xwb2w")
 states/Jump/position = Vector2(650, 195)
 states/Run/node = SubResource("AnimationNodeBlendTree_omv0o")
 states/Run/position = Vector2(311, 51)
+states/Skid/node = SubResource("AnimationNodeBlendTree_ucmnm")
+states/Skid/position = Vector2(466, -61)
 states/Start/position = Vector2(202, 100)
 states/Walk/node = SubResource("AnimationNodeBlendTree_xwb2w")
 states/Walk/position = Vector2(650, 39)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_rg7kn"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_52sos"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_xwb2w"), "Walk", "Run", SubResource("AnimationNodeStateMachineTransition_omv0o"), "Run", "Walk", SubResource("AnimationNodeStateMachineTransition_bw35f"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_qo0kk"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_2hb64"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_qsune"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_vov0p"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_yq18l"), "Fall", "Walk", SubResource("AnimationNodeStateMachineTransition_n8jjm"), "Fall", "Run", SubResource("AnimationNodeStateMachineTransition_b4k72"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_nhcly"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_2gkp7"), "Walk", "Fall", SubResource("AnimationNodeStateMachineTransition_dsnr8"), "Run", "Fall", SubResource("AnimationNodeStateMachineTransition_brmje"), "Jump", "Walk", SubResource("AnimationNodeStateMachineTransition_ju8fe"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_miu1y")]
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_rg7kn"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_52sos"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_xwb2w"), "Walk", "Run", SubResource("AnimationNodeStateMachineTransition_omv0o"), "Run", "Walk", SubResource("AnimationNodeStateMachineTransition_bw35f"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_qo0kk"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_2hb64"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_qsune"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_vov0p"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_yq18l"), "Fall", "Walk", SubResource("AnimationNodeStateMachineTransition_n8jjm"), "Fall", "Run", SubResource("AnimationNodeStateMachineTransition_b4k72"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_nhcly"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_2gkp7"), "Walk", "Fall", SubResource("AnimationNodeStateMachineTransition_dsnr8"), "Run", "Fall", SubResource("AnimationNodeStateMachineTransition_brmje"), "Jump", "Walk", SubResource("AnimationNodeStateMachineTransition_ju8fe"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_miu1y"), "Run", "Skid", SubResource("AnimationNodeStateMachineTransition_qbvq2"), "Skid", "Run", SubResource("AnimationNodeStateMachineTransition_rk3dc"), "Skid", "Walk", SubResource("AnimationNodeStateMachineTransition_ucmnm"), "Walk", "Skid", SubResource("AnimationNodeStateMachineTransition_q0l0r")]
+graph_offset = Vector2(90, -95)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_rg7kn")
@@ -330,6 +394,7 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_rg7kn")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Run/TimeScale/scale = 8.0
+parameters/Skid/TimeScale/scale = 8.0
 parameters/Walk/TimeScale/scale = 8.0
 
 [node name="JumpPlayer" type="AudioStreamPlayer" parent="."]

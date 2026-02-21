@@ -20,6 +20,9 @@ var jump_speed_increased : float = 9.375 * 4 / 1.5
 
 var jump_buffered : bool = false
 var air_speed : float = 0.0
+var is_skidding : bool = false
+var skid_timer : float = 0.0
+var skid_min_duration : float = .2
 #endregion
 
 #region -- Animation Setup --
@@ -33,14 +36,17 @@ var air_speed : float = 0.0
 
 
 func _physics_process(delta: float) -> void:
-	if GlobalScene.enabledMovement:
+	if GlobalScene.movement_enabled:
 		_set_speed()
 		_set_gravity(delta)
 		_set_direction(delta)
 		_handle_jump()
-		_handle_misc_jump()
+
+		var was_on_floor = is_on_floor()
+
 		move_and_slide()
-		
+
+		_handle_misc_jump(was_on_floor)
 		
 		_handle_animation()
 
@@ -55,6 +61,9 @@ func _handle_animation():
 		else:  # Moving down = falling
 			if state_machine.get_current_node() != "Fall":
 				state_machine.travel("Fall")
+	elif is_skidding:
+		if state_machine.get_current_node() != "Skid":
+			state_machine.travel("Skid")
 	elif abs(velocity.x) > 1:
 		var current_speed = abs(velocity.x)
 
@@ -73,22 +82,38 @@ func _handle_animation():
 func _set_direction(delta : float):
 	var direction := Input.get_axis("ui_left", "ui_right")
 	
-	if is_on_floor():
-		if Input.is_action_pressed("ui_left"):
-			$PlayerSprite.flip_h = true
-			$CollisionShape2D.position.x = -1.5
-		elif Input.is_action_pressed("ui_right"):
-			$PlayerSprite.flip_h = false
-			$CollisionShape2D.position.x = 1.5
-		# Ground movement - normal behavior
+	if skid_timer > 0:
+		skid_timer -= delta
+
+	if is_on_floor() and direction != 0 and abs(velocity.x) > max_walk_speed:
+		if sign(direction) != sign(velocity.x):
+			is_skidding = true
+			skid_timer = skid_min_duration
+
 	if direction:
-		var max_speed := max_walk_speed
-		if 1 == 1:
-			max_speed = max_run_speed
-		velocity.x = move_toward(velocity.x, (direction * max_speed), walk_accel * delta)
+		var max_speed := max_run_speed
+		var accel_to_use = walk_accel
+		
+		if is_skidding:
+			accel_to_use = stop_decel * 1.1
+			
+		velocity.x = move_toward(velocity.x, (direction * max_speed), accel_to_use * delta)
 	else:
 		velocity.x = move_toward(velocity.x, (direction * max_walk_speed), stop_decel * delta)
+	
+	if is_on_floor():
+		if not is_skidding:
+			if direction < 0:
+				$PlayerSprite.flip_h = true
+				$CollisionShape2D.position.x = -1.5
+			elif direction > 0:
+				$PlayerSprite.flip_h = false
+				$CollisionShape2D.position.x = 1.5
 
+
+	if is_skidding:
+		if skid_timer <= 0:
+			is_skidding = false
 
 ## Sets the movement speeds to the [speed_factor].
 func _set_speed():
@@ -119,7 +144,7 @@ func _handle_jump():
 			# Coyote jump - only if timer is active and we're falling
 			air_speed = abs(velocity.x)
 			velocity.y = _jump_speed()
-			PopupText.display_text("Coyote'd!", position, 32, 2)
+			PopupText.display_text("Coyote'd!", position, 32, 4)
 		else:
 			if !jump_buffered:
 				$JumpBufferTimer.start()
@@ -127,8 +152,7 @@ func _handle_jump():
 		
 
 ## Handle jump buffering/coyote.
-func _handle_misc_jump():
-	var was_on_floor : bool = is_on_floor()
+func _handle_misc_jump(was_on_floor : bool):
 	if was_on_floor && !is_on_floor():
 		$CoyoteTimeTimer.start()
 	else:
@@ -138,7 +162,7 @@ func _handle_misc_jump():
 		if jump_buffered:
 			jump_buffered = false
 			velocity.y = _jump_speed()
-			PopupText.display_text("Buffered!", position, 32, 2)
+			PopupText.display_text("Buffered!", position, 32, 4)
 
 
 ## Returns the jump speed to use.

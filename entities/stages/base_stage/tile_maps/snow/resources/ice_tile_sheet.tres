@@ -1,33 +1,34 @@
-[gd_resource type="TileSet" load_steps=32 format=3 uid="uid://csgeol2lhjxop"]
+[gd_resource type="TileSet" format=3 uid="uid://csgeol2lhjxop"]
 
-[ext_resource type="Texture2D" uid="uid://b3fxyt3swa7ki" path="res://entities/stages/base_stage/tile_maps/snow/art/jay_leno_tile_sheet.png" id="1_76en1"]
-[ext_resource type="PackedScene" uid="uid://b3l6onbijevle" path="res://entities/stages/base_stage/tile_obstacles/spikes/scenes/spike_left.tscn" id="2_yahiv"]
-[ext_resource type="PackedScene" uid="uid://coromvgvefbcm" path="res://entities/stages/base_stage/tile_obstacles/spikes/scenes/spike_down.tscn" id="3_j2g6x"]
-[ext_resource type="PackedScene" uid="uid://b703g8tfjpgjx" path="res://entities/stages/base_stage/tile_obstacles/spikes/scenes/spike_up.tscn" id="4_2ryq6"]
-[ext_resource type="PackedScene" uid="uid://cadfk4ji0w73r" path="res://entities/stages/base_stage/tile_obstacles/spikes/scenes/spike_black_down.tscn" id="5_watgv"]
-[ext_resource type="PackedScene" uid="uid://davqtnffjh8kv" path="res://entities/stages/base_stage/tile_obstacles/spikes/scenes/spike_black_up.tscn" id="6_7rvl0"]
-[ext_resource type="PackedScene" uid="uid://cbl4kmgs440ug" path="res://entities/stages/base_stage/tile_obstacles/spikes/scenes/spike_wood_black_up.tscn" id="7_hbycs"]
-[ext_resource type="PackedScene" uid="uid://cuqmu4sjkqnxe" path="res://entities/stages/base_stage/tile_obstacles/spikes/scenes/spike_wood_black_down.tscn" id="8_o3yaw"]
-[ext_resource type="PackedScene" uid="uid://c2au7h82i80kf" path="res://entities/stages/potatomous_stage/scenes/potato_bomb.tscn" id="9_57upr"]
-[ext_resource type="PackedScene" uid="uid://bn8g726ekjkg1" path="res://entities/stages/potatomous_stage/scenes/potato_bomb_left_facing.tscn" id="10_ml04h"]
-[ext_resource type="PackedScene" uid="uid://di0ndssek72xh" path="res://entities/stages/potatomous_stage/scenes/potato_bomb_black_background.tscn" id="11_iacjf"]
-[ext_resource type="PackedScene" uid="uid://dicy51pjm6ubo" path="res://entities/stages/potatomous_stage/scenes/potato_bomb_right_facing.tscn" id="12_18rr2"]
-[ext_resource type="PackedScene" uid="uid://buxj7mrua1lek" path="res://entities/stages/base_stage/tile_obstacles/end_points/scenes/end_point_left.tscn" id="13_mtdti"]
-[ext_resource type="PackedScene" uid="uid://owdefd6ne75o" path="res://entities/stages/base_stage/tile_obstacles/end_points/scenes/end_point_up.tscn" id="14_yo847"]
-[ext_resource type="PackedScene" uid="uid://bfeh050ygkcv5" path="res://entities/stages/base_stage/tile_obstacles/end_points/scenes/end_point_black_right.tscn" id="15_fgg8j"]
-[ext_resource type="PackedScene" uid="uid://bucwh7ibjpqo2" path="res://entities/stages/base_stage/tile_obstacles/end_points/scenes/end_point_right.tscn" id="16_tstc6"]
-[ext_resource type="PackedScene" uid="uid://c68vcvgoof2i3" path="res://entities/stages/base_stage/tile_obstacles/start_points/scenes/start_point.tscn" id="17_wns1h"]
-[ext_resource type="PackedScene" uid="uid://can0ukqowhqw7" path="res://entities/stages/base_stage/tile_obstacles/start_points/scenes/start_point_up.tscn" id="18_lt2va"]
-[ext_resource type="PackedScene" uid="uid://mlgyl1vb3f6s" path="res://entities/stages/base_stage/tile_obstacles/start_points/scenes/start_point_black.tscn" id="19_ord1a"]
-[ext_resource type="PackedScene" uid="uid://b23t3g4yoxwox" path="res://entities/stages/base_stage/tile_obstacles/start_points/scenes/start_point_down.tscn" id="20_ce2bm"]
-[ext_resource type="PackedScene" uid="uid://cks0d5te5trda" path="res://entities/stages/potatomous_stage/scenes/potatomous_1.tscn" id="21_7yfts"]
-[ext_resource type="PackedScene" uid="uid://v8pmbftqy2aw" path="res://entities/stages/potatomous_stage/scenes/potatomous_2.tscn" id="22_c8sdf"]
-[ext_resource type="PackedScene" uid="uid://b6jesxmsjrasx" path="res://entities/stages/potatomous_stage/scenes/potatomous_3.tscn" id="23_7jdls"]
-[ext_resource type="PackedScene" uid="uid://bq0kdal6cp4xc" path="res://entities/stages/dummy_stage/scenes/dummy.tscn" id="24_dfbt4"]
+[ext_resource type="Texture2D" uid="uid://b3fxyt3swa7ki" path="res://entities/stages/base_stage/tile_maps/snow/art/jay_leno_tile_sheet.png" id="1_bopqr"]
+[ext_resource type="PackedScene" uid="uid://b3l6onbijevle" path="res://entities/stages/base_stage/tile_obstacles/spikes/scenes/spike_left.tscn" id="2_6bx6u"]
+[ext_resource type="PackedScene" uid="uid://coromvgvefbcm" path="res://entities/stages/base_stage/tile_obstacles/spikes/scenes/spike_down.tscn" id="3_agml0"]
+[ext_resource type="PackedScene" uid="uid://b703g8tfjpgjx" path="res://entities/stages/base_stage/tile_obstacles/spikes/scenes/spike_up.tscn" id="4_ldqly"]
+[ext_resource type="PackedScene" uid="uid://cadfk4ji0w73r" path="res://entities/stages/base_stage/tile_obstacles/spikes/scenes/spike_black_down.tscn" id="5_sksg1"]
+[ext_resource type="PackedScene" uid="uid://davqtnffjh8kv" path="res://entities/stages/base_stage/tile_obstacles/spikes/scenes/spike_black_up.tscn" id="6_bb85d"]
+[ext_resource type="PackedScene" uid="uid://cbl4kmgs440ug" path="res://entities/stages/base_stage/tile_obstacles/spikes/scenes/spike_wood_black_up.tscn" id="7_64qut"]
+[ext_resource type="PackedScene" uid="uid://cuqmu4sjkqnxe" path="res://entities/stages/base_stage/tile_obstacles/spikes/scenes/spike_wood_black_down.tscn" id="8_eyubw"]
+[ext_resource type="PackedScene" uid="uid://c2au7h82i80kf" path="res://entities/stages/potatomous_stage/scenes/potato_bomb.tscn" id="9_x76rm"]
+[ext_resource type="PackedScene" uid="uid://bn8g726ekjkg1" path="res://entities/stages/potatomous_stage/scenes/potato_bomb_left_facing.tscn" id="10_l5eo3"]
+[ext_resource type="PackedScene" uid="uid://di0ndssek72xh" path="res://entities/stages/potatomous_stage/scenes/potato_bomb_black_background.tscn" id="11_5fu0b"]
+[ext_resource type="PackedScene" uid="uid://dicy51pjm6ubo" path="res://entities/stages/potatomous_stage/scenes/potato_bomb_right_facing.tscn" id="12_lrq06"]
+[ext_resource type="PackedScene" uid="uid://buxj7mrua1lek" path="res://entities/stages/base_stage/tile_obstacles/end_points/scenes/end_point_left.tscn" id="13_jrac3"]
+[ext_resource type="PackedScene" uid="uid://owdefd6ne75o" path="res://entities/stages/base_stage/tile_obstacles/end_points/scenes/end_point_up.tscn" id="14_q3x48"]
+[ext_resource type="PackedScene" uid="uid://bfeh050ygkcv5" path="res://entities/stages/base_stage/tile_obstacles/end_points/scenes/end_point_black_right.tscn" id="15_t33ff"]
+[ext_resource type="PackedScene" uid="uid://bucwh7ibjpqo2" path="res://entities/stages/base_stage/tile_obstacles/end_points/scenes/end_point_right.tscn" id="16_5o7bm"]
+[ext_resource type="PackedScene" uid="uid://c68vcvgoof2i3" path="res://entities/stages/base_stage/tile_obstacles/start_points/scenes/start_point.tscn" id="17_pmfl7"]
+[ext_resource type="PackedScene" uid="uid://can0ukqowhqw7" path="res://entities/stages/base_stage/tile_obstacles/start_points/scenes/start_point_up.tscn" id="18_fweak"]
+[ext_resource type="PackedScene" uid="uid://mlgyl1vb3f6s" path="res://entities/stages/base_stage/tile_obstacles/start_points/scenes/start_point_black.tscn" id="19_1kjl7"]
+[ext_resource type="PackedScene" uid="uid://b23t3g4yoxwox" path="res://entities/stages/base_stage/tile_obstacles/start_points/scenes/start_point_down.tscn" id="20_lo2if"]
+[ext_resource type="PackedScene" uid="uid://cks0d5te5trda" path="res://entities/stages/potatomous_stage/scenes/potatomous_1.tscn" id="21_nctij"]
+[ext_resource type="PackedScene" uid="uid://v8pmbftqy2aw" path="res://entities/stages/potatomous_stage/scenes/potatomous_2.tscn" id="22_w6gpd"]
+[ext_resource type="PackedScene" uid="uid://b6jesxmsjrasx" path="res://entities/stages/potatomous_stage/scenes/potatomous_3.tscn" id="23_dvw77"]
+[ext_resource type="PackedScene" uid="uid://bq0kdal6cp4xc" path="res://entities/stages/dummy_stage/scenes/dummy.tscn" id="24_fhqjb"]
+[ext_resource type="PackedScene" uid="uid://dki5r8g01nb6a" path="res://entities/stages/dummy_stage/scenes/intro_tile_scene.tscn" id="25_6bx6u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fr38o"]
 resource_name = "IceSheet"
-texture = ExtResource("1_76en1")
+texture = ExtResource("1_bopqr")
 2:5/0 = 0
 2:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:5/0 = 0
@@ -339,44 +340,48 @@ texture = ExtResource("1_76en1")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_vpdhu"]
 resource_name = "Spike"
-scenes/1/scene = ExtResource("2_yahiv")
-scenes/2/scene = ExtResource("3_j2g6x")
-scenes/3/scene = ExtResource("4_2ryq6")
-scenes/4/scene = ExtResource("5_watgv")
-scenes/5/scene = ExtResource("6_7rvl0")
-scenes/6/scene = ExtResource("7_hbycs")
-scenes/7/scene = ExtResource("8_o3yaw")
+scenes/1/scene = ExtResource("2_6bx6u")
+scenes/2/scene = ExtResource("3_agml0")
+scenes/3/scene = ExtResource("4_ldqly")
+scenes/4/scene = ExtResource("5_sksg1")
+scenes/5/scene = ExtResource("6_bb85d")
+scenes/6/scene = ExtResource("7_64qut")
+scenes/7/scene = ExtResource("8_eyubw")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_vr860"]
 resource_name = "PotatoBomb"
-scenes/1/scene = ExtResource("9_57upr")
-scenes/2/scene = ExtResource("10_ml04h")
-scenes/3/scene = ExtResource("11_iacjf")
-scenes/4/scene = ExtResource("12_18rr2")
+scenes/1/scene = ExtResource("9_x76rm")
+scenes/2/scene = ExtResource("10_l5eo3")
+scenes/3/scene = ExtResource("11_5fu0b")
+scenes/4/scene = ExtResource("12_lrq06")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_io2x8"]
 resource_name = "EndPortal"
-scenes/1/scene = ExtResource("13_mtdti")
-scenes/2/scene = ExtResource("14_yo847")
-scenes/3/scene = ExtResource("15_fgg8j")
-scenes/4/scene = ExtResource("16_tstc6")
+scenes/1/scene = ExtResource("13_jrac3")
+scenes/2/scene = ExtResource("14_q3x48")
+scenes/3/scene = ExtResource("15_t33ff")
+scenes/4/scene = ExtResource("16_5o7bm")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_tf8ea"]
 resource_name = "StartPoint"
-scenes/1/scene = ExtResource("17_wns1h")
-scenes/2/scene = ExtResource("18_lt2va")
-scenes/3/scene = ExtResource("19_ord1a")
-scenes/4/scene = ExtResource("20_ce2bm")
+scenes/1/scene = ExtResource("17_pmfl7")
+scenes/2/scene = ExtResource("18_fweak")
+scenes/3/scene = ExtResource("19_1kjl7")
+scenes/4/scene = ExtResource("20_lo2if")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_bsxmm"]
 resource_name = "Potatomous"
-scenes/1/scene = ExtResource("21_7yfts")
-scenes/2/scene = ExtResource("22_c8sdf")
-scenes/3/scene = ExtResource("23_7jdls")
+scenes/1/scene = ExtResource("21_nctij")
+scenes/2/scene = ExtResource("22_w6gpd")
+scenes/3/scene = ExtResource("23_dvw77")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_u2kvv"]
 resource_name = "Dummy"
-scenes/1/scene = ExtResource("24_dfbt4")
+scenes/1/scene = ExtResource("24_fhqjb")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_6bx6u"]
+resource_name = "SantaOutline"
+scenes/1/scene = ExtResource("25_6bx6u")
 
 [resource]
 physics_layer_0/collision_layer = 1
@@ -387,3 +392,4 @@ sources/3 = SubResource("TileSetScenesCollectionSource_io2x8")
 sources/4 = SubResource("TileSetScenesCollectionSource_tf8ea")
 sources/5 = SubResource("TileSetScenesCollectionSource_bsxmm")
 sources/6 = SubResource("TileSetScenesCollectionSource_u2kvv")
+sources/9 = SubResource("TileSetScenesCollectionSource_6bx6u")

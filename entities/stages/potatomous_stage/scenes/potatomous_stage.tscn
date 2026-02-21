@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://bhknwy2pm2iro"]
+[gd_scene format=4 uid="uid://bhknwy2pm2iro"]
 
 [ext_resource type="Script" uid="uid://c321ng1ti8w6q" path="res://entities/stages/potatomous_stage/scripts/potatomous_stage.gd" id="1_f5yus"]
 [ext_resource type="PackedScene" uid="uid://wsvdb4844wue" path="res://ui/transition_ui/health_points/ninja_health_point/scenes/ninja_health_point.tscn" id="2_vq27i"]
@@ -24,71 +24,71 @@
 [ext_resource type="Texture2D" uid="uid://05yn0aaq5m5x" path="res://entities/stages/base_stage/art/level_border.png" id="22_8k3qd"]
 [ext_resource type="PackedScene" uid="uid://cxhirmhnvqi3c" path="res://ui/transition_ui/scenes/transition_ui.tscn" id="23_fb6le"]
 
-[node name="PotatomousStage" type="Node2D"]
+[node name="PotatomousStage" type="Node2D" unique_id=2035529796]
 texture_filter = 1
 script = ExtResource("1_f5yus")
 player_hp = 10
 player_hp_entity = ExtResource("2_vq27i")
 enemy_hp_entity = ExtResource("3_x6nem")
 
-[node name="NightSky" type="Sprite2D" parent="."]
+[node name="NightSky" type="Sprite2D" parent="." unique_id=1897477399]
 z_index = -2
 texture_filter = 1
 position = Vector2(960, 416)
 scale = Vector2(4, 4)
 texture = ExtResource("4_24n46")
 
-[node name="Mountains" type="Sprite2D" parent="."]
+[node name="Mountains" type="Sprite2D" parent="." unique_id=512470755]
 z_index = -2
 texture_filter = 1
 position = Vector2(960, 488)
 scale = Vector2(4, 4)
 texture = ExtResource("5_fl7ap")
 
-[node name="Trees" type="Sprite2D" parent="."]
+[node name="Trees" type="Sprite2D" parent="." unique_id=952997868]
 z_index = -2
 texture_filter = 1
 position = Vector2(960, 368)
 scale = Vector2(4, 4)
 texture = ExtResource("6_enlf7")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1119057029]
 one_shot = true
 
-[node name="Player" parent="." groups=["Player"] instance=ExtResource("7_62one")]
+[node name="Player" parent="." unique_id=1783784812 groups=["Player"] instance=ExtResource("7_62one")]
 position = Vector2(88, 764)
 scale = Vector2(4, 4)
 
-[node name="BaseLayer" parent="." instance=ExtResource("8_87xgf")]
+[node name="BaseLayer" parent="." unique_id=1087923074 instance=ExtResource("8_87xgf")]
 tile_map_data = PackedByteArray("AAAWABYAAAAEAAYAAAAXABYAAAAEAAYAAAAYABYAAAAEAAYAAAAZABYAAAAEAAYAAAAaABYAAAAEAAYAAAAbABYAAAAEAAYAAAAcABYAAAAEAAYAAAAdABYAAAAEAAYAAAAVABYAAAAEAAYAAAAUABYAAAAEAAYAAAATABYAAAAEAAYAAAASABYAAAAEAAYAAAARABYAAAAEAAYAAAAQABYAAAAEAAYAAAAPABYAAAAEAAYAAAAOABYAAAAEAAYAAAANABYAAAAEAAYAAAAMABYAAAAEAAYAAAALABYAAAAEAAYAAAAKABYAAAAEAAYAAAAJABYAAAAEAAYAAAAIABYAAAAEAAYAAAAHABYAAAAEAAYAAAAGABYAAAAEAAYAAAAFABYAAAAEAAYAAAAEABYAAAAEAAYAAAADABYAAAAEAAYAAAACABYAAAAEAAYAAAABABYAAAAEAAYAAAAAABYAAAAEAAYAAAABABMAAAAEAAYAAAAAABMAAAAEAAYAAAACABMAAAAEAAYAAAADABMAAAAEAAYAAAAEABMAAAAEAAYAAAAFABMAAAAEAAYAAAAGABMAAAAEAAYAAAASABMAAAAEAAYAAAATABMAAAAEAAYAAAAUABMAAAAEAAYAAAAVABMAAAAEAAYAAAAWABMAAAAEAAYAAAAXABMAAAAEAAYAAAAYABMAAAAEAAYAAAAZABMAAAAEAAYAAAAaABMAAAAEAAYAAAAbABMAAAAEAAYAAAAcABMAAAAEAAYAAAAdABMAAAAEAAYAAAAAABQAAAAEAAYAAAABABQAAAAEAAYAAAACABQAAAAEAAYAAAADABQAAAAEAAYAAAAEABQAAAAEAAYAAAAFABQAAAAEAAYAAAAGABQAAAAEAAYAAAAHABQAAAAEAAYAAAAIABQAAAAEAAYAAAAJABQAAAAEAAYAAAAKABQAAAAEAAYAAAALABQAAAAEAAYAAAAMABQAAAAEAAYAAAANABQAAAAEAAYAAAAOABQAAAAEAAYAAAAPABQAAAAEAAYAAAAQABQAAAAEAAYAAAARABQAAAAEAAYAAAASABQAAAAEAAYAAAATABQAAAAEAAYAAAAUABQAAAAEAAYAAAAVABQAAAAEAAYAAAAWABQAAAAEAAYAAAAXABQAAAAEAAYAAAAYABQAAAAEAAYAAAAZABQAAAAEAAYAAAAaABQAAAAEAAYAAAAbABQAAAAEAAYAAAAcABQAAAAEAAYAAAAdABQAAAAEAAYAAAAAABUAAAAEAAYAAAABABUAAAAEAAYAAAACABUAAAAEAAYAAAADABUAAAAEAAYAAAAEABUAAAAEAAYAAAAFABUAAAAEAAYAAAAGABUAAAAEAAYAAAAHABUAAAAEAAYAAAAIABUAAAAEAAYAAAAJABUAAAAEAAYAAAAKABUAAAAEAAYAAAALABUAAAAEAAYAAAAMABUAAAAEAAYAAAANABUAAAAEAAYAAAAOABUAAAAEAAYAAAAPABUAAAAEAAYAAAAQABUAAAAEAAYAAAARABUAAAAEAAYAAAASABUAAAAEAAYAAAATABUAAAAEAAYAAAAUABUAAAAEAAYAAAAVABUAAAAEAAYAAAAWABUAAAAEAAYAAAAXABUAAAAEAAYAAAAYABUAAAAEAAYAAAAZABUAAAAEAAYAAAAaABUAAAAEAAYAAAAbABUAAAAEAAYAAAAcABUAAAAEAAYAAAAdABUAAAAEAAYAAAAKABMAAAAEAAYAAAALABMAAAAEAAYAAAAMABMAAAAEAAYAAAAOABMAAAAEAAYAAAANABMAAAAEAAYAAAAPABMAAAAEAAYAAAAQABMAAAAEAAYAAAARABMAAAAEAAYAAAAHABMAAAAEAAYAAAAIABMAAAAEAAYAAAAJABMAAAAEAAYAAAD//xEAAAAAAAEAAAD//xAAAAAAAAEAAAD//w8AAAAAAAEAAAD//w4AAAAAAAEAAAD//w0AAAAAAAEAAAD//wwAAAAAAAEAAAD//wsAAAAAAAEAAAD//woAAAAAAAEAAAD//wkAAAAAAAEAAAD//wgAAAAAAAEAAAD//wcAAAAAAAEAAAD//wYAAAAAAAEAAAD//wUAAAAAAAEAAAAeAAYAAAAAAAEAAAAeAAcAAAAAAAEAAAAeAAgAAAAAAAEAAAAeAAwAAAAAAAEAAAAeAA0AAAAAAAEAAAAeAA4AAAAAAAEAAAAeAA8AAAAAAAEAAAAeABAAAAAAAAEAAAD//xIAAAAAAAEAAAD//xQAAAAAAAEAAAD//xUAAAAAAAEAAAD//xYAAAAAAAEAAAAeABYAAAAAAAEAAAAeABUAAAAAAAEAAAAeABQAAAAAAAEAAAAeABMAAAAAAAEAAAD//xcAAAAAAAEAAAAAABcAAAACAAEAAAABABcAAAACAAEAAAACABcAAAACAAEAAAADABcAAAACAAEAAAAEABcAAAACAAEAAAAFABcAAAACAAEAAAAGABcAAAACAAEAAAAHABcAAAACAAEAAAAIABcAAAACAAEAAAAJABcAAAACAAEAAAAKABcAAAACAAEAAAALABcAAAACAAEAAAAMABcAAAACAAEAAAANABcAAAACAAEAAAAOABcAAAACAAEAAAAPABcAAAACAAEAAAAQABcAAAACAAEAAAARABcAAAACAAEAAAASABcAAAACAAEAAAATABcAAAACAAEAAAAUABcAAAACAAEAAAAVABcAAAACAAEAAAAWABcAAAACAAEAAAAXABcAAAACAAEAAAAYABcAAAACAAEAAAAZABcAAAACAAEAAAAaABcAAAACAAEAAAAbABcAAAACAAEAAAAcABcAAAACAAEAAAAdABcAAAACAAEAAAAeABcAAAAAAAEAAAD//wQAAAAAAAEAAAD//wMAAAAAAAEAAAD//wEAAAAAAAEAAAAAAAEAAAACAAIAAAABAAEAAAACAAIAAAACAAEAAAACAAIAAAADAAEAAAACAAIAAAAEAAEAAAACAAIAAAD//wIAAAAAAAEAAAAGAAEAAAACAAIAAAAHAAEAAAACAAIAAAAIAAEAAAACAAIAAAAJAAEAAAACAAIAAAAKAAEAAAACAAIAAAAFAAEAAAACAAIAAAALAAEAAAACAAIAAAAMAAEAAAACAAIAAAANAAEAAAACAAIAAAAOAAEAAAACAAIAAAAPAAEAAAACAAIAAAAQAAEAAAACAAIAAAARAAEAAAACAAIAAAASAAEAAAACAAIAAAATAAEAAAACAAIAAAAUAAEAAAACAAIAAAAVAAEAAAACAAIAAAAWAAEAAAACAAIAAAAXAAEAAAACAAIAAAAYAAEAAAACAAIAAAAZAAEAAAACAAIAAAAbAAEAAAACAAIAAAAcAAEAAAACAAIAAAAdAAEAAAACAAIAAAAeAAEAAAAAAAEAAAAeAAIAAAAAAAEAAAAeAAMAAAAAAAEAAAAeAAQAAAAAAAEAAAD//xMAAAAAAAEAAAAeAAUAAAAAAAEAAAAeAAkAAAAAAAEAAAAeAAoAAAAAAAEAAAAeAAsAAAAAAAEAAAAeABIAAAAAAAEAAAAeABEAAAAAAAEAAAD//xgAAAAAAAIAAAAeABgAAAAAAAIAAAD//wAAAAABAAAAAAAeAAAAAAABAAAAAAAaAAEAAAACAAIAAAA=")
 enabled = true
 
-[node name="Level1" parent="." instance=ExtResource("9_wibnn")]
+[node name="Level1" parent="." unique_id=1628712841 instance=ExtResource("9_wibnn")]
 position = Vector2(0, -8)
 
-[node name="Level2" parent="." instance=ExtResource("10_srsfr")]
+[node name="Level2" parent="." unique_id=2142167065 instance=ExtResource("10_srsfr")]
 
-[node name="Level3" parent="." instance=ExtResource("11_tsj17")]
+[node name="Level3" parent="." unique_id=728953735 instance=ExtResource("11_tsj17")]
 
-[node name="Level4" parent="." instance=ExtResource("12_d2yyd")]
+[node name="Level4" parent="." unique_id=1793513104 instance=ExtResource("12_d2yyd")]
 
-[node name="Level5" parent="." instance=ExtResource("13_l27ph")]
+[node name="Level5" parent="." unique_id=1363692196 instance=ExtResource("13_l27ph")]
 
-[node name="Level6" parent="." instance=ExtResource("14_44fan")]
+[node name="Level6" parent="." unique_id=2037443495 instance=ExtResource("14_44fan")]
 
-[node name="Level7" parent="." instance=ExtResource("15_e6trx")]
+[node name="Level7" parent="." unique_id=1901943796 instance=ExtResource("15_e6trx")]
 
-[node name="Level8" parent="." instance=ExtResource("16_dvtfs")]
+[node name="Level8" parent="." unique_id=1292880864 instance=ExtResource("16_dvtfs")]
 
-[node name="Level9" parent="." instance=ExtResource("17_tyhh0")]
+[node name="Level9" parent="." unique_id=224996972 instance=ExtResource("17_tyhh0")]
 
-[node name="Level10" parent="." instance=ExtResource("18_v8n55")]
+[node name="Level10" parent="." unique_id=1101994440 instance=ExtResource("18_v8n55")]
 
-[node name="Level11" parent="." instance=ExtResource("19_gwqu6")]
+[node name="Level11" parent="." unique_id=262529464 instance=ExtResource("19_gwqu6")]
 
-[node name="Level12" parent="." instance=ExtResource("20_uns0y")]
+[node name="Level12" parent="." unique_id=1430366947 instance=ExtResource("20_uns0y")]
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1608061689]
 texture_filter = 1
 offset_top = 984.0
 offset_right = 1920.0
@@ -97,13 +97,12 @@ size_flags_vertical = 8
 theme = ExtResource("21_0r1ep")
 show_percentage = false
 
-[node name="BackgroundSprite" type="Sprite2D" parent="."]
+[node name="BackgroundSprite" type="Sprite2D" parent="." unique_id=2138581003]
 texture_filter = 1
 position = Vector2(960, 540)
 texture = ExtResource("22_8k3qd")
 
-[node name="TransitionIntro" parent="." instance=ExtResource("23_fb6le")]
-visible = false
+[node name="TransitionUI" parent="." unique_id=1390571896 instance=ExtResource("23_fb6le")]
 position = Vector2(961, 540)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
