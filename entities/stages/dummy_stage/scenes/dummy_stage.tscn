@@ -1,8 +1,10 @@
-[gd_scene load_steps=21 format=4 uid="uid://c6ahriwt65j3v"]
+[gd_scene format=4 uid="uid://c6ahriwt65j3v"]
 
 [ext_resource type="Script" uid="uid://x7n86vpq3thr" path="res://entities/stages/dummy_stage/scripts/dummy_stage.gd" id="1_oahpv"]
 [ext_resource type="Texture2D" uid="uid://kll6eu4dqu2" path="res://entities/stages/base_stage/art/snow_world_sky.png" id="2_585lx"]
+[ext_resource type="PackedScene" uid="uid://wsvdb4844wue" path="res://ui/transition_ui/health_points/ninja_health_point/scenes/ninja_health_point.tscn" id="2_j6e4s"]
 [ext_resource type="Texture2D" uid="uid://c7bagfx6uqf4j" path="res://entities/stages/base_stage/art/snow_world_mountain.png" id="3_3cefq"]
+[ext_resource type="PackedScene" uid="uid://c5r8q43l8n4wv" path="res://ui/transition_ui/health_points/dummy_health_point/scenes/dummy_health_point.tscn" id="3_j6e4s"]
 [ext_resource type="Texture2D" uid="uid://dp2nkj2u14jm3" path="res://entities/stages/base_stage/art/snow_world_tree.png" id="4_xkma6"]
 [ext_resource type="PackedScene" uid="uid://m7u5e3x6nme8" path="res://entities/ninja/scenes/player.tscn" id="5_j3x85"]
 [ext_resource type="TileSet" uid="uid://csgeol2lhjxop" path="res://entities/stages/base_stage/tile_maps/snow/resources/ice_tile_sheet.tres" id="6_whu3o"]
@@ -20,70 +22,73 @@
 [ext_resource type="PackedScene" uid="uid://cwkrlcnnlj43k" path="res://entities/stages/dummy_stage/levels/level_12.tscn" id="18_qnmv4"]
 [ext_resource type="Theme" uid="uid://tufc51t2fgr3" path="res://entities/stages/base_stage/progress_bar/themes/progress_bar.tres" id="19_2fs12"]
 [ext_resource type="PackedScene" uid="uid://cxhirmhnvqi3c" path="res://ui/transition_ui/scenes/transition_ui.tscn" id="20_v5h82"]
+[ext_resource type="Texture2D" uid="uid://05yn0aaq5m5x" path="res://entities/stages/base_stage/art/level_border.png" id="22_8sqik"]
 
-[node name="DummyStage" type="Node2D"]
+[node name="DummyStage" type="Node2D" unique_id=464841658]
 script = ExtResource("1_oahpv")
+player_hp_entity = ExtResource("2_j6e4s")
+enemy_hp_entity = ExtResource("3_j6e4s")
 
-[node name="NightSky" type="Sprite2D" parent="."]
+[node name="NightSky" type="Sprite2D" parent="." unique_id=1844342670]
 z_index = -1
 texture_filter = 1
 position = Vector2(960, 416)
 scale = Vector2(4, 4)
 texture = ExtResource("2_585lx")
 
-[node name="Mountains" type="Sprite2D" parent="."]
+[node name="Mountains" type="Sprite2D" parent="." unique_id=620352281]
 z_index = -1
 texture_filter = 1
 position = Vector2(960, 488)
 scale = Vector2(4, 4)
 texture = ExtResource("3_3cefq")
 
-[node name="Trees" type="Sprite2D" parent="."]
+[node name="Trees" type="Sprite2D" parent="." unique_id=1959895463]
 z_index = -1
 texture_filter = 1
 position = Vector2(960, 368)
 scale = Vector2(4, 4)
 texture = ExtResource("4_xkma6")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1053396947]
 one_shot = true
 
-[node name="Player" parent="." instance=ExtResource("5_j3x85")]
+[node name="Player" parent="." unique_id=324587529 groups=["Player"] instance=ExtResource("5_j3x85")]
 position = Vector2(88, 316)
 scale = Vector2(4, 4)
 
-[node name="BaseLayer" type="TileMapLayer" parent="."]
+[node name="BaseLayer" type="TileMapLayer" parent="." unique_id=1054748281]
 texture_filter = 1
 position = Vector2(0, -392)
 scale = Vector2(4, 4)
 tile_map_data = PackedByteArray("AAAWABYAAAAEAAYAAAAXABYAAAAEAAYAAAAYABYAAAAEAAYAAAAZABYAAAAEAAYAAAAaABYAAAAEAAYAAAAbABYAAAAEAAYAAAAcABYAAAAEAAYAAAAdABYAAAAEAAYAAAAVABYAAAAEAAYAAAAUABYAAAAEAAYAAAATABYAAAAEAAYAAAASABYAAAAEAAYAAAARABYAAAAEAAYAAAAQABYAAAAEAAYAAAAPABYAAAAEAAYAAAAOABYAAAAEAAYAAAANABYAAAAEAAYAAAAMABYAAAAEAAYAAAALABYAAAAEAAYAAAAKABYAAAAEAAYAAAAJABYAAAAEAAYAAAAIABYAAAAEAAYAAAAHABYAAAAEAAYAAAAGABYAAAAEAAYAAAAFABYAAAAEAAYAAAAEABYAAAAEAAYAAAADABYAAAAEAAYAAAACABYAAAAEAAYAAAABABYAAAAEAAYAAAAAABYAAAAEAAYAAAABABMAAAAEAAYAAAAAABMAAAAEAAYAAAACABMAAAAEAAYAAAADABMAAAAEAAYAAAAEABMAAAAEAAYAAAAFABMAAAAEAAYAAAAGABMAAAAEAAYAAAASABMAAAAEAAYAAAATABMAAAAEAAYAAAAUABMAAAAEAAYAAAAVABMAAAAEAAYAAAAWABMAAAAEAAYAAAAXABMAAAAEAAYAAAAYABMAAAAEAAYAAAAZABMAAAAEAAYAAAAaABMAAAAEAAYAAAAbABMAAAAEAAYAAAAcABMAAAAEAAYAAAAdABMAAAAEAAYAAAAAABQAAAAEAAYAAAABABQAAAAEAAYAAAACABQAAAAEAAYAAAADABQAAAAEAAYAAAAEABQAAAAEAAYAAAAFABQAAAAEAAYAAAAGABQAAAAEAAYAAAAHABQAAAAEAAYAAAAIABQAAAAEAAYAAAAJABQAAAAEAAYAAAAKABQAAAAEAAYAAAALABQAAAAEAAYAAAAMABQAAAAEAAYAAAANABQAAAAEAAYAAAAOABQAAAAEAAYAAAAPABQAAAAEAAYAAAAQABQAAAAEAAYAAAARABQAAAAEAAYAAAASABQAAAAEAAYAAAATABQAAAAEAAYAAAAUABQAAAAEAAYAAAAVABQAAAAEAAYAAAAWABQAAAAEAAYAAAAXABQAAAAEAAYAAAAYABQAAAAEAAYAAAAZABQAAAAEAAYAAAAaABQAAAAEAAYAAAAbABQAAAAEAAYAAAAcABQAAAAEAAYAAAAdABQAAAAEAAYAAAAAABUAAAAEAAYAAAABABUAAAAEAAYAAAACABUAAAAEAAYAAAADABUAAAAEAAYAAAAEABUAAAAEAAYAAAAFABUAAAAEAAYAAAAGABUAAAAEAAYAAAAHABUAAAAEAAYAAAAIABUAAAAEAAYAAAAJABUAAAAEAAYAAAAKABUAAAAEAAYAAAALABUAAAAEAAYAAAAMABUAAAAEAAYAAAANABUAAAAEAAYAAAAOABUAAAAEAAYAAAAPABUAAAAEAAYAAAAQABUAAAAEAAYAAAARABUAAAAEAAYAAAASABUAAAAEAAYAAAATABUAAAAEAAYAAAAUABUAAAAEAAYAAAAVABUAAAAEAAYAAAAWABUAAAAEAAYAAAAXABUAAAAEAAYAAAAYABUAAAAEAAYAAAAZABUAAAAEAAYAAAAaABUAAAAEAAYAAAAbABUAAAAEAAYAAAAcABUAAAAEAAYAAAAdABUAAAAEAAYAAAAKABMAAAAEAAYAAAALABMAAAAEAAYAAAAMABMAAAAEAAYAAAAOABMAAAAEAAYAAAANABMAAAAEAAYAAAAPABMAAAAEAAYAAAAQABMAAAAEAAYAAAARABMAAAAEAAYAAAAHABMAAAAEAAYAAAAIABMAAAAEAAYAAAAJABMAAAAEAAYAAAD//xEAAAAAAAEAAAD//xAAAAAAAAEAAAD//w8AAAAAAAEAAAD//w4AAAAAAAEAAAD//w0AAAAAAAEAAAD//wwAAAAAAAEAAAD//wsAAAAAAAEAAAD//woAAAAAAAEAAAD//wkAAAAAAAEAAAD//wgAAAAAAAEAAAD//wcAAAAAAAEAAAD//wYAAAAAAAEAAAD//wUAAAAAAAEAAAAeAAYAAAAAAAEAAAAeAAcAAAAAAAEAAAAeAAgAAAAAAAEAAAAeAAwAAAAAAAEAAAAeAA0AAAAAAAEAAAAeAA4AAAAAAAEAAAAeAA8AAAAAAAEAAAAeABAAAAAAAAEAAAD//xIAAAAAAAEAAAD//xQAAAAAAAEAAAD//xUAAAAAAAEAAAD//xYAAAAAAAEAAAAeABYAAAAAAAEAAAAeABUAAAAAAAEAAAAeABQAAAAAAAEAAAAeABMAAAAAAAEAAAD//xcAAAAAAAEAAAAAABcAAAACAAEAAAABABcAAAACAAEAAAACABcAAAACAAEAAAADABcAAAACAAEAAAAEABcAAAACAAEAAAAFABcAAAACAAEAAAAGABcAAAACAAEAAAAHABcAAAACAAEAAAAIABcAAAACAAEAAAAJABcAAAACAAEAAAAKABcAAAACAAEAAAALABcAAAACAAEAAAAMABcAAAACAAEAAAANABcAAAACAAEAAAAOABcAAAACAAEAAAAPABcAAAACAAEAAAAQABcAAAACAAEAAAARABcAAAACAAEAAAASABcAAAACAAEAAAATABcAAAACAAEAAAAUABcAAAACAAEAAAAVABcAAAACAAEAAAAWABcAAAACAAEAAAAXABcAAAACAAEAAAAYABcAAAACAAEAAAAZABcAAAACAAEAAAAaABcAAAACAAEAAAAbABcAAAACAAEAAAAcABcAAAACAAEAAAAdABcAAAACAAEAAAAeABcAAAAAAAEAAAD//wQAAAAAAAEAAAD//wMAAAAAAAEAAAD//wEAAAAAAAEAAAAAAAEAAAACAAIAAAABAAEAAAACAAIAAAACAAEAAAACAAIAAAADAAEAAAACAAIAAAAEAAEAAAACAAIAAAD//wIAAAAAAAEAAAAGAAEAAAACAAIAAAAHAAEAAAACAAIAAAAIAAEAAAACAAIAAAAJAAEAAAACAAIAAAAKAAEAAAACAAIAAAAFAAEAAAACAAIAAAALAAEAAAACAAIAAAAMAAEAAAACAAIAAAANAAEAAAACAAIAAAAOAAEAAAACAAIAAAAPAAEAAAACAAIAAAAQAAEAAAACAAIAAAARAAEAAAACAAIAAAASAAEAAAACAAIAAAATAAEAAAACAAIAAAAUAAEAAAACAAIAAAAVAAEAAAACAAIAAAAWAAEAAAACAAIAAAAXAAEAAAACAAIAAAAYAAEAAAACAAIAAAAZAAEAAAACAAIAAAAbAAEAAAACAAIAAAAcAAEAAAACAAIAAAAdAAEAAAACAAIAAAAeAAEAAAAAAAEAAAAeAAIAAAAAAAEAAAAeAAMAAAAAAAEAAAAeAAQAAAAAAAEAAAD//xMAAAAAAAEAAAAeAAUAAAAAAAEAAAAeAAkAAAAAAAEAAAAeAAoAAAAAAAEAAAAeAAsAAAAAAAEAAAAeABIAAAAAAAEAAAAeABEAAAAAAAEAAAD//xgAAAAAAAIAAAAeABgAAAAAAAIAAAD//wAAAAABAAAAAAAeAAAAAAABAAAAAAAaAAEAAAACAAIAAAA=")
 tile_set = ExtResource("6_whu3o")
 
-[node name="Level1" parent="." instance=ExtResource("7_7njk7")]
+[node name="Level1" parent="." unique_id=507636383 instance=ExtResource("7_7njk7")]
 
-[node name="Level2" parent="." instance=ExtResource("8_hwg0x")]
+[node name="Level2" parent="." unique_id=1775490651 instance=ExtResource("8_hwg0x")]
 
-[node name="Level3" parent="." instance=ExtResource("9_437mn")]
+[node name="Level3" parent="." unique_id=1570644202 instance=ExtResource("9_437mn")]
 
-[node name="Level4" parent="." instance=ExtResource("10_hr32h")]
+[node name="Level4" parent="." unique_id=160935831 instance=ExtResource("10_hr32h")]
 
-[node name="Level5" parent="." instance=ExtResource("11_n2gyt")]
+[node name="Level5" parent="." unique_id=621491665 instance=ExtResource("11_n2gyt")]
 
-[node name="Level6" parent="." instance=ExtResource("12_npsmc")]
+[node name="Level6" parent="." unique_id=1964503588 instance=ExtResource("12_npsmc")]
 
-[node name="Level7" parent="." instance=ExtResource("13_jylqh")]
+[node name="Level7" parent="." unique_id=1831073462 instance=ExtResource("13_jylqh")]
 
-[node name="Level8" parent="." instance=ExtResource("14_23mgi")]
+[node name="Level8" parent="." unique_id=1958866012 instance=ExtResource("14_23mgi")]
 
-[node name="Level9" parent="." instance=ExtResource("15_4exdg")]
+[node name="Level9" parent="." unique_id=611145770 instance=ExtResource("15_4exdg")]
 
-[node name="Level10" parent="." instance=ExtResource("16_1xu81")]
+[node name="Level10" parent="." unique_id=1545745848 instance=ExtResource("16_1xu81")]
 
-[node name="Level11" parent="." instance=ExtResource("17_ylwt8")]
+[node name="Level11" parent="." unique_id=2034474232 instance=ExtResource("17_ylwt8")]
 
-[node name="Level12" parent="." instance=ExtResource("18_qnmv4")]
+[node name="Level12" parent="." unique_id=1923268689 instance=ExtResource("18_qnmv4")]
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1286421386]
 texture_filter = 1
 offset_top = 984.0
 offset_right = 1920.0
@@ -92,11 +97,12 @@ size_flags_vertical = 8
 theme = ExtResource("19_2fs12")
 show_percentage = false
 
-[node name="BackgroundSprite" type="Sprite2D" parent="."]
+[node name="BackgroundSprite" type="Sprite2D" parent="." unique_id=244172866]
 texture_filter = 1
 position = Vector2(960, 540)
+texture = ExtResource("22_8sqik")
 
-[node name="TransitionUI" parent="." instance=ExtResource("20_v5h82")]
-position = Vector2(961, 540)
+[node name="TransitionUI" parent="." unique_id=1578950508 instance=ExtResource("20_v5h82")]
+position = Vector2(960, 540)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

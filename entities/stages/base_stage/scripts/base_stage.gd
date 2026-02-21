@@ -42,16 +42,16 @@ static var array_of_levels : Array[Node]
 #region -- Transition Setup --
 ## The transition scene animation tree.
 ## [br] Used for the [animation_finished] signal. 
-@onready var anim_tree = $TransitionIntro/AnimationTree
+@onready var anim_tree = $TransitionUI/DummyAnimationTree
 ## State machine for the animation tree playback.
 ## [br] Used for most animations. 
 @onready var state_machine = anim_tree.get("parameters/playback")
 ## Player HP Container for losing/adding health.
-@onready var player_hp_container = $TransitionIntro/TransitionSprite/HPContainer
+@onready var player_hp_container = $TransitionUI/TransitionSprite/PlayerHPContainer
 ## Enemy HP Container for losing/adding health.
-@onready var enemy_hp_container = $TransitionIntro/TransitionSprite/EnemyHPContainer
-## The versus lcabel.
-@onready var versus_label = $TransitionIntro/TransitionSprite/VersusLabel
+@onready var enemy_hp_container = $TransitionUI/TransitionSprite/EnemyHPContainer
+## The versus label.
+@onready var versus_label = $TransitionUI/TransitionSprite/VersusLabel
 #endregion
 
 
@@ -92,7 +92,7 @@ func _health_set_up(revival : bool):
 	for hp in player_hp:
 		await get_tree().create_timer(0.1).timeout
 		player_hp_container.add_child(player_hp_entity.instantiate())
-		$TransitionIntro/LivesAdded.play()
+		$TransitionUI/LivesAdded.play()
 
 	var enemy_hp_difference = enemy_hp_container.get_child_count()
 	if !revival:
@@ -103,7 +103,7 @@ func _health_set_up(revival : bool):
 	for hp in (enemy_hp - enemy_hp_difference):
 		await get_tree().create_timer(0.1).timeout
 		enemy_hp_container.add_child(enemy_hp_entity.instantiate())
-		$TransitionIntro/LivesEnemyAdded.play()
+		$TransitionUI/LivesEnemyAdded.play()
 
 	player.reset_momentum()
 	player.position = _find_start_point()
@@ -160,8 +160,12 @@ func _find_start_point() -> Vector2i:
 	elif array_of_levels[current_level].get_used_cells_by_id(4, Vector2i.ZERO, 3) != []:
 		used_cells = array_of_levels[current_level].get_used_cells_by_id(4, Vector2i.ZERO, 3)
 	
-	else:
+	elif array_of_levels[current_level].get_used_cells_by_id(4, Vector2i.ZERO, 4) != []:
 		used_cells = array_of_levels[current_level].get_used_cells_by_id(4, Vector2i.ZERO, 4)
+
+	# Level 1 Stage 1
+	else:
+		used_cells = array_of_levels[current_level].get_used_cells_by_id(9, Vector2i.ZERO, 1)
 
 	var world_position = array_of_levels[current_level].to_global(array_of_levels[current_level].map_to_local(used_cells[0]))
 	world_position -= Vector2(8, 28)
@@ -212,13 +216,13 @@ func _on_timer_timeout() -> void:
 	else:
 		await _transition_out()
 		if player_hp_left >= 3:
-			await _player_hit_ouch()
+			await _player_hit_1()
 			_reset_local_levels()
-			await _ouch_transition_in()
+			await _player_hit_1_transition_in()
 		elif player_hp_left == 2:
-			await _player_hit_augh()
+			await _player_hit_2()
 			_reset_local_levels()
-			await _augh_transition_in()
+			await _player_hit_2_transition_in()
 		timer.start(level_speed)
 
 		_start_scene()
@@ -247,12 +251,15 @@ func _on_enemy_enter() -> void:
 	if enemy_hp_container.get_child_count() == 1:
 		await _transition_out()
 		await _enemy_kill()
+		await _revive_animation()
+		## Just to stop breaking between stages
+		await _health_set_up(true)
 	elif enemy_hp_container.get_child_count() == 2:
 		await _transition_out()
-		await _enemy_hit_second()
+		await _enemy_hit_2()
 	else:
 		await _transition_out()
-		await _enemy_hit_first()
+		await _enemy_hit_1()
 
 	array_of_levels[current_level].enabled = false
 	array_of_levels.pop_front()
@@ -272,9 +279,9 @@ func _on_enemy_enter() -> void:
 	player.position = _find_start_point()
 
 	if enemy_hp_container.get_child_count() == 2:
-		await _enemy_first_transition_in()
+		await _enemy_hit_1_transition_in()
 	else:
-		await _enemy_second_transition_in()
+		await _enemy_hit_2_transition_in()
 	
 	_start_scene()
 	#array_of_levels[current_level].get_node("Music").play()
@@ -299,20 +306,20 @@ func _battle_transition_in():
 #endregion
 
 #region -- Player Animations --
-func _player_hit_ouch():
-	state_machine.travel("PlayerHitOuch")
+func _player_hit_1():
+	state_machine.travel("PlayerHit1")
 	await anim_tree.animation_finished
 
-func _player_hit_augh():
-	state_machine.travel("PlayerHitAugh")
+func _player_hit_2():
+	state_machine.travel("PlayerHit2")
 	await anim_tree.animation_finished
 
-func _ouch_transition_in():
-	state_machine.travel("OuchTransitionIn")
+func _player_hit_1_transition_in():
+	state_machine.travel("PlayerHit1TransitionIn")
 	await anim_tree.animation_finished
 
-func _augh_transition_in():
-	state_machine.travel("AughTransitionIn")
+func _player_hit_2_transition_in():
+	state_machine.travel("PlayerHit2TransitionIn")
 	await anim_tree.animation_finished
 
 func _player_game_over():
@@ -320,29 +327,29 @@ func _player_game_over():
 	await anim_tree.animation_finished
 
 func _revive_animation():
-	state_machine.travel("ReviveLevel")
+	state_machine.travel("PlayerRevive")
 	await anim_tree.animation_finished
 #endregion
 
 #region -- Enemy Animations --
-func _enemy_hit_first():
-	state_machine.travel("DummyHitFirst")
+func _enemy_hit_1():
+	state_machine.travel("EnemyHit1")
 	await anim_tree.animation_finished
 
-func _enemy_first_transition_in():
-	state_machine.travel("DummyHitFirstTransitionIn")
+func _enemy_hit_1_transition_in():
+	state_machine.travel("EnemyHit1TransitionIn")
 	await anim_tree.animation_finished
 
-func _enemy_hit_second():
-	state_machine.travel("DummyHitSecond")
+func _enemy_hit_2():
+	state_machine.travel("EnemyHit2")
 	await anim_tree.animation_finished
 
-func _enemy_second_transition_in():
-	state_machine.travel("DummyHitSecondTransitionIn")
+func _enemy_hit_2_transition_in():
+	state_machine.travel("EnemyHit2TransitionIn")
 	await anim_tree.animation_finished
 
 func _enemy_kill():
-	state_machine.travel("DummyDeath")
+	state_machine.travel("EnemyDeath")
 	await anim_tree.animation_finished
 #endregion
 

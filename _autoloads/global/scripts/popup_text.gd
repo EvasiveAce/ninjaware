@@ -7,7 +7,7 @@ func display_text(value: String, position: Vector2, font_size: int, outline_size
 	text.text = value
 	text.z_index = 1
 	text.label_settings = LabelSettings.new()
-	text.label_settings.font = preload('res://Wariowareinc-BWWdn.ttf')
+	text.label_settings.font = preload('res://ui/text_ui/fonts/ware.ttf')
 	
 	var color = "#FFF"
 	
