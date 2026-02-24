@@ -1,7 +1,7 @@
 extends Node2D
 
 
-const dummy_stage = preload("res://Stages/DummyStage/Scenes/dummy_stage.tscn")
+const dummy_stage = preload("res://entities/stages/dummy_stage/scenes/dummy_stage.tscn")
 
 func _ready() -> void:
     $OpeningScene/AnimationTree.active = true    
