@@ -1,11 +1,15 @@
-[gd_scene load_steps=2 format=4 uid="uid://blv765dekni3c"]
+[gd_scene format=4 uid="uid://blv765dekni3c"]
 
 [ext_resource type="TileSet" uid="uid://csgeol2lhjxop" path="res://entities/stages/base_stage/tile_maps/snow/resources/ice_tile_sheet.tres" id="1_kqdfu"]
+[ext_resource type="AudioStream" uid="uid://cpqau6xm5sawo" path="res://entities/stages/base_stage/music/Lenny Pixels - The Back Street Is My Stage.wav" id="2_durvk"]
 
-[node name="Level10" type="TileMapLayer"]
+[node name="Level10" type="TileMapLayer" unique_id=1331934926]
 texture_filter = 1
 position = Vector2(-9151, -8)
 scale = Vector2(4, 4)
 tile_map_data = PackedByteArray("AACPAA0AAAAAAAUAAACPAA4AAAAAAAYAAACPAA8AAAAAAAYAAACPABAAAAAAAAYAAACQAA0AAAABAAUAAACQAA4AAAABAAYAAACQAA8AAAAAAAgAAACQABAAAAACAAYAAACRAA0AAAABAAUAAACRAA4AAAABAAYAAACRAA8AAAABAAcAAACnAAYAAAAAAAoAAACoAAYAAAABAAoAAACrAAYAAAACAAIAAACsAAYAAAACAAIAAACqAAYAAAABAAIAAACpAAYAAAACAAoAAACQAAwABAAAAAAAAQCrAAQAAwAAAAAAAQCSAA0AAAACAAUAAACSAA4AAAACAAYAAACSAA8AAAACAAcAAACXAAoAAAAAAAoAAACYAAoAAAABAAoAAACfAAgAAAAAAAoAAACgAAgAAAABAAoAAACZAAoAAAACAAoAAAChAAgAAAACAAoAAAA=")
 enabled = false
 tile_set = ExtResource("1_kqdfu")
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=411078277]
+stream = ExtResource("2_durvk")

@@ -103,6 +103,6 @@ position = Vector2(960, 540)
 texture = ExtResource("22_8sqik")
 
 [node name="TransitionUI" parent="." unique_id=1578950508 instance=ExtResource("20_v5h82")]
-position = Vector2(960, 540)
+position = Vector2(961, 540)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

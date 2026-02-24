@@ -37,11 +37,15 @@ static var array_of_levels : Array[Node]
 ## The level timer in seconds.
 ## [br] [Default for levels 1 - 4]
 @export_range(1, 100) var level_speed : float = 6.0
+## Default for game overs
+var level_speed_default : float
+var player_speed_default : float
 #endregion
 
 #region -- Transition Setup --
 ## The transition scene animation tree.
-## [br] Used for the [animation_finished] signal. 
+## [br] Used for the [animation_finished] signal.
+# TODO: Update for level 
 @onready var anim_tree = $TransitionUI/DummyAnimationTree
 ## State machine for the animation tree playback.
 ## [br] Used for most animations. 
@@ -50,12 +54,12 @@ static var array_of_levels : Array[Node]
 @onready var player_hp_container = $TransitionUI/TransitionSprite/PlayerHPContainer
 ## Enemy HP Container for losing/adding health.
 @onready var enemy_hp_container = $TransitionUI/TransitionSprite/EnemyHPContainer
-## The versus label.
-@onready var versus_label = $TransitionUI/TransitionSprite/VersusLabel
 #endregion
 
 
 func _ready() -> void:
+	level_speed_default = level_speed
+	player_speed_default = player.speed_factor
 	await _health_set_up(false)
 
 
@@ -87,7 +91,9 @@ func _check_for_coin():
 ## [br] If [revival], includes additional animation.
 func _health_set_up(revival : bool):
 	_stop_scene()
-
+	player.reset_momentum()
+	level_speed = level_speed_default
+	player.speed_factor = player_speed_default
 	_arrays_reset()
 	for hp in player_hp:
 		await get_tree().create_timer(0.1).timeout
@@ -115,7 +121,6 @@ func _health_set_up(revival : bool):
 	await _battle_transition_in()
 
 	_start_scene()
-	#array_of_levels[current_level].get_node("Music").play()
 
 
 ## Resets the level array after Game Over or inital HP setup.
@@ -192,6 +197,8 @@ func _add_local_level():
 
 ## Disables the player's movement, player's animation tree, and scene timer.
 func _stop_scene():
+	if array_of_levels:
+		array_of_levels[current_level].get_node("Music").stop()
 	player.reset_momentum()
 	GlobalScene.movement_enabled = false
 	player_tree.active = false
@@ -200,6 +207,15 @@ func _stop_scene():
 
 ## Enables the player's movement, player's animation tree, and scene timer.
 func _start_scene():
+	var music_player = array_of_levels[current_level].get_node_or_null("Music") as AudioStreamPlayer
+	
+	if music_player and music_player.stream:
+		var song_length = music_player.stream.get_length()
+		var target_pitch = song_length / level_speed
+		music_player.pitch_scale = target_pitch
+		music_player.play()
+
+	array_of_levels[current_level].get_node("Music").play()
 	timer.start(level_speed)
 	player_tree.active = true
 	GlobalScene.movement_enabled = true
@@ -215,18 +231,12 @@ func _on_timer_timeout() -> void:
 		await _player_game_over()
 	else:
 		await _transition_out()
-		if player_hp_left >= 3:
-			await _player_hit_1()
-			_reset_local_levels()
-			await _player_hit_1_transition_in()
-		elif player_hp_left == 2:
-			await _player_hit_2()
-			_reset_local_levels()
-			await _player_hit_2_transition_in()
+		await _player_hit()
+		_reset_local_levels()
+		await _player_hit_transition_in()
 		timer.start(level_speed)
 
 		_start_scene()
-		#array_of_levels[current_level].get_node("Music").play()
 
 
 ## When the player enters a portal.
@@ -239,14 +249,11 @@ func portal_entered() -> void:
 	await _transition_in()
 
 	_start_scene()
-	#array_of_levels[current_level].get_node("Music").play()
 
 
 ## When the player enters the enemy.
 func _on_enemy_enter() -> void:
 	_stop_scene()
-
-	versus_label.text = "VERSUS"
 
 	if enemy_hp_container.get_child_count() == 1:
 		await _transition_out()
@@ -254,12 +261,9 @@ func _on_enemy_enter() -> void:
 		await _revive_animation()
 		## Just to stop breaking between stages
 		await _health_set_up(true)
-	elif enemy_hp_container.get_child_count() == 2:
-		await _transition_out()
-		await _enemy_hit_2()
 	else:
 		await _transition_out()
-		await _enemy_hit_1()
+		await _enemy_hit()
 
 	array_of_levels[current_level].enabled = false
 	array_of_levels.pop_front()
@@ -278,14 +282,9 @@ func _on_enemy_enter() -> void:
 	array_of_levels[current_level].enabled = true
 	player.position = _find_start_point()
 
-	if enemy_hp_container.get_child_count() == 2:
-		await _enemy_hit_1_transition_in()
-	else:
-		await _enemy_hit_2_transition_in()
-	
-	_start_scene()
-	#array_of_levels[current_level].get_node("Music").play()
+	await _enemy_hit_transition_in()
 
+	_start_scene()
 
 #region -- Battle Animations --
 func _battle_start():
@@ -306,20 +305,12 @@ func _battle_transition_in():
 #endregion
 
 #region -- Player Animations --
-func _player_hit_1():
-	state_machine.travel("PlayerHit1")
+func _player_hit():
+	state_machine.travel("PlayerHit")
 	await anim_tree.animation_finished
 
-func _player_hit_2():
-	state_machine.travel("PlayerHit2")
-	await anim_tree.animation_finished
-
-func _player_hit_1_transition_in():
-	state_machine.travel("PlayerHit1TransitionIn")
-	await anim_tree.animation_finished
-
-func _player_hit_2_transition_in():
-	state_machine.travel("PlayerHit2TransitionIn")
+func _player_hit_transition_in():
+	state_machine.travel("PlayerHitTransitionIn")
 	await anim_tree.animation_finished
 
 func _player_game_over():
@@ -332,20 +323,12 @@ func _revive_animation():
 #endregion
 
 #region -- Enemy Animations --
-func _enemy_hit_1():
-	state_machine.travel("EnemyHit1")
+func _enemy_hit():
+	state_machine.travel("EnemyHit")
 	await anim_tree.animation_finished
 
-func _enemy_hit_1_transition_in():
-	state_machine.travel("EnemyHit1TransitionIn")
-	await anim_tree.animation_finished
-
-func _enemy_hit_2():
-	state_machine.travel("EnemyHit2")
-	await anim_tree.animation_finished
-
-func _enemy_hit_2_transition_in():
-	state_machine.travel("EnemyHit2TransitionIn")
+func _enemy_hit_transition_in():
+	state_machine.travel("EnemyHitTransitionIn")
 	await anim_tree.animation_finished
 
 func _enemy_kill():
@@ -355,6 +338,8 @@ func _enemy_kill():
 
 #region -- Transition Animations --
 func _transition_in():
+	state_machine.travel("LevelWin")
+	await anim_tree.animation_finished
 	state_machine.travel("TransitionIn")
 	await anim_tree.animation_finished
 

@@ -2,17 +2,50 @@ extends Node2D
 
 #region -- Setup --
 ## Array to keep laughing markers.
-@onready var markers_array : Array = [$TransitionSprite/EnemySprite/Marker2D, $TransitionSprite/EnemySprite/Marker2D2, $TransitionSprite/EnemySprite/Marker2D3]
+@onready var markers_array : Array = [$TransitionSprite/DummySprite/Marker2D, $TransitionSprite/DummySprite/Marker2D2, $TransitionSprite/DummySprite/Marker2D3]
 ## Current markers array index
 var current_markers_array_index : int = 0
 ## Time between laughing.
 var time : float = .35
+## NumberLabel Int
+var lvlToUse : int = 0
 #endregion
 
 #region -- Node Setup --
 @onready var player_hp_container = $TransitionSprite/PlayerHPContainer
 @onready var enemy_hp_container = $TransitionSprite/EnemyHPContainer
 #endregion
+
+func _reset_level():
+	lvlToUse = 0
+
+func _get_current_level():
+	lvlToUse += 1
+	if lvlToUse <= 9:
+		$TransitionSprite/LevelNode/NumberLabel.text = "0" + str(lvlToUse)
+	else:
+		$TransitionSprite/LevelNode/NumberLabel.text = str(lvlToUse)
+
+func _lose_current_level():
+	var target_level : int = 1
+	if lvlToUse >= 9:
+		target_level = 9
+	elif lvlToUse >= 5:
+		target_level = 5
+	else:
+		target_level = 1
+	
+	while lvlToUse > target_level:
+		lvlToUse -= 1
+		
+		if lvlToUse <= 9:
+			$TransitionSprite/LevelNode/NumberLabel.text = "0" + str(lvlToUse)
+		else:
+			$TransitionSprite/LevelNode/NumberLabel.text = str(lvlToUse)
+		
+		$LostLevel.play() 
+		
+		await get_tree().create_timer(0.5).timeout 
 
 
 ## Removes player health from [player_hp_container].
