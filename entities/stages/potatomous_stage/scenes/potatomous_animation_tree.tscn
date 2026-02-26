@@ -1,0 +1,295 @@
+[gd_scene format=3 uid="uid://ctjy0u8mlfl5h"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m1cc1"]
+animation = &"PotatomousLibrary/02BattleIntro"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_y2f0o"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ixtyk"]
+graph_offset = Vector2(-146.21487, 41.917343)
+nodes/output/position = Vector2(660, 120)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_m1cc1")
+nodes/Animation/position = Vector2(80, 140)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_y2f0o")
+nodes/TimeScale/position = Vector2(440, 100)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_64g52"]
+animation = &"PotatomousLibrary/15BattleRevive"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_iv6ni"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hyh4t"]
+nodes/output/position = Vector2(560, 40)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_64g52")
+nodes/Animation/position = Vector2(71.40497, 83.30579)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_iv6ni")
+nodes/TimeScale/position = Vector2(458.1819, 135.86778)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xojix"]
+animation = &"PotatomousLibrary/01BattleStart"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_xojix"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ayxtp"]
+graph_offset = Vector2(-708.47864, 53.701767)
+nodes/output/position = Vector2(40, 140)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_xojix")
+nodes/Animation/position = Vector2(-560, 160)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_xojix")
+nodes/TimeScale/position = Vector2(-180, 120)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y2f0o"]
+animation = &"PotatomousLibrary/03BattleTransitionIn"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ixtyk"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ejcqh"]
+graph_offset = Vector2(-119.94708, -85.86197)
+nodes/output/position = Vector2(720, 120)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_y2f0o")
+nodes/Animation/position = Vector2(60, 140)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_ixtyk")
+nodes/TimeScale/position = Vector2(480, 100)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lpbi4"]
+animation = &"PotatomousLibrary/09EnemyDeath"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_0ociy"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7faum"]
+graph_offset = Vector2(-211, 18)
+nodes/output/position = Vector2(400, 180)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_lpbi4")
+nodes/Animation/position = Vector2(-220, 200)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_0ociy")
+nodes/TimeScale/position = Vector2(180, 160)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oe7x8"]
+animation = &"PotatomousLibrary/07EnemyHit"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_kqtx2"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8qcxo"]
+graph_offset = Vector2(-59.600006, 163.13538)
+nodes/output/position = Vector2(1240, 460)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_oe7x8")
+nodes/Animation/position = Vector2(640, 480)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_kqtx2")
+nodes/TimeScale/position = Vector2(1020, 440)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kqtx2"]
+animation = &"PotatomousLibrary/08EnemyHitTransitionIn"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_lpbi4"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_xojix"]
+graph_offset = Vector2(-417.2487, -54.45758)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_kqtx2")
+nodes/Animation/position = Vector2(-280, 120)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_lpbi4")
+nodes/TimeScale/position = Vector2(135.28287, 217.85812)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0ociy"]
+animation = &"PotatomousLibrary/12GameOver"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_7faum"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hlafk"]
+graph_offset = Vector2(-462.81818, 139.27272)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_0ociy")
+nodes/Animation/position = Vector2(-400, 300)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_7faum")
+nodes/TimeScale/position = Vector2(44.801483, 307.81244)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7faum"]
+animation = &"PotatomousLibrary/13InsertCoin"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r641t"]
+animation = &"PotatomousLibrary/05LevelWin"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_2yby2"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_bbuhj"]
+graph_offset = Vector2(-211.22147, 155.92235)
+nodes/output/position = Vector2(380, 160)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_r641t")
+nodes/Animation/position = Vector2(-100, 140)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_2yby2")
+nodes/TimeScale/position = Vector2(180, 160)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bbuhj"]
+animation = &"PotatomousLibrary/10PlayerHit"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_7by0j"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_oe7x8"]
+nodes/output/position = Vector2(720, 120)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_bbuhj")
+nodes/Animation/position = Vector2(123.60001, 114.00001)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_7by0j")
+nodes/TimeScale/position = Vector2(500, 100)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7by0j"]
+animation = &"PotatomousLibrary/11PlayerHitTransitionIn"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_oe7x8"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_kqtx2"]
+graph_offset = Vector2(-523.91486, 45.871902)
+nodes/output/position = Vector2(-80, 200)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_7by0j")
+nodes/Animation/position = Vector2(-760, 220)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_oe7x8")
+nodes/TimeScale/position = Vector2(-320, 180)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hlafk"]
+animation = &"PotatomousLibrary/14PlayerRevive"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_64g52"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_iv6ni"]
+graph_offset = Vector2(-187.73454, 108.091736)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_hlafk")
+nodes/Animation/position = Vector2(-180, 180)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_64g52")
+nodes/TimeScale/position = Vector2(160, 180)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4f863"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2yby2"]
+animation = &"PotatomousLibrary/06TransitionIn"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_bbuhj"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7by0j"]
+graph_offset = Vector2(-411.52798, 63.864822)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_2yby2")
+nodes/Animation/position = Vector2(-300, 160)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_bbuhj")
+nodes/TimeScale/position = Vector2(100, 160)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8qcxo"]
+animation = &"PotatomousLibrary/04TransitionOut"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_m1cc1"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_y2f0o"]
+graph_offset = Vector2(461.06647, 301.34552)
+nodes/output/position = Vector2(1520, 360)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_m1cc1")
+nodes/TimeScale/position = Vector2(1300, 340)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_8qcxo")
+nodes/Animation/position = Vector2(900, 380)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m1cc1"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q8nxu"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7by0j"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oe7x8"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8qcxo"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kqtx2"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lpbi4"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0ociy"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7faum"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hlafk"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_64g52"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iv6ni"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hyh4t"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_utqut"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vhss1"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3cuq4"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w1x6d"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jqvcd"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xojix"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1nps7"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ayxtp"]
+states/BattleIntro/node = SubResource("AnimationNodeBlendTree_ixtyk")
+states/BattleIntro/position = Vector2(350, 193)
+states/BattleRevive/node = SubResource("AnimationNodeBlendTree_hyh4t")
+states/BattleRevive/position = Vector2(-6, 281)
+states/BattleStart/node = SubResource("AnimationNodeBlendTree_ayxtp")
+states/BattleStart/position = Vector2(348, 100)
+states/BattleTransitionIn/node = SubResource("AnimationNodeBlendTree_ejcqh")
+states/BattleTransitionIn/position = Vector2(350, 281)
+states/EnemyDeath/node = SubResource("AnimationNodeBlendTree_7faum")
+states/EnemyDeath/position = Vector2(350, 361)
+states/EnemyHit/node = SubResource("AnimationNodeBlendTree_8qcxo")
+states/EnemyHit/position = Vector2(931, 193)
+states/EnemyHitTransitionIn/node = SubResource("AnimationNodeBlendTree_xojix")
+states/EnemyHitTransitionIn/position = Vector2(931, 361)
+states/GameOver/node = SubResource("AnimationNodeBlendTree_hlafk")
+states/GameOver/position = Vector2(180, 361)
+states/InsertCoin/node = SubResource("AnimationNodeAnimation_7faum")
+states/InsertCoin/position = Vector2(180, 484)
+states/LevelWin/node = SubResource("AnimationNodeBlendTree_bbuhj")
+states/LevelWin/position = Vector2(527, 361)
+states/PlayerHit/node = SubResource("AnimationNodeBlendTree_oe7x8")
+states/PlayerHit/position = Vector2(527, 193)
+states/PlayerHitTransitionIn/node = SubResource("AnimationNodeBlendTree_kqtx2")
+states/PlayerHitTransitionIn/position = Vector2(747, 193)
+states/PlayerRevive/node = SubResource("AnimationNodeBlendTree_iv6ni")
+states/PlayerRevive/position = Vector2(-6, 484)
+states/RESET/node = SubResource("AnimationNodeAnimation_4f863")
+states/RESET/position = Vector2(349, 21)
+states/Start/position = Vector2(210, 21)
+states/TransitionIn/node = SubResource("AnimationNodeBlendTree_7by0j")
+states/TransitionIn/position = Vector2(747, 361)
+states/TransitionOut/node = SubResource("AnimationNodeBlendTree_y2f0o")
+states/TransitionOut/position = Vector2(623, 281)
+transitions = ["BattleStart", "BattleIntro", SubResource("AnimationNodeStateMachineTransition_m1cc1"), "BattleIntro", "BattleTransitionIn", SubResource("AnimationNodeStateMachineTransition_q8nxu"), "Start", "RESET", SubResource("AnimationNodeStateMachineTransition_7by0j"), "RESET", "BattleStart", SubResource("AnimationNodeStateMachineTransition_oe7x8"), "BattleTransitionIn", "TransitionOut", SubResource("AnimationNodeStateMachineTransition_8qcxo"), "TransitionOut", "LevelWin", SubResource("AnimationNodeStateMachineTransition_kqtx2"), "LevelWin", "TransitionIn", SubResource("AnimationNodeStateMachineTransition_lpbi4"), "TransitionIn", "TransitionOut", SubResource("AnimationNodeStateMachineTransition_0ociy"), "TransitionOut", "PlayerHit", SubResource("AnimationNodeStateMachineTransition_7faum"), "PlayerHit", "PlayerHitTransitionIn", SubResource("AnimationNodeStateMachineTransition_hlafk"), "PlayerHitTransitionIn", "TransitionOut", SubResource("AnimationNodeStateMachineTransition_64g52"), "TransitionOut", "EnemyHit", SubResource("AnimationNodeStateMachineTransition_iv6ni"), "EnemyHit", "EnemyHitTransitionIn", SubResource("AnimationNodeStateMachineTransition_hyh4t"), "EnemyHitTransitionIn", "TransitionOut", SubResource("AnimationNodeStateMachineTransition_utqut"), "TransitionOut", "EnemyDeath", SubResource("AnimationNodeStateMachineTransition_vhss1"), "TransitionOut", "GameOver", SubResource("AnimationNodeStateMachineTransition_3cuq4"), "GameOver", "InsertCoin", SubResource("AnimationNodeStateMachineTransition_w1x6d"), "InsertCoin", "PlayerRevive", SubResource("AnimationNodeStateMachineTransition_jqvcd"), "BattleRevive", "BattleTransitionIn", SubResource("AnimationNodeStateMachineTransition_xojix"), "PlayerRevive", "BattleRevive", SubResource("AnimationNodeStateMachineTransition_1nps7")]
+graph_offset = Vector2(-52, 84)
+
+[node name="PotatomousAnimationTree" type="AnimationTree" unique_id=664958892]
+deterministic = false
+tree_root = SubResource("AnimationNodeStateMachine_ayxtp")
+anim_player = NodePath("../AnimationPlayer")
+parameters/BattleIntro/TimeScale/scale = 8.0
+parameters/BattleRevive/TimeScale/scale = 8.0
+parameters/BattleStart/TimeScale/scale = 8.0
+parameters/BattleTransitionIn/TimeScale/scale = 8.0
+parameters/EnemyDeath/TimeScale/scale = 8.0
+parameters/EnemyHit/TimeScale/scale = 8.0
+parameters/EnemyHitTransitionIn/TimeScale/scale = 8.0
+parameters/GameOver/TimeScale/scale = 8.0
+parameters/LevelWin/TimeScale/scale = 8.0
+parameters/PlayerHit/TimeScale/scale = 8.0
+parameters/PlayerHitTransitionIn/TimeScale/scale = 8.0
+parameters/PlayerRevive/TimeScale/scale = 8.0
+parameters/TransitionIn/TimeScale/scale = 8.0
+parameters/TransitionOut/TimeScale/scale = 8.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=4 uid="uid://camlls0wflyxo"]
+[gd_scene format=4 uid="uid://camlls0wflyxo"]
 
 [ext_resource type="Texture2D" uid="uid://c7bagfx6uqf4j" path="res://entities/stages/base_stage/art/snow_world_mountain.png" id="1_sr5r4"]
 [ext_resource type="Texture2D" uid="uid://dp2nkj2u14jm3" path="res://entities/stages/base_stage/art/snow_world_tree.png" id="2_uvtaq"]
@@ -12,12 +12,12 @@
 [ext_resource type="Texture2D" uid="uid://bhh7ib0h71rkd" path="res://ui/cutscenes/opening_cutscene/art/debris_3.png" id="10_lxdgg"]
 [ext_resource type="Texture2D" uid="uid://bwnra7464dcop" path="res://ui/cutscenes/opening_cutscene/art/happy_dummy.png" id="11_6dg6k"]
 [ext_resource type="Texture2D" uid="uid://cggyouvgos1hw" path="res://ui/cutscenes/opening_cutscene/art/ice_heart_sheet.png" id="12_y2bkp"]
-[ext_resource type="LabelSettings" uid="uid://d2gk24pdcoddj" path="res://ui/text_ui/resources/label_settings.tres" id="13_jfmyd"]
 [ext_resource type="FontFile" uid="uid://b4l4vamirhbk5" path="res://ui/text_ui/fonts/ware.ttf" id="14_03bpt"]
 [ext_resource type="Texture2D" uid="uid://05yn0aaq5m5x" path="res://entities/stages/base_stage/art/level_border.png" id="15_o6emx"]
 [ext_resource type="Texture2D" uid="uid://kll6eu4dqu2" path="res://entities/stages/base_stage/art/snow_world_sky.png" id="16_4nvy4"]
 [ext_resource type="Texture2D" uid="uid://chjltiteqc731" path="res://ui/transition_ui/art/arcade_screen_sheet.png" id="17_dbrrt"]
 [ext_resource type="Shader" uid="uid://rjy4xp4r2u4h" path="res://ui/crt_filter/crt.gdshader" id="18_murck"]
+[ext_resource type="Texture2D" uid="uid://c4ua5kxvya0ns" path="res://ui/cutscenes/opening_cutscene/art/ninja_ware_logo.png" id="18_sku1g"]
 [ext_resource type="Texture2D" uid="uid://b67sbjlc1aso4" path="res://entities/stages/dummy_stage/art/dummy.png" id="19_2n4as"]
 [ext_resource type="AudioStream" uid="uid://rxnu6rly8dj4" path="res://ui/cutscenes/opening_cutscene/audio/conversion_sfx/dummy_convert.wav" id="20_bf161"]
 [ext_resource type="AudioStream" uid="uid://sosde0xic2sa" path="res://ui/cutscenes/opening_cutscene/audio/santa_sfx/santa_laugh.wav" id="21_luxol"]
@@ -34,8 +34,17 @@
 [ext_resource type="AudioStream" uid="uid://h6u0xttxhugs" path="res://ui/cutscenes/opening_cutscene/audio/house_sfx/wall_burst.wav" id="32_b7u7t"]
 [ext_resource type="AudioStream" uid="uid://b434i8oc85385" path="res://ui/cutscenes/opening_cutscene/audio/house_sfx/wall_burst_2.wav" id="33_i6ga7"]
 [ext_resource type="AudioStream" uid="uid://do4auwufy2rhb" path="res://ui/cutscenes/opening_cutscene/audio/conversion_sfx/heart_beam.wav" id="34_vvgh0"]
+[ext_resource type="AudioStream" uid="uid://5jwqh8bw6ycb" path="res://ui/transition_ui/audio/transport_in.wav" id="35_dstj2"]
 [ext_resource type="AudioStream" uid="uid://coluw2hm0ninf" path="res://ui/cutscenes/opening_cutscene/audio/house_sfx/house_light_turn_on.wav" id="35_pexsy"]
 [ext_resource type="AudioStream" uid="uid://pmllmfhwnbyq" path="res://ui/cutscenes/opening_cutscene/audio/ninja_sfx/ninja_surprise.wav" id="36_a17cw"]
+[ext_resource type="AudioStream" uid="uid://crgnbn6gk4nfn" path="res://ui/transition_ui/audio/transport_out.wav" id="38_kutj6"]
+[ext_resource type="AudioStream" uid="uid://hkaxu2tha43e" path="res://ui/transition_ui/audio/coin_inserted.wav" id="39_kutj6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_su0ge"]
+font = ExtResource("14_03bpt")
+font_size = 96
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_5usnq"]
 font = ExtResource("14_03bpt")
@@ -75,6 +84,12 @@ shader_parameter/scanline_thickness = 2.0
 shader_parameter/chromatic_aberration_strength = 1.0
 shader_parameter/wiggle = 0.002
 
+[sub_resource type="LabelSettings" id="LabelSettings_sku1g"]
+font = ExtResource("14_03bpt")
+font_size = 48
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0lp35"]
 animation = &"Opening"
 
@@ -87,6 +102,9 @@ nodes/Animation/position = Vector2(42, 115)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_3uawx")
 nodes/TimeScale/position = Vector2(220, 60)
 node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sku1g"]
+animation = &"StartGame"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tu627"]
 animation = &"TransitionIn"
@@ -101,21 +119,40 @@ nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_a7tx8")
 nodes/TimeScale/position = Vector2(265, 200)
 node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_su0ge"]
+animation = &"TransitionOut"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_sku1g"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5nskk"]
+nodes/output/position = Vector2(460, 120)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_su0ge")
+nodes/Animation/position = Vector2(100, 40)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_sku1g")
+nodes/TimeScale/position = Vector2(295.90002, 133.1)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a7tx8"]
-switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dstj2"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5nskk"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1cher"]
-advance_mode = 2
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kutj6"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_0lp35"]
 states/Opening/node = SubResource("AnimationNodeBlendTree_dasv5")
-states/Opening/position = Vector2(335, 66)
-states/Start/position = Vector2(51, 84)
+states/Opening/position = Vector2(275, 51)
+states/Start/position = Vector2(-115, 85)
+states/StartGame/node = SubResource("AnimationNodeAnimation_sku1g")
+states/StartGame/position = Vector2(123, 29)
 states/TransitionIn/node = SubResource("AnimationNodeBlendTree_h54xb")
-states/TransitionIn/position = Vector2(89, 189)
-transitions = ["TransitionIn", "Opening", SubResource("AnimationNodeStateMachineTransition_a7tx8"), "Start", "TransitionIn", SubResource("AnimationNodeStateMachineTransition_1cher")]
-graph_offset = Vector2(-90, 38)
+states/TransitionIn/position = Vector2(181, 187)
+states/TransitionOut/node = SubResource("AnimationNodeBlendTree_5nskk")
+states/TransitionOut/position = Vector2(538, 66)
+transitions = ["TransitionIn", "Opening", SubResource("AnimationNodeStateMachineTransition_a7tx8"), "Opening", "TransitionOut", SubResource("AnimationNodeStateMachineTransition_dstj2"), "Start", "StartGame", SubResource("AnimationNodeStateMachineTransition_5nskk"), "StartGame", "TransitionIn", SubResource("AnimationNodeStateMachineTransition_kutj6")]
+graph_offset = Vector2(-250, -28)
 
 [sub_resource type="Animation" id="Animation_3uawx"]
 resource_name = "Opening"
@@ -160,70 +197,58 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("SaintNick:hframes")
+tracks/3/path = NodePath("SaintNick:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(64),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [20]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("SaintNick:frame")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(43.133034, 44.133034, 45.133034, 46.133034, 47.133034, 48.133034, 49.133034, 50.133034, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 96, 97, 98, 99, 100, 101, 105, 105.25, 105.5, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167.00418, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181.0441, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 0, 10, 11, 12, 10, 11, 12, 10, 11, 12, 10, 11, 12, 0, 17, 17, 17, 18, 18, 19, 18, 17, 16, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 5, 13, 14, 15, 13, 14, 15, 13, 14, 15, 13, 14, 15, 5, 13, 14, 15, 13, 14, 15, 13, 14, 15, 13, 14, 15, 13, 14, 15, 13, 14, 15, 13, 14, 15, 13, 14, 15, 5, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("SaintNick:flip_h")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SaintNick:flip_h")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(64, 110.75, 144),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, false]
 }
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("SaintNick:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SaintNick:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(64, 80, 105, 110, 110.5, 111, 116, 143, 144, 167, 240, 256),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(1960, 636), Vector2(1364, 636), Vector2(1364, 636), Vector2(1364, -136), Vector2(1364, -136), Vector2(1064, -103.201), Vector2(1064, 470), Vector2(1020, 632), Vector2(1020, 632), Vector2(2880, 632), Vector2(2880, 632), Vector2(4336, 632)]
 }
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("SaintNick:visible")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("SaintNick:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0, 64, 116, 144),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [false, true, false, true]
 }
-tracks/8/type = "audio"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("AudioStreamPlayer")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
+tracks/7/type = "audio"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AudioStreamPlayer")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
@@ -467,322 +492,258 @@ tracks/8/keys = {
 }, {
 "end_offset": 0.0,
 "start_offset": 0.0,
+"stream": ExtResource("38_kutj6")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("35_dstj2")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
 "stream": ExtResource("35_pexsy")
 }, {
 "end_offset": 0.0,
 "start_offset": 0.0,
 "stream": ExtResource("36_a17cw")
 }],
-"times": PackedFloat32Array(64, 66, 68, 70, 72, 74, 76, 78, 80, 81, 82.5, 84, 85.5, 87, 88.5, 90, 91.5, 96, 99, 101, 105, 116, 120, 124, 143, 144, 145, 147, 149, 151, 153, 155, 157, 159, 161, 163, 165, 167, 169, 170.5, 172, 173.5, 175, 176.5, 178, 179.5, 192, 206, 220, 240, 241.5, 243, 244.5, 246, 247.5, 249, 250.5, 252, 253.5, 255, 310, 316)
+"times": PackedFloat32Array(64, 66, 68, 70, 72, 74, 76, 78, 80, 81, 82.5, 84, 85.5, 87, 88.5, 90, 91.5, 96, 99, 101, 105, 116, 120, 124, 143, 144, 145, 147, 149, 151, 153, 155, 157, 159, 161, 163, 165, 167, 169, 170.5, 172, 173.5, 175, 176.5, 178, 179.5, 192, 206, 220, 240, 241.5, 243, 244.5, 246, 247.5, 249, 250.5, 252, 253.5, 255, 258, 278, 310, 316)
 }
-tracks/8/use_blend = true
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("SaintNick:flip_v")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
+tracks/7/use_blend = true
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("SaintNick:flip_v")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
 "times": PackedFloat32Array(53.53065, 110.75, 143),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
 }
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("SaintNick:scale")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("SaintNick:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
 "times": PackedFloat32Array(111, 116, 143),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(4, 4), Vector2(1, 1), Vector2(4, 4)]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Ground:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 144),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Ground:visible")
+tracks/11/path = NodePath("Bursted:visible")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
 "times": PackedFloat32Array(0, 144),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true, false]
+"values": [false, true]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("Bursted:visible")
+tracks/12/path = NodePath("Debris1:visible")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"times": PackedFloat32Array(0, 144),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("Debris1:visible")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
 "times": PackedFloat32Array(0, 144, 261),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
 }
-tracks/14/type = "value"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("Debris1:hframes")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
-"times": PackedFloat32Array(144),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/15/type = "value"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("Debris1:frame")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Debris1:frame")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
 "times": PackedFloat32Array(144, 145, 146, 147, 148, 149.04839, 150),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 0, 1, 2, 3]
 }
-tracks/16/type = "value"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("Debris1:position")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = {
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Debris1:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
 "times": PackedFloat32Array(144, 146, 148, 150, 150.0212),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(952, 624), Vector2(668, 404), Vector2(524, 279.435), Vector2(290, 100), Vector2(290, 100)]
 }
-tracks/17/type = "value"
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/path = NodePath("Debris2:visible")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/keys = {
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Debris2:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
 "times": PackedFloat32Array(0, 144, 261),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, true]
 }
-tracks/18/type = "value"
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/path = NodePath("Debris2:hframes")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/keys = {
-"times": PackedFloat32Array(144),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
-}
-tracks/19/type = "value"
-tracks/19/imported = false
-tracks/19/enabled = true
-tracks/19/path = NodePath("Debris2:frame")
-tracks/19/interp = 1
-tracks/19/loop_wrap = true
-tracks/19/keys = {
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Debris2:frame")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
 "times": PackedFloat32Array(144, 145),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 1]
 }
-tracks/20/type = "value"
-tracks/20/imported = false
-tracks/20/enabled = true
-tracks/20/path = NodePath("Debris2:position")
-tracks/20/interp = 1
-tracks/20/loop_wrap = true
-tracks/20/keys = {
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Debris2:position")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
 "times": PackedFloat32Array(144, 145),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [Vector2(970, 692), Vector2(764, 752)]
 }
-tracks/21/type = "value"
-tracks/21/imported = false
-tracks/21/enabled = true
-tracks/21/path = NodePath("Camera2D:position")
-tracks/21/interp = 1
-tracks/21/loop_wrap = true
-tracks/21/keys = {
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Camera2D:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
 "times": PackedFloat32Array(0, 146, 167, 261, 262, 320, 348),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(960, 540), Vector2(960, 540), Vector2(3264, 540), Vector2(3264, 540), Vector2(960, 540), Vector2(960, 540), Vector2(3264, 540)]
 }
-tracks/22/type = "value"
-tracks/22/imported = false
-tracks/22/enabled = true
-tracks/22/path = NodePath("Debris3:hframes")
-tracks/22/interp = 1
-tracks/22/loop_wrap = true
-tracks/22/keys = {
-"times": PackedFloat32Array(0, 144),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [1, 1]
-}
-tracks/23/type = "value"
-tracks/23/imported = false
-tracks/23/enabled = true
-tracks/23/path = NodePath("Debris3:vframes")
-tracks/23/interp = 1
-tracks/23/loop_wrap = true
-tracks/23/keys = {
-"times": PackedFloat32Array(144),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/24/type = "value"
-tracks/24/imported = false
-tracks/24/enabled = true
-tracks/24/path = NodePath("Debris3:frame")
-tracks/24/interp = 1
-tracks/24/loop_wrap = true
-tracks/24/keys = {
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Debris3:frame")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
 "times": PackedFloat32Array(144),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
 }
-tracks/25/type = "value"
-tracks/25/imported = false
-tracks/25/enabled = true
-tracks/25/path = NodePath("Debris3:position")
-tracks/25/interp = 1
-tracks/25/loop_wrap = true
-tracks/25/keys = {
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Debris3:position")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
 "times": PackedFloat32Array(144, 148),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1136, 606), Vector2(2000, -252)]
 }
-tracks/26/type = "value"
-tracks/26/imported = false
-tracks/26/enabled = true
-tracks/26/path = NodePath("Debris3:visible")
-tracks/26/interp = 1
-tracks/26/loop_wrap = true
-tracks/26/keys = {
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("Debris3:visible")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
 "times": PackedFloat32Array(0, 144, 261),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
 }
-tracks/27/type = "value"
-tracks/27/imported = false
-tracks/27/enabled = true
-tracks/27/path = NodePath("Dummy:position")
-tracks/27/interp = 1
-tracks/27/loop_wrap = true
-tracks/27/keys = {
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("Dummy:position")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
 "times": PackedFloat32Array(0, 171.96568),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(3600, 688), Vector2(3600, 688)]
 }
-tracks/28/type = "value"
-tracks/28/imported = false
-tracks/28/enabled = true
-tracks/28/path = NodePath("Dummy:texture")
-tracks/28/interp = 1
-tracks/28/loop_wrap = true
-tracks/28/keys = {
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("Dummy:texture")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
 "times": PackedFloat32Array(0, 210, 211),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [ExtResource("11_6dg6k"), ExtResource("11_6dg6k"), ExtResource("19_2n4as")]
 }
-tracks/29/type = "value"
-tracks/29/imported = false
-tracks/29/enabled = true
-tracks/29/path = NodePath("Heart:visible")
-tracks/29/interp = 1
-tracks/29/loop_wrap = true
-tracks/29/keys = {
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("Heart:visible")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
 "times": PackedFloat32Array(0, 184, 239),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
 }
-tracks/30/type = "value"
-tracks/30/imported = false
-tracks/30/enabled = true
-tracks/30/path = NodePath("Heart:vframes")
-tracks/30/interp = 1
-tracks/30/loop_wrap = true
-tracks/30/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/31/type = "value"
-tracks/31/imported = false
-tracks/31/enabled = true
-tracks/31/path = NodePath("Heart:frame")
-tracks/31/interp = 1
-tracks/31/loop_wrap = true
-tracks/31/keys = {
+tracks/25/type = "value"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("Heart:frame")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/keys = {
 "times": PackedFloat32Array(0, 192, 193, 194, 195, 196, 197, 198, 199, 200.00731, 201.03319, 202, 203.00731, 204, 205, 206.00731, 207.03319, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 0, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 0]
 }
-tracks/32/type = "value"
-tracks/32/imported = false
-tracks/32/enabled = true
-tracks/32/path = NodePath("Heart:hframes")
-tracks/32/interp = 1
-tracks/32/loop_wrap = true
-tracks/32/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/33/type = "value"
-tracks/33/imported = false
-tracks/33/enabled = true
-tracks/33/path = NodePath("Heart:position")
-tracks/33/interp = 1
-tracks/33/loop_wrap = true
-tracks/33/keys = {
+tracks/26/type = "value"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("Heart:position")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/keys = {
 "times": PackedFloat32Array(184, 192, 236.00381, 238),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(3269, 828), Vector2(3474, 676), Vector2(3474, 676), Vector2(3269, 828)]
 }
-tracks/34/type = "audio"
-tracks/34/imported = false
-tracks/34/enabled = true
-tracks/34/path = NodePath("AudioStreamPlayer2")
-tracks/34/interp = 1
-tracks/34/loop_wrap = true
-tracks/34/keys = {
+tracks/27/type = "audio"
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/path = NodePath("AudioStreamPlayer2")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
@@ -930,210 +891,114 @@ tracks/34/keys = {
 }],
 "times": PackedFloat32Array(210, 211, 212.5, 214, 215.5, 217, 218.5, 220, 221.5, 223, 224.5, 226, 227.5, 229, 230.5, 232, 233.5, 261, 261.5, 262, 262.5, 263.5, 264, 264.5, 265, 266, 266.5, 267, 267.5, 268, 268.5, 269, 269.5, 270, 270.5, 350)
 }
-tracks/34/use_blend = true
-tracks/35/type = "value"
-tracks/35/imported = false
-tracks/35/enabled = true
-tracks/35/path = NodePath("Camera2D/TransitionSprite:scale")
-tracks/35/interp = 1
-tracks/35/loop_wrap = true
-tracks/35/keys = {
-"times": PackedFloat32Array(0, 258, 259, 260, 278, 279, 280, 356, 357, 358),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+tracks/27/use_blend = true
+tracks/28/type = "value"
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/path = NodePath("Camera2D/TransitionSprite:scale")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/keys = {
+"times": PackedFloat32Array(0, 258, 259, 260, 278, 279, 280),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(5, 5), Vector2(5, 5), Vector2(2, 2), Vector2(1, 1), Vector2(1, 1), Vector2(2, 2), Vector2(5, 5), Vector2(5, 5), Vector2(2, 2), Vector2(1, 1)]
+"values": [Vector2(5, 5), Vector2(5, 5), Vector2(2, 2), Vector2(1, 1), Vector2(1, 1), Vector2(2, 2), Vector2(5, 5)]
 }
-tracks/36/type = "value"
-tracks/36/imported = false
-tracks/36/enabled = true
-tracks/36/path = NodePath("Camera2D/TransitionSprite:frame")
-tracks/36/interp = 1
-tracks/36/loop_wrap = true
-tracks/36/keys = {
-"times": PackedFloat32Array(0, 258, 259, 260, 278, 279, 280, 356, 357, 358),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+tracks/29/type = "value"
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/path = NodePath("Camera2D/TransitionSprite:frame")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/keys = {
+"times": PackedFloat32Array(0, 258, 259, 260, 278, 279, 280),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [6, 6, 5, 0, 0, 5, 6, 6, 5, 4]
+"values": [6, 6, 5, 0, 0, 5, 6]
 }
-tracks/37/type = "value"
-tracks/37/imported = false
-tracks/37/enabled = true
-tracks/37/path = NodePath("Camera2D/TransitionSprite/Label:text")
-tracks/37/interp = 1
-tracks/37/loop_wrap = true
-tracks/37/keys = {
+tracks/30/type = "value"
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/path = NodePath("Camera2D/TransitionSprite/Label:text")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/keys = {
 "times": PackedFloat32Array(261, 261.5, 262, 262.5, 263, 263.5, 264, 264.5, 265, 265.5, 266, 266.5, 267, 267.5, 268, 268.5, 269, 269.5, 270, 270.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": ["", "T", "Th", "The", "The ", "The n", "The ne", "The nex", "The next", "The next ", "The next m", "The next mo", "The next mor", "The next morn", "The next morni", "The next mornin", "The next morning", "The next morning.", "The next morning..", "The next morning..."]
 }
-tracks/38/type = "value"
-tracks/38/imported = false
-tracks/38/enabled = true
-tracks/38/path = NodePath("Camera2D/TransitionSprite/Label:visible")
-tracks/38/interp = 1
-tracks/38/loop_wrap = true
-tracks/38/keys = {
+tracks/31/type = "value"
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/path = NodePath("Camera2D/TransitionSprite/Label:visible")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/keys = {
 "times": PackedFloat32Array(278, 279),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
-tracks/39/type = "value"
-tracks/39/imported = false
-tracks/39/enabled = true
-tracks/39/path = NodePath("Light:visible")
-tracks/39/interp = 1
-tracks/39/loop_wrap = true
-tracks/39/keys = {
+tracks/32/type = "value"
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/path = NodePath("Light:visible")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/keys = {
 "times": PackedFloat32Array(309, 310),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
-tracks/40/type = "value"
-tracks/40/imported = false
-tracks/40/enabled = true
-tracks/40/path = NodePath("Ninja:hframes")
-tracks/40/interp = 1
-tracks/40/loop_wrap = true
-tracks/40/keys = {
-"times": PackedFloat32Array(320),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [10]
-}
-tracks/41/type = "value"
-tracks/41/imported = false
-tracks/41/enabled = true
-tracks/41/path = NodePath("Ninja:vframes")
-tracks/41/interp = 1
-tracks/41/loop_wrap = true
-tracks/41/keys = {
-"times": PackedFloat32Array(320),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [14]
-}
-tracks/42/type = "value"
-tracks/42/imported = false
-tracks/42/enabled = true
-tracks/42/path = NodePath("Ninja:frame")
-tracks/42/interp = 1
-tracks/42/loop_wrap = true
-tracks/42/keys = {
+tracks/33/type = "value"
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/path = NodePath("Ninja:frame")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/keys = {
 "times": PackedFloat32Array(320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346, 347, 348),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [2, 3, 4, 10, 11, 12, 2, 3, 4, 10, 11, 12, 2, 3, 4, 10, 11, 12, 2, 3, 4, 10, 11, 12, 2, 3, 4, 10, 0]
 }
-tracks/43/type = "value"
-tracks/43/imported = false
-tracks/43/enabled = true
-tracks/43/path = NodePath("Ninja:position")
-tracks/43/interp = 1
-tracks/43/loop_wrap = true
-tracks/43/keys = {
+tracks/34/type = "value"
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/path = NodePath("Ninja:position")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/keys = {
 "times": PackedFloat32Array(320, 348),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(828, 700), Vector2(2880, 700)]
 }
-tracks/44/type = "value"
-tracks/44/imported = false
-tracks/44/enabled = true
-tracks/44/path = NodePath("Ninja:visible")
-tracks/44/interp = 1
-tracks/44/loop_wrap = true
-tracks/44/keys = {
+tracks/35/type = "value"
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/path = NodePath("Ninja:visible")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/keys = {
 "times": PackedFloat32Array(319, 320, 350, 354),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [false, true, false, true]
 }
-tracks/45/type = "value"
-tracks/45/imported = false
-tracks/45/enabled = true
-tracks/45/path = NodePath("NinjaSword:visible")
-tracks/45/interp = 1
-tracks/45/loop_wrap = true
-tracks/45/keys = {
+tracks/36/type = "value"
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/path = NodePath("NinjaSword:visible")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/keys = {
 "times": PackedFloat32Array(320, 350, 354),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
-}
-tracks/46/type = "value"
-tracks/46/imported = false
-tracks/46/enabled = true
-tracks/46/path = NodePath("Dummy:hframes")
-tracks/46/interp = 1
-tracks/46/loop_wrap = true
-tracks/46/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/47/type = "value"
-tracks/47/imported = false
-tracks/47/enabled = true
-tracks/47/path = NodePath("Dummy:vframes")
-tracks/47/interp = 1
-tracks/47/loop_wrap = true
-tracks/47/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/48/type = "value"
-tracks/48/imported = false
-tracks/48/enabled = true
-tracks/48/path = NodePath("Camera2D/TransitionSprite:hframes")
-tracks/48/interp = 1
-tracks/48/loop_wrap = true
-tracks/48/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [7]
-}
-tracks/49/type = "value"
-tracks/49/imported = false
-tracks/49/enabled = true
-tracks/49/path = NodePath("Camera2D/TransitionSprite:vframes")
-tracks/49/interp = 1
-tracks/49/loop_wrap = true
-tracks/49/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/50/type = "value"
-tracks/50/imported = false
-tracks/50/enabled = true
-tracks/50/path = NodePath("Debris1:vframes")
-tracks/50/interp = 1
-tracks/50/loop_wrap = true
-tracks/50/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/51/type = "value"
-tracks/51/imported = false
-tracks/51/enabled = true
-tracks/51/path = NodePath("Debris2:vframes")
-tracks/51/interp = 1
-tracks/51/loop_wrap = true
-tracks/51/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
 }
 
 [sub_resource type="Animation" id="Animation_h5idg"]
@@ -1141,55 +1006,55 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SaintNick:hframes")
+tracks/0/path = NodePath("SaintNick:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [20]
+"values": [1]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SaintNick:frame")
+tracks/1/path = NodePath("SaintNick:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("SaintNick:flip_h")
+tracks/2/path = NodePath("SaintNick:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector2(1960, 632)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("SaintNick:position")
+tracks/3/path = NodePath("SaintNick:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1960, 632)]
+"update": 1,
+"values": [true]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("SaintNick:visible")
+tracks/4/path = NodePath("SaintNick:flip_v")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1201,43 +1066,43 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("SaintNick:flip_v")
+tracks/5/path = NodePath("SaintNick:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector2(4, 4)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("SaintNick:scale")
+tracks/6/path = NodePath("Ground:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(4, 4)]
+"update": 1,
+"values": [true]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Ground:visible")
+tracks/7/path = NodePath("Bursted:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Bursted:visible")
+tracks/8/path = NodePath("Debris1:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -1249,79 +1114,79 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Debris1:visible")
+tracks/9/path = NodePath("Debris1:frame")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [0]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Debris1:hframes")
+tracks/10/path = NodePath("Debris1:position")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [3]
+"update": 0,
+"values": [Vector2(952, 624)]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Debris1:frame")
+tracks/11/path = NodePath("Debris2:visible")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [false]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("Debris1:position")
+tracks/12/path = NodePath("Debris2:frame")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(952, 624)]
+"update": 1,
+"values": [0]
 }
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("Debris2:visible")
+tracks/13/path = NodePath("Debris2:position")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Vector2(970, 692)]
 }
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("Debris2:hframes")
+tracks/14/path = NodePath("Camera2D:position")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
+"update": 0,
+"values": [Vector2(960, 540)]
 }
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("Debris2:frame")
+tracks/15/path = NodePath("Debris3:frame")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -1333,465 +1198,464 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("Debris2:position")
+tracks/16/path = NodePath("Debris3:position")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(970, 692)]
+"values": [Vector2(1136, 606)]
 }
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("Camera2D:position")
+tracks/17/path = NodePath("Debris3:visible")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(960, 540)]
+"update": 1,
+"values": [false]
 }
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("Debris3:hframes")
+tracks/18/path = NodePath("Dummy:position")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
+"update": 0,
+"values": [Vector2(3600, 688)]
 }
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("Debris3:vframes")
+tracks/19/path = NodePath("Dummy:texture")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [ExtResource("11_6dg6k")]
 }
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("Debris3:frame")
+tracks/20/path = NodePath("Heart:visible")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [false]
 }
 tracks/21/type = "value"
 tracks/21/imported = false
 tracks/21/enabled = true
-tracks/21/path = NodePath("Debris3:position")
+tracks/21/path = NodePath("Heart:frame")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1136, 606)]
+"update": 1,
+"values": [0]
 }
 tracks/22/type = "value"
 tracks/22/imported = false
 tracks/22/enabled = true
-tracks/22/path = NodePath("Debris3:visible")
+tracks/22/path = NodePath("Heart:position")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Vector2(3072, 688)]
 }
 tracks/23/type = "value"
 tracks/23/imported = false
 tracks/23/enabled = true
-tracks/23/path = NodePath("Dummy:position")
+tracks/23/path = NodePath("Camera2D/TransitionSprite:scale")
 tracks/23/interp = 1
 tracks/23/loop_wrap = true
 tracks/23/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(3600, 688)]
+"values": [Vector2(1, 1)]
 }
 tracks/24/type = "value"
 tracks/24/imported = false
 tracks/24/enabled = true
-tracks/24/path = NodePath("Dummy:texture")
+tracks/24/path = NodePath("Camera2D/TransitionSprite:frame")
 tracks/24/interp = 1
 tracks/24/loop_wrap = true
 tracks/24/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("11_6dg6k")]
+"values": [0]
 }
 tracks/25/type = "value"
 tracks/25/imported = false
 tracks/25/enabled = true
-tracks/25/path = NodePath("Heart:visible")
+tracks/25/path = NodePath("Camera2D/TransitionSprite/Label:text")
 tracks/25/interp = 1
 tracks/25/loop_wrap = true
 tracks/25/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [""]
 }
 tracks/26/type = "value"
 tracks/26/imported = false
 tracks/26/enabled = true
-tracks/26/path = NodePath("Heart:vframes")
+tracks/26/path = NodePath("Camera2D/TransitionSprite/Label:visible")
 tracks/26/interp = 1
 tracks/26/loop_wrap = true
 tracks/26/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [2]
+"values": [false]
 }
 tracks/27/type = "value"
 tracks/27/imported = false
 tracks/27/enabled = true
-tracks/27/path = NodePath("Heart:frame")
+tracks/27/path = NodePath("Light:visible")
 tracks/27/interp = 1
 tracks/27/loop_wrap = true
 tracks/27/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [false]
 }
 tracks/28/type = "value"
 tracks/28/imported = false
 tracks/28/enabled = true
-tracks/28/path = NodePath("Heart:hframes")
+tracks/28/path = NodePath("Ninja:position")
 tracks/28/interp = 1
 tracks/28/loop_wrap = true
 tracks/28/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
+"update": 0,
+"values": [Vector2(2880, 700)]
 }
 tracks/29/type = "value"
 tracks/29/imported = false
 tracks/29/enabled = true
-tracks/29/path = NodePath("Heart:position")
+tracks/29/path = NodePath("Ninja:visible")
 tracks/29/interp = 1
 tracks/29/loop_wrap = true
 tracks/29/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(3072, 688)]
+"update": 1,
+"values": [true]
 }
 tracks/30/type = "value"
 tracks/30/imported = false
 tracks/30/enabled = true
-tracks/30/path = NodePath("Camera2D/TransitionSprite:hframes")
+tracks/30/path = NodePath("Ninja:frame")
 tracks/30/interp = 1
 tracks/30/loop_wrap = true
 tracks/30/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [7]
+"values": [2]
 }
 tracks/31/type = "value"
 tracks/31/imported = false
 tracks/31/enabled = true
-tracks/31/path = NodePath("Camera2D/TransitionSprite:vframes")
+tracks/31/path = NodePath("NinjaSword:visible")
 tracks/31/interp = 1
 tracks/31/loop_wrap = true
 tracks/31/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [true]
 }
 tracks/32/type = "value"
 tracks/32/imported = false
 tracks/32/enabled = true
-tracks/32/path = NodePath("Camera2D/TransitionSprite:scale")
+tracks/32/path = NodePath("NinjaWareLogo:visible")
 tracks/32/interp = 1
 tracks/32/loop_wrap = true
 tracks/32/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(5, 5)]
+"update": 1,
+"values": [false]
 }
 tracks/33/type = "value"
 tracks/33/imported = false
 tracks/33/enabled = true
-tracks/33/path = NodePath("Camera2D/TransitionSprite:frame")
+tracks/33/path = NodePath("InsertCoin:visible")
 tracks/33/interp = 1
 tracks/33/loop_wrap = true
 tracks/33/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [6]
+"values": [false]
 }
 tracks/34/type = "value"
 tracks/34/imported = false
 tracks/34/enabled = true
-tracks/34/path = NodePath("Camera2D/TransitionSprite/Label:text")
+tracks/34/path = NodePath("NinjaWareLogo:scale")
 tracks/34/interp = 1
 tracks/34/loop_wrap = true
 tracks/34/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [""]
-}
-tracks/35/type = "value"
-tracks/35/imported = false
-tracks/35/enabled = true
-tracks/35/path = NodePath("Camera2D/TransitionSprite/Label:visible")
-tracks/35/interp = 1
-tracks/35/loop_wrap = true
-tracks/35/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/36/type = "value"
-tracks/36/imported = false
-tracks/36/enabled = true
-tracks/36/path = NodePath("Light:visible")
-tracks/36/interp = 1
-tracks/36/loop_wrap = true
-tracks/36/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/37/type = "value"
-tracks/37/imported = false
-tracks/37/enabled = true
-tracks/37/path = NodePath("Ninja:position")
-tracks/37/interp = 1
-tracks/37/loop_wrap = true
-tracks/37/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2880, 700)]
-}
-tracks/38/type = "value"
-tracks/38/imported = false
-tracks/38/enabled = true
-tracks/38/path = NodePath("Ninja:visible")
-tracks/38/interp = 1
-tracks/38/loop_wrap = true
-tracks/38/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/39/type = "value"
-tracks/39/imported = false
-tracks/39/enabled = true
-tracks/39/path = NodePath("Ninja:frame")
-tracks/39/interp = 1
-tracks/39/loop_wrap = true
-tracks/39/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
-}
-tracks/40/type = "value"
-tracks/40/imported = false
-tracks/40/enabled = true
-tracks/40/path = NodePath("NinjaSword:visible")
-tracks/40/interp = 1
-tracks/40/loop_wrap = true
-tracks/40/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/41/type = "value"
-tracks/41/imported = false
-tracks/41/enabled = true
-tracks/41/path = NodePath("Dummy:hframes")
-tracks/41/interp = 1
-tracks/41/loop_wrap = true
-tracks/41/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/42/type = "value"
-tracks/42/imported = false
-tracks/42/enabled = true
-tracks/42/path = NodePath("Dummy:vframes")
-tracks/42/interp = 1
-tracks/42/loop_wrap = true
-tracks/42/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/43/type = "value"
-tracks/43/imported = false
-tracks/43/enabled = true
-tracks/43/path = NodePath("Debris1:vframes")
-tracks/43/interp = 1
-tracks/43/loop_wrap = true
-tracks/43/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/44/type = "value"
-tracks/44/imported = false
-tracks/44/enabled = true
-tracks/44/path = NodePath("Debris2:vframes")
-tracks/44/interp = 1
-tracks/44/loop_wrap = true
-tracks/44/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
+"values": [Vector2(5.8, 5.8)]
 }
 
-[sub_resource type="Animation" id="Animation_tu627"]
-resource_name = "TransitionIn"
-length = 2.0
-step = 1.0
+[sub_resource type="Animation" id="Animation_5nskk"]
+resource_name = "StartGame"
+length = 4.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Camera2D/TransitionSprite:hframes")
+tracks/0/path = NodePath("NinjaWareLogo:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [7]
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Camera2D/TransitionSprite:vframes")
+tracks/1/path = NodePath("InsertCoin:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1.9),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [1]
+"values": [true, false]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Camera2D/TransitionSprite:frame")
+tracks/2/path = NodePath("NinjaWareLogo:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1, 2),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.8, 0.8)]
+}
+
+[sub_resource type="Animation" id="Animation_tu627"]
+resource_name = "TransitionIn"
+length = 4.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D/TransitionSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2, 3, 4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 5, 6]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Camera2D/TransitionSprite:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 1, 2),
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D/TransitionSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2, 3, 4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(2, 2), Vector2(5, 5)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NinjaWareLogo:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NinjaWareLogo:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.8, 0.8), Vector2(1.6, 1.6)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("InsertCoin:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "audio"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioStreamPlayer4")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("39_kutj6")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("35_dstj2")
+}],
+"times": PackedFloat32Array(0, 2)
+}
+tracks/5/use_blend = true
+
+[sub_resource type="Animation" id="Animation_su0ge"]
+resource_name = "TransitionOut"
+length = 2.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D/TransitionSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [6, 5, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D/TransitionSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(5, 5), Vector2(2, 2), Vector2(1, 1)]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer4")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("38_kutj6")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dasv5"]
 _data = {
 &"Opening": SubResource("Animation_3uawx"),
 &"RESET": SubResource("Animation_h5idg"),
-&"TransitionIn": SubResource("Animation_tu627")
+&"StartGame": SubResource("Animation_5nskk"),
+&"TransitionIn": SubResource("Animation_tu627"),
+&"TransitionOut": SubResource("Animation_su0ge")
 }
 
-[node name="OpeningCutscene" type="Node2D"]
+[node name="OpeningCutscene" type="Node2D" unique_id=2050797640]
 texture_filter = 1
 
-[node name="Mountains" type="Sprite2D" parent="."]
-z_index = -1
+[node name="Mountains" type="Sprite2D" parent="." unique_id=188499568]
+z_index = -6
 texture_filter = 1
 position = Vector2(960, 488)
 scale = Vector2(4, 4)
 texture = ExtResource("1_sr5r4")
 
-[node name="Mountains2" type="Sprite2D" parent="."]
-z_index = -1
+[node name="Mountains2" type="Sprite2D" parent="." unique_id=456481318]
+z_index = -6
 texture_filter = 1
 position = Vector2(2880, 488)
 scale = Vector2(4, 4)
 texture = ExtResource("1_sr5r4")
 
-[node name="Mountains3" type="Sprite2D" parent="."]
-z_index = -1
+[node name="Mountains3" type="Sprite2D" parent="." unique_id=1512063595]
+z_index = -6
 texture_filter = 1
 position = Vector2(4800, 488)
 scale = Vector2(4, 4)
 texture = ExtResource("1_sr5r4")
 
-[node name="Trees" type="Sprite2D" parent="."]
-z_index = -1
+[node name="Trees" type="Sprite2D" parent="." unique_id=184922687]
+z_index = -5
 texture_filter = 1
 position = Vector2(960, 368)
 scale = Vector2(4, 4)
 texture = ExtResource("2_uvtaq")
 
-[node name="Trees2" type="Sprite2D" parent="."]
-z_index = -1
+[node name="Trees2" type="Sprite2D" parent="." unique_id=690415323]
+z_index = -5
 texture_filter = 1
 position = Vector2(2880, 368)
 scale = Vector2(4, 4)
 texture = ExtResource("2_uvtaq")
 
-[node name="Trees3" type="Sprite2D" parent="."]
-z_index = -1
+[node name="Trees3" type="Sprite2D" parent="." unique_id=413640896]
+z_index = -5
 texture_filter = 1
 position = Vector2(4800, 368)
 scale = Vector2(4, 4)
 texture = ExtResource("2_uvtaq")
 
-[node name="Bursted" type="TileMapLayer" parent="."]
+[node name="Bursted" type="TileMapLayer" parent="." unique_id=153882495]
 visible = false
 position = Vector2(960, 568)
 scale = Vector2(4, 4)
 tile_map_data = PackedByteArray("AAD+/wEAAAALAAQAAAD+/wIAAAALAAUAAAD//wEAAAAGAAYAAAD//wIAAAAGAAcAAAAAAAEAAAAHAAYAAAAAAAIAAAAHAAcAAAABAAEAAAAIAAYAAAABAAIAAAAIAAcAAADx/wMAAAABAAUAAADx/wQAAAABAAYAAADx/wcAAAAEAAYAAADy/wMAAAABAAUAAADy/wQAAAABAAYAAADy/wcAAAAEAAYAAADz/wMAAAABAAUAAADz/wQAAAABAAYAAADz/wcAAAAEAAYAAAD0/wMAAAABAAUAAAD0/wQAAAABAAYAAAD0/wcAAAAEAAYAAAD1/wMAAAABAAUAAAD1/wQAAAABAAYAAAD1/wcAAAAEAAYAAAD2/wMAAAABAAUAAAD2/wQAAAABAAYAAAD2/wcAAAAEAAYAAAD3/wMAAAABAAUAAAD3/wQAAAABAAYAAAD3/wcAAAAEAAYAAAD4/wMAAAABAAUAAAD4/wQAAAABAAYAAAD4/wcAAAAEAAYAAAD5/wMAAAABAAUAAAD5/wQAAAABAAYAAAD5/wcAAAAEAAYAAAD6/wMAAAABAAUAAAD6/wQAAAABAAYAAAD6/wcAAAAEAAYAAAD7/wMAAAABAAUAAAD7/wQAAAABAAYAAAD7/wcAAAAEAAYAAAD8////AAAJAAIAAAD8/wAAAAAJAAMAAAD8/wEAAAAJAAQAAAD8/wIAAAAJAAUAAAD8/wMAAAABAAUAAAD8/wQAAAABAAYAAAD8/wcAAAAEAAYAAAD9////AAAKAAIAAAD9/wAAAAAKAAMAAAD9/wEAAAAKAAQAAAD9/wIAAAAKAAUAAAD9/wMAAAABAAUAAAD9/wQAAAABAAYAAAD9/wcAAAAEAAYAAAD+////AAALAAIAAAD+/wAAAAALAAMAAAD+/wMAAAABAAUAAAD+/wQAAAABAAYAAAD+/wcAAAAEAAYAAAD/////AAAMAAIAAAD//wAAAAAGAAUAAAD//wMAAAABAAUAAAD//wQAAAABAAYAAAD//wcAAAAEAAYAAAAAAP7/AAANAAEAAAAAAP//AAAHAAQAAAAAAAAAAAAHAAUAAAAAAAMAAAABAAUAAAAAAAQAAAABAAYAAAAAAAcAAAAEAAYAAAABAP3/AAAOAAAAAAABAP7/AAAOAAEAAAABAP//AAAIAAQAAAABAAAAAAAIAAUAAAABAAMAAAABAAUAAAABAAQAAAABAAYAAAABAAcAAAAEAAYAAAACAP3/AAAPAAAAAAACAP7/AAAPAAEAAAACAP//AAAPAAIAAAACAAAAAAAPAAMAAAACAAEAAAAJAAYAAAACAAIAAAAJAAcAAAACAAMAAAABAAUAAAACAAQAAAABAAYAAAACAAcAAAAEAAYAAAADAAAAAAAQAAMAAAADAAEAAAAQAAQAAAADAAIAAAAQAAUAAAADAAMAAAABAAUAAAADAAQAAAABAAYAAAADAAcAAAAEAAYAAAAEAAMAAAABAAUAAAAEAAQAAAABAAYAAAAEAAcAAAAEAAYAAAAFAAMAAAABAAUAAAAFAAQAAAABAAYAAAAFAAcAAAAEAAYAAAAGAAMAAAABAAUAAAAGAAQAAAABAAYAAAAGAAcAAAAEAAYAAAAHAAMAAAABAAUAAAAHAAQAAAABAAYAAAAHAAcAAAAEAAYAAAAIAAMAAAABAAUAAAAIAAQAAAABAAYAAAAIAAcAAAAEAAYAAAAJAAMAAAABAAUAAAAJAAQAAAABAAYAAAAJAAcAAAAEAAYAAAAKAAMAAAABAAUAAAAKAAQAAAABAAYAAAAKAAcAAAAEAAYAAAALAAMAAAABAAUAAAALAAQAAAABAAYAAAALAAcAAAAEAAYAAAAMAAMAAAABAAUAAAAMAAQAAAABAAYAAAAMAAcAAAAEAAYAAAANAAMAAAABAAUAAAANAAQAAAABAAYAAAANAAcAAAAEAAYAAAAOAAMAAAABAAUAAAAOAAQAAAABAAYAAAAOAAcAAAAEAAYAAAAPAAMAAAABAAUAAAAPAAcAAAAEAAYAAAAQAAMAAAABAAUAAAAQAAcAAAAEAAYAAAARAAMAAAABAAUAAAARAAcAAAAEAAYAAAASAAMAAAABAAUAAAASAAcAAAAEAAYAAAATAAMAAAABAAUAAAATAAcAAAAEAAYAAAAUAAMAAAABAAUAAAAUAAcAAAAEAAYAAAAVAAMAAAABAAUAAAAVAAcAAAAEAAYAAAAWAAMAAAABAAUAAAAWAAcAAAAEAAYAAAAXAAMAAAABAAUAAAAXAAcAAAAEAAYAAAAYAAMAAAABAAUAAAAYAAcAAAAEAAYAAAAZAAMAAAABAAUAAAAZAAcAAAAEAAYAAAAaAAMAAAABAAUAAAAaAAcAAAAEAAYA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AAAtAAUAAAAEAAUAAAAuAAUAAAAEAAUAAAAvAAUAAAAEAAUAAAAwAAUAAAAEAAUAAAAxAAUAAAAEAAUAAAAyAAUAAAAEAAUAAAAzAAUAAAAEAAUAAAA0AAUAAAAEAAUAAAA1AAUAAAAEAAUAAAA2AAUAAAAEAAUAAAA3AAUAAAAEAAUAAAA4AAUAAAAEAAUAAAA5AAUAAAAEAAUAAAA6AAUAAAAEAAUAAAA7AAUAAAAEAAUAAAA8AAUAAAAEAAUAAAA9AAUAAAAEAAUAAAA+AAUAAAAEAAUAAAA/AAUAAAAEAAUAAABAAAUAAAAEAAUAAABBAAUAAAAEAAUAAABCAAUAAAAEAAUAAABDAAUAAAAEAAUAAAARAAYAAAAEAAYAAAAQAAYAAAAEAAYAAAAPAAYAAAAEAAYAAAASAAYAAAAEAAYAAAATAAYAAAAEAAYAAAAUAAYAAAAEAAYAAAAVAAYAAAAEAAYAAAAWAAYAAAAEAAYAAAAXAAYAAAAEAAYAAAAYAAYAAAAEAAYAAAAZAAYAAAAEAAYAAAAaAAYAAAAEAAYAAAAbAAYAAAAEAAYAAAAcAAYAAAAEAAYAAAAdAAYAAAAEAAYAAAAeAAYAAAAEAAYAAAAfAAYAAAAEAAYAAAAgAAYAAAAEAAYAAAAhAAYAAAAEAAYAAAAiAAYAAAAEAAYAAAAjAAYAAAAEAAYAAAAkAAYAAAAEAAYAAAAlAAYAAAAEAAYAAAAmAAYAAAAEAAYAAAAnAAYAAAAEAAYAAAAoAAYAAAAEAAYAAAApAAYAAAAEAAYAAAAqAAYAAAAEAAYAAAArAAYAAAAEAAYAAAAsAAYAAAAEAAYAAAAtAAYAAAAEAAYAAAAuAAYAAAAEAAYAAAAvAAYAAAAEAAYAAAAwAAYAAAAEAAYAAAAxAAYAAAAEAAYAAAAyAAYAAAAEAAYAAAAzAAYAAAAEAAYAAAA0AAYAAAAEAAYAAAA1AAYAAAAEAAYAAAA2AAYAAAAEAAYAAAA3AAYAAAAEAAYAAAA4AAYAAAAEAAYAAAA5AAYAAAAEAAYAAAA6AAYAAAAEAAYAAAA7AAYAAAAEAAYAAAA8AAYAAAAEAAYAAAA9AAYAAAAEAAYAAAA+AAYAAAAEAAYAAAA/AAYAAAAEAAYAAABAAAYAAAAEAAYAAABBAAYAAAAEAAYAAABCAAYAAAAEAAYAAABDAAYAAAAEAAYAAAA=")
 tile_set = ExtResource("3_mx2h3")
 
-[node name="SaintNick" type="Sprite2D" parent="."]
+[node name="SaintNick" type="Sprite2D" parent="." unique_id=409981280]
+z_index = -1
 position = Vector2(1960, 632)
 scale = Vector2(4, 4)
 texture = ExtResource("4_1rtbd")
@@ -1800,20 +1664,20 @@ flip_v = true
 hframes = 20
 frame = 1
 
-[node name="Ground" type="TileMapLayer" parent="."]
+[node name="Ground" type="TileMapLayer" parent="." unique_id=2103890450]
 position = Vector2(960, 568)
 scale = Vector2(4, 4)
 tile_map_data = PackedByteArray("AADx/wcAAAAEAAYAAAAOAAcAAAAEAAYAAAANAAcAAAAEAAYAAAAMAAcAAAAEAAYAAAALAAcAAAAEAAYAAAAKAAcAAAAEAAYAAAAJAAcAAAAEAAYAAAAIAAcAAAAEAAYAAAAHAAcAAAAEAAYAAAAGAAcAAAAEAAYAAAAFAAcAAAAEAAYAAAAEAAcAAAAEAAYAAAADAAcAAAAEAAYAAAACAAcAAAAEAAYAAAABAAcAAAAEAAYAAAAAAAcAAAAEAAYAAAD//wcAAAAEAAYAAAD+/wcAAAAEAAYAAAD9/wcAAAAEAAYAAAD8/wcAAAAEAAYAAAD7/wcAAAAEAAYAAAD6/wcAAAAEAAYAAAD5/wcAAAAEAAYAAAD4/wcAAAAEAAYAAAD3/wcAAAAEAAYAAAD2/wcAAAAEAAYAAAD1/wcAAAAEAAYAAAD0/wcAAAAEAAYAAADz/wcAAAAEAAYAAADy/wcAAAAEAAYAAAAOAAMAAAABAAUAAAANAAMAAAABAAUAAAAMAAMAAAABAAUAAAALAAMAAAABAAUAAAAKAAMAAAABAAUAAAAJAAMAAAABAAUAAAAIAAMAAAABAAUAAAAHAAMAAAABAAUAAAAGAAMAAAABAAUAAAAFAAMAAAABAAUAAAAEAAMAAAABAAUAAAADAAMAAAABAAUAAAACAAMAAAABAAUAAAABAAMAAAABAAUAAAAAAAMAAAABAAUAAAD//wMAAAABAAUAAAD+/wMAAAABAAUAAAD9/wMAAAABAAUAAAD8/wMAAAABAAUAAAD7/wMAAAABAAUAAAD6/wMAAAABAAUAAAD5/wMAAAABAAUAAAD4/wMAAAABAAUAAAD3/wMAAAABAAUAAAD2/wMAAAABAAUAAAD1/wMAAAABAAUAAAD0/wMAAAABAAUAAADz/wMAAAABAAUAAADy/wMAAAABAAUAAADx/wMAAAABAAUAAAD8////AAAJAAIAAAD8/wAAAAAJAAMAAAD8/wEAAAAJAAQAAAD8/wIAAAAJAAUAAAD9////AAAKAAIAAAD9/wAAAAAKAAMAAAD9/wEAAAAKAAQAAAD9/wIAAAAKAAUAAAD+////AAALAAIAAAD+/wAAAAALAAMAAAD+/wEAAAALAAQAAAD+/wIAAAALAAUAAAD/////AAAMAAIAAAD//wAAAAAMAAMAAAD//wEAAAAMAAQAAAD//wIAAAAMAAUAAAAAAP7/AAANAAEAAAAAAP//AAANAAIAAAAAAAAAAAANAAMAAAAAAAEAAAANAAQAAAAAAAIAAAANAAUAAAABAP3/AAAOAAAAAAABAP7/AAAOAAEAAAABAP//AAAOAAIAAAABAAAAAAAOAAMAAAABAAEAAAAOAAQAAAABAAIAAAAOAAUAAAACAP3/AAAPAAAAAAACAP7/AAAPAAEAAAACAAAAAAAPAAMAAAACAAEAAAAPAAQAAAACAAIAAAAPAAUAAAADAAAAAAAQAAMAAAADAAEAAAAQAAQAAAADAAIAAAAQAAUAAADx/wQAAAABAAYAAADx/wUAAAAEAAUAAADy/wQAAAABAAYAAADy/wUAAAAEAAUAAADz/wQAAAABAAYAAADz/wUAAAAEAAUAAAD0/wQAAAABAAYAAAD0/wUAAAAEAAUAAAD1/wQAAAABAAYAAAD1/wUAAAAEAAUAAAD2/wQAAAABAAYAAAD2/wUAAAAEAAUAAAD3/wQAAAABAAYAAAD3/wUAAAAEAAUAAAD4/wQAAAABAAYAAAD4/wUAAAAEAAUAAAD5/wQAAAABAAYAAAD5/wUAAAAEAAUAAAD6/wQAAAABAAYAAAD6/wUAAAAEAAUAAAD7/wQAAAABAAYAAAD7/wUAAAAEAAUAAAD8/wQAAAABAAYAAAD8/wUAAAAEAAUAAAD9/wQAAAABAAYAAAD9/wUAAAAEAAUAAAD+/wQAAAABAAYAAAD+/wUAAAAEAAUAAAD//wQAAAABAAYAAAD//wUAAAAEAAUAAAAAAAQAAAABAAYAAAAAAAUAAAAEAAUAAAABAAQAAAABAAYAAAABAAUAAAAEAAUAAAACAAQAAAABAAYAAAACAAUAAAAEAAUAAAADAAQAAAABAAYAAAADAAUAAAAEAAUAAAAEAAQAAAABAAYAAAAEAAUAAAAEAAUAAAAFAAQAAAABAAYAAAAFAAUAAAAEAAUAAAAGAAQAAAABAAYAAAAGAAUAAAAEAAUAAAAHAAQAAAABAAYAAAAHAAUAAAAEAAUAAAAIAAQAAAABAAYAAAAIAAUAAAAEAAUAAAAJAAQAAAABAAYAAAAJAAUAAAAEAAUAAAAKAAQAAAABAAYAAAAKAAUAAAAEAAUAAAALAAQAAAABAAYAAAALAAUAAAAEAAUAAAAMAAQAAAABAAYAAAAMAAUAAAAEAAUAAAANAAQAAAABAAYAAAANAAUAAAAEAAUAAAAOAAQAAAABAAYAAAAOAAUAAAAEAAUAAAD3/wYAAAAEAAYAAAD2/wYAAAAEAAYAAAD1/wYAAAAEAAYAAAD0/wYAAAAEAAYAAADz/wYAAAAEAAYAAADy/wYAAAAEAAYAAADx/wYAAAAEAAYAAAD4/wYAAAAEAAYAAAD5/wYAAAAEAAYAAAD6/wYAAAAEAAYAAAD7/wYAAAAEAAYAAAD8/wYAAAAEAAYAAAD9/wYAAAAEAAYAAAD+/wYAAAAEAAYAAAD//wYAAAAEAAYAAAAAAAYAAAAEAAYAAAABAAYAAAAEAAYAAAACAAYAAAAEAAYAAAADAAYAAAAEAAYAAAAEAAYAAAAEAAYAAAAFAAYAAAAEAAYAAAAGAAYAAAAEAAYAAAAHAAYAAAAEAAYAAAAIAAYAAAAEAAYAAAAJAAYAAAAEAAYAAAAKAAYAAAAEAAYAAAALAAYAAAAEAAYAAAAMAAYAAAAEAAYAAAANAAYAAAAEAAYAAAAOAAYAAAAEAAYAAAACAP//AAAPAAIAAAAPAAMAAAABAAUAAAAPAAQAAAABAAYAAAAPAAUAAAAEAAUAAAAPAAYAAAAEAAYAAAAPAAcAAAAEAAYAAAAQAAMAAAABAAUAAAAQAAQAAAABAAYAAAAQAAUAAAAEAAUAAAAQAAYAAAAEAAYAAAAQAAcAAAAEAAYAAAARAAMAAAABAAUAAAARAAQAAAABAAYAAAARAAUAAAAEAAUAAAARAAYAAAAEAAYAAAARAAcAAAAEAAYAAAASAAMAAAABAAUAAAASAAQAAAABAAYAAAASAAUAAAAEAAUAAAASAAYAAAAEAAYAAAASAAcAAAAEAAYAAAATAAMAAAABAAUAAAATAAQAAAABAAYAAAATAAUAAAAEAAUAAAATAAYAAAAEAAYAAAATAAcAAAAEAAYAAAAUAAMAAAABAAUAAAAUAAQAAAABAAYAAAAUAAUAAAAEAAUAAAAUAAYAAAAEAAYAAAAUAAcAAAAEAAYAAAAVAAMAAAABAAUAAAAVAAQAAAABAAYAAAAVAAUAAAAEAAUAAAAVAAYAAAAEAAYAAAAVAAcAAAAEAAYAAAAWAAMAAAABAAUAAAAWAAQAAAABAAYAAAAWAAUAAAAEAAUAAAAWAAYAAAAEAAYAAAAWAAcAAAAEAAYAAAAXAAMAAAABAAUAAAAXAAQAAAABAAYAAAAXAAUAAAAEAAUAAAAXAAYAAAAEAAYAAAAXAAcAAAAEAAYAAAAYAAMAAAABAAUAAAAYAAQAAAABAAYAAAAYAAUAAAAEAAUAAAAYAAYAAAAEAAYAAAAYAAcAAAAEAAYAAAAZAAMAAAABAAUAAAAZAAQAAAABAAYAAAAZAAUAAAAEAAUAAAAZAAYAAAAEAAYAAAAZAAcAAAAEAAYAAAAaAAMAAAABAAUAAAAaAAQAAAABAAYAAAAaAAUAAAAEAAUAAAAaAAYAAAAEAAYAAAAaAAcAAAAEAAYAAAAbAAMAAAABAAUAAAAbAAQAAAABAAYAAAAbAAUAAAAEAAUAAAAbAAYAAAAEAAYAAAAbAAcAAAAEAAYAAAAcAAMAAAABAAUAAAAcAAQAAAABAAYAAAAcAAUAAAAEAAUAAAAcAAYAAAAEAAYAAAAcAAcAAAAEAAYAAAAdAAMAAAABAAUAAAAdAAQAAAABAAYAAAAdAAUAAAAEAAUAAAAdAAYAAAAEAAYAAAAdAAcAAAAEAAYAAAAeAAMAAAABAAUAAAAeAAQAAAABAAYAAAAeAAUAAAAEAAUAAAAeAAYAAAAEAAYAAAAeAAcAAAAEAAYAAAAfAAMAAAABAAUAAAAfAAQAAAABAAYAAAAfAAUAAAAEAAUAAAAfAAYAAAAEAAYAAAAfAAcAAAAEAAYAAAAgAAMAAAABAAUAAAAgAAQAAAABAAYAAAAgAAUAAAAEAAUAAAAgAAYAAAAEAAYAAAAgAAcAAAAEAAYAAAAhAAMAAAABAAUAAAAhAAQAAAABAAYAAAAhAAUAAAAEAAUAAAAhAAYAAAAEAAYAAAAhAAcAAAAEAAYAAAAiAAMAAAABAAUAAAAiAAQAAAABAAYAAAAiAAUAAAAEAAUAAAAiAAYAAAAEAAYAAAAiAAcAAAAEAAYAAAAjAAMAAAABAAUAAAAjAAQAAAABAAYAAAAjAAUAAAAEAAUAAAAjAAYAAAAEAAYAAAAjAAcAAAAEAAYAAAAkAAMAAAABAAUAAAAkAAQAAAABAAYAAAAkAAUAAAAEAAUAAAAkAAYAAAAEAAYAAAAkAAcAAAAEAAYAAAAlAAMAAAABAAUAAAAlAAQAAAABAAYAAAAlAAUAAAAEAAUAAAAlAAYAAAAEAAYAAAAlAAcAAAAEAAYAAAAmAAMAAAABAAUAAAAmAAQAAAABAAYAAAAmAAUAAAAEAAUAAAAmAAYAAAAEAAYAAAAmAAcAAAAEAAYAAAAnAAMAAAABAAUAAAAnAAQAAAABAAYAAAAnAAUAAAAEAAUAAAAnAAYAAAAEAAYAAAAnAAcAAAAEAAYAAAAoAAMAAAABAAUAAAAoAAQAAAABAAYAAAAoAAUAAAAEAAUAAAAoAAYAAAAEAAYAAAAoAAcAAAAEAAYAAAApAAMAAAABAAUAAAApAAQAAAABAAYAAAApAAUAAAAEAAUAAAApAAYAAAAEAAYAAAApAAcAAAAEAAYAAAAqAAMAAAABAAUAAAAqAAQAAAABAAYAAAAqAAUAAAAEAAUAAAAqAAYAAAAEAAYAAAAqAAcAAAAEAAYAAAArAAMAAAABAAUAAAArAAQAAAABAAYAAAArAAUAAAAEAAUAAAArAAYAAAAEAAYAAAArAAcAAAAEAAYAAAAsAAMAAAABAAUAAAAsAAQAAAABAAYAAAAsAAUAAAAEAAUAAAAsAAYAAAAEAAYAAAAsAAcAAAAEAAYAAAAtAAMAAAABAAUAAAAtAAQAAAABAAYAAAAtAAUAAAAEAAUAAAAtAAYAAAAEAAYAAAAtAAcAAAAEAAYAAAAuAAMAAAABAAUAAAAuAAQAAAABAAYAAAAuAAUAAAAEAAUAAAAuAAYAAAAEAAYAAAAuAAcAAAAEAAYAAAAvAAMAAAABAAUAAAAvAAQAAAABAAYAAAAvAAUAAAAEAAUAAAAvAAYAAAAEAAYAAAAvAAcAAAAEAAYAAAAwAAMAAAABAAUAAAAwAAQAAAABAAYAAAAwAAUAAAAEAAUAAAAwAAYAAAAEAAYAAAAwAAcAAAAEAAYAAAAxAAMAAAABAAUAAAAxAAQAAAABAAYAAAAxAAUAAAAEAAUAAAAxAAYAAAAEAAYAAAAxAAcAAAAEAAYAAAAyAAMAAAABAAUAAAAyAAQAAAABAAYAAAAyAAUAAAAEAAUAAAAyAAYAAAAEAAYAAAAyAAcAAAAEAAYAAAAzAAMAAAABAAUAAAAzAAQAAAABAAYAAAAzAAUAAAAEAAUAAAAzAAYAAAAEAAYAAAAzAAcAAAAEAAYAAAA0AAMAAAABAAUAAAA0AAQAAAABAAYAAAA0AAUAAAAEAAUAAAA0AAYAAAAEAAYAAAA0AAcAAAAEAAYAAAA1AAMAAAABAAUAAAA1AAQAAAABAAYAAAA1AAUAAAAEAAUAAAA1AAYAAAAEAAYAAAA1AAcAAAAEAAYAAAA2AAMAAAABAAUAAAA2AAQAAAABAAYAAAA2AAUAAAAEAAUAAAA2AAYAAAAEAAYAAAA2AAcAAAAEAAYAAAA3AAMAAAABAAUAAAA3AAQAAAABAAYAAAA3AAUAAAAEAAUAAAA3AAYAAAAEAAYAAAA3AAcAAAAEAAYAAAA4AAMAAAABAAUAAAA4AAQAAAABAAYAAAA4AAUAAAAEAAUAAAA4AAYAAAAEAAYAAAA4AAcAAAAEAAYAAAA5AAMAAAABAAUAAAA5AAQAAAABAAYAAAA5AAUAAAAEAAUAAAA5AAYAAAAEAAYAAAA5AAcAAAAEAAYAAAA6AAMAAAABAAUAAAA6AAQAAAABAAYAAAA6AAUAAAAEAAUAAAA6AAYAAAAEAAYAAAA6AAcAAAAEAAYAAAA7AAMAAAABAAUAAAA7AAQAAAABAAYAAAA7AAUAAAAEAAUAAAA7AAYAAAAEAAYAAAA7AAcAAAAEAAYAAAA8AAMAAAABAAUAAAA8AAQAAAABAAYAAAA8AAUAAAAEAAUAAAA8AAYAAAAEAAYAAAA8AAcAAAAEAAYAAAA9AAMAAAABAAUAAAA9AAQAAAABAAYAAAA9AAUAAAAEAAUAAAA9AAYAAAAEAAYAAAA9AAcAAAAEAAYAAAA+AAMAAAABAAUAAAA+AAQAAAABAAYAAAA+AAUAAAAEAAUAAAA+AAYAAAAEAAYAAAA+AAcAAAAEAAYAAAA/AAMAAAABAAUAAAA/AAQAAAABAAYAAAA/AAUAAAAEAAUAAAA/AAYAAAAEAAYAAAA/AAcAAAAEAAYAAABAAAMAAAABAAUAAABAAAQAAAABAAYAAABAAAUAAAAEAAUAAABAAAYAAAAEAAYAAABAAAcAAAAEAAYAAABBAAMAAAABAAUAAABBAAQAAAABAAYAAABBAAUAAAAEAAUAAABBAAYAAAAEAAYAAABBAAcAAAAEAAYAAABCAAMAAAABAAUAAABCAAQAAAABAAYAAABCAAUAAAAEAAUAAABCAAYAAAAEAAYAAABCAAcAAAAEAAYAAABDAAMAAAABAAUAAABDAAQAAAABAAYAAABDAAUAAAAEAAUAAABDAAYAAAAEAAYAAABDAAcAAAAEAAYAAAA=")
 tile_set = ExtResource("3_mx2h3")
 
-[node name="Debris1" type="Sprite2D" parent="."]
+[node name="Debris1" type="Sprite2D" parent="." unique_id=2099123944]
 visible = false
 position = Vector2(952, 624)
 scale = Vector2(4, 4)
 texture = ExtResource("5_y3q2p")
-hframes = 3
+hframes = 4
 
-[node name="Ninja" type="Sprite2D" parent="."]
+[node name="Ninja" type="Sprite2D" parent="." unique_id=366285574]
 position = Vector2(2880, 700)
 scale = Vector2(4, 4)
 texture = ExtResource("6_0poaa")
@@ -1821,52 +1685,52 @@ hframes = 10
 vframes = 14
 frame = 2
 
-[node name="NinjaSword" type="Sprite2D" parent="."]
+[node name="NinjaSword" type="Sprite2D" parent="." unique_id=638105257]
 position = Vector2(2922, 700)
 scale = Vector2(4, 4)
 texture = ExtResource("7_4jv2f")
 
-[node name="Light" type="Sprite2D" parent="."]
+[node name="Light" type="Sprite2D" parent="." unique_id=885537510]
 visible = false
 position = Vector2(870, 636)
 scale = Vector2(4, 4)
 texture = ExtResource("8_oio3b")
 
-[node name="Debris2" type="Sprite2D" parent="."]
+[node name="Debris2" type="Sprite2D" parent="." unique_id=1824221164]
 visible = false
 position = Vector2(970, 692)
 scale = Vector2(4, 4)
 texture = ExtResource("9_78dmd")
 hframes = 2
 
-[node name="Debris3" type="Sprite2D" parent="."]
+[node name="Debris3" type="Sprite2D" parent="." unique_id=681329954]
 visible = false
 position = Vector2(1136, 606)
 scale = Vector2(4, 4)
 texture = ExtResource("10_lxdgg")
 
-[node name="Dummy" type="Sprite2D" parent="."]
+[node name="Dummy" type="Sprite2D" parent="." unique_id=1320935159]
 position = Vector2(3600, 688)
 scale = Vector2(4, 4)
 texture = ExtResource("11_6dg6k")
 
-[node name="Heart" type="Sprite2D" parent="."]
+[node name="Heart" type="Sprite2D" parent="." unique_id=656885056]
 visible = false
 position = Vector2(3072, 688)
 scale = Vector2(4, 4)
 texture = ExtResource("12_y2bkp")
-vframes = 2
+hframes = 4
 
-[node name="BigZ" type="Label" parent="."]
+[node name="BigZ" type="Label" parent="." unique_id=1680111059]
 visible = false
 offset_left = 484.0
 offset_top = 208.0
 offset_right = 564.0
 offset_bottom = 331.0
 text = "Z"
-label_settings = ExtResource("13_jfmyd")
+label_settings = SubResource("LabelSettings_su0ge")
 
-[node name="MedZ" type="Label" parent="."]
+[node name="MedZ" type="Label" parent="." unique_id=1754491698]
 visible = false
 offset_left = 564.0
 offset_top = 354.0
@@ -1875,7 +1739,7 @@ offset_bottom = 446.0
 text = "Z"
 label_settings = SubResource("LabelSettings_5usnq")
 
-[node name="SmallZ" type="Label" parent="."]
+[node name="SmallZ" type="Label" parent="." unique_id=1640291226]
 visible = false
 offset_left = 656.0
 offset_top = 464.0
@@ -1884,29 +1748,26 @@ offset_bottom = 526.0
 text = "Z"
 label_settings = SubResource("LabelSettings_jepy7")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-visible = false
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2019214839]
 position = Vector2(960, 540)
 
-[node name="Border" type="Sprite2D" parent="Camera2D"]
+[node name="Border" type="Sprite2D" parent="Camera2D" unique_id=1051076899]
 texture = ExtResource("15_o6emx")
 
-[node name="NightSky" type="Sprite2D" parent="Camera2D"]
-z_index = -3
+[node name="NightSky" type="Sprite2D" parent="Camera2D" unique_id=1211830655]
+z_index = -7
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(0, -124)
 scale = Vector2(4, 4)
 texture = ExtResource("16_4nvy4")
 
-[node name="TransitionSprite" type="Sprite2D" parent="Camera2D"]
+[node name="TransitionSprite" type="Sprite2D" parent="Camera2D" unique_id=793652333]
 texture_filter = 1
-scale = Vector2(5, 5)
 texture = ExtResource("17_dbrrt")
 hframes = 7
-frame = 6
 
-[node name="Label" type="Label" parent="Camera2D/TransitionSprite"]
+[node name="Label" type="Label" parent="Camera2D/TransitionSprite" unique_id=883857388]
 visible = false
 offset_left = -434.0
 offset_top = -304.0
@@ -1914,7 +1775,7 @@ offset_right = 446.0
 offset_bottom = -160.0
 label_settings = SubResource("LabelSettings_tu627")
 
-[node name="CRTPanel" type="ColorRect" parent="Camera2D/TransitionSprite"]
+[node name="CRTPanel" type="ColorRect" parent="Camera2D/TransitionSprite" unique_id=340340941]
 z_index = 1
 texture_filter = 1
 material = SubResource("ShaderMaterial_tu627")
@@ -1924,18 +1785,40 @@ offset_right = 512.0
 offset_bottom = 480.0
 metadata/_edit_use_anchors_ = true
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="InsertCoin" type="Label" parent="." unique_id=66576535]
+visible = false
+texture_filter = 1
+offset_left = 578.0
+offset_top = 570.0
+offset_right = 1342.0
+offset_bottom = 632.0
+text = "INSERT CREDIT TO BEGIN"
+label_settings = SubResource("LabelSettings_sku1g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinjaWareLogo" type="Sprite2D" parent="." unique_id=844073398]
+visible = false
+position = Vector2(960, 536)
+scale = Vector2(5.8, 5.8)
+texture = ExtResource("18_sku1g")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1708992426]
 active = false
+deterministic = false
 tree_root = SubResource("AnimationNodeStateMachine_0lp35")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Opening/TimeScale/scale = 8.0
 parameters/TransitionIn/TimeScale/scale = 8.0
+parameters/TransitionOut/TimeScale/scale = 8.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_dasv5")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=196540980]
+libraries/ = SubResource("AnimationLibrary_dasv5")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1596324160]
 
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=989006315]
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="." unique_id=1800000073]
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="." unique_id=74937108]

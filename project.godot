@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="NinjaWare"
-run/main_scene="uid://c6ahriwt65j3v"
+run/main_scene="uid://41s0x14fwb53"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://bccaqmdm3qjtm"
 

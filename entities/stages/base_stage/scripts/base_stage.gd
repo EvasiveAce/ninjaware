@@ -43,13 +43,14 @@ var player_speed_default : float
 #endregion
 
 #region -- Transition Setup --
+## Scene for specific stage animation
+var anim_tree_scene : PackedScene 
 ## The transition scene animation tree.
 ## [br] Used for the [animation_finished] signal.
-# TODO: Update for level 
-@onready var anim_tree = $TransitionUI/DummyAnimationTree
+var anim_tree : AnimationTree
 ## State machine for the animation tree playback.
 ## [br] Used for most animations. 
-@onready var state_machine = anim_tree.get("parameters/playback")
+var state_machine : AnimationNodeStateMachinePlayback
 ## Player HP Container for losing/adding health.
 @onready var player_hp_container = $TransitionUI/TransitionSprite/PlayerHPContainer
 ## Enemy HP Container for losing/adding health.
@@ -58,6 +59,18 @@ var player_speed_default : float
 
 
 func _ready() -> void:
+	if anim_tree_scene:
+		anim_tree = anim_tree_scene.instantiate()
+		$TransitionUI.add_child(anim_tree)
+		
+		# 4. LINK IT TO THE PLAYER
+		anim_tree.anim_player = $TransitionUI/AnimationPlayer.get_path()
+		
+		# 5. INITIALIZE THE STATE MACHINE
+		state_machine = anim_tree.get("parameters/playback")
+		anim_tree.active = true
+	else:
+		push_error("No AnimationTree scene assigned!")
 	level_speed_default = level_speed
 	player_speed_default = player.speed_factor
 	await _health_set_up(false)
