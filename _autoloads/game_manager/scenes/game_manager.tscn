@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://41s0x14fwb53"]
+[gd_scene format=3 uid="uid://41s0x14fwb53"]
 
 [ext_resource type="Script" uid="uid://cuytj5us6yfg2" path="res://_autoloads/game_manager/scripts/game_manager.gd" id="1_bmar4"]
 [ext_resource type="PackedScene" uid="uid://camlls0wflyxo" path="res://ui/cutscenes/opening_cutscene/scenes/opening_cutscene.tscn" id="2_slm13"]
 
-[node name="GameManager" type="Node2D"]
+[node name="GameManager" type="Node2D" unique_id=1341941764]
 script = ExtResource("1_bmar4")
 
-[node name="OpeningScene" parent="." instance=ExtResource("2_slm13")]
+[node name="OpeningCutscene" parent="." unique_id=2050797640 instance=ExtResource("2_slm13")]
