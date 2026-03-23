@@ -11,6 +11,7 @@
 [ext_resource type="LabelSettings" uid="uid://ep7go2kb7utp" path="res://ui/text_ui/resources/number_settings_number.tres" id="8_y2f0o"]
 [ext_resource type="AnimationLibrary" uid="uid://dmnbvsi3arhae" path="res://entities/stages/dummy_stage/animations/DummyLibrary.res" id="9_ayxtp"]
 [ext_resource type="AnimationLibrary" uid="uid://bk0my1jt02t0m" path="res://entities/stages/potatomous_stage/animations/PotatomousLibrary.res" id="11_8qcxo"]
+[ext_resource type="AudioStream" uid="uid://hkaxu2tha43e" path="res://ui/transition_ui/audio/coin_inserted.wav" id="14_xojix"]
 [ext_resource type="AudioStream" uid="uid://bsffdgrgkmr6k" path="res://ui/transition_ui/audio/back_level.wav" id="17_m1cc1"]
 [ext_resource type="Texture2D" uid="uid://75es56r2om70" path="res://ui/transition_ui/art/arcade_screen_overlay.png" id="20_jwvd4"]
 [ext_resource type="AudioStream" uid="uid://dervq7k4dm652" path="res://ui/transition_ui/health_points/ninja_health_point/audio/player_health_point_added.wav" id="21_0nyji"]
@@ -475,21 +476,38 @@ visible = false
 position = Vector2(-1, 0)
 texture = ExtResource("20_jwvd4")
 
+[node name="ArcadeOverlayLives" type="Sprite2D" parent="." unique_id=1571684498]
+visible = false
+z_index = 3
+position = Vector2(-1, 0)
+texture = ExtResource("20_jwvd4")
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1559630572]
+bus = &"Arcade"
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=968955498]
+bus = &"Arcade"
 
 [node name="LivesAdded" type="AudioStreamPlayer" parent="." unique_id=293447052]
 stream = ExtResource("21_0nyji")
+bus = &"Arcade"
+
+[node name="LivesExtra" type="AudioStreamPlayer" parent="." unique_id=345226509]
+stream = ExtResource("14_xojix")
+bus = &"Arcade"
 
 [node name="LivesEnemyAdded" type="AudioStreamPlayer" parent="." unique_id=1990383163]
 stream = ExtResource("22_qjwl3")
+bus = &"Arcade"
 
 [node name="NextLevel" type="AudioStreamPlayer" parent="." unique_id=1196882986]
+bus = &"Arcade"
 
 [node name="LostLevel" type="AudioStreamPlayer" parent="." unique_id=932720530]
 stream = ExtResource("17_m1cc1")
+bus = &"Arcade"
 
 [node name="CharacterType" type="AudioStreamPlayer" parent="." unique_id=1943461716]
+bus = &"Arcade"
 
 [connection signal="timeout" from="LaughTimer" to="." method="_on_laugh_timer_timeout"]

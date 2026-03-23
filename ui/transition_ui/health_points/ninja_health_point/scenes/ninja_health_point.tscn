@@ -1,7 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://wsvdb4844wue"]
+[gd_scene format=3 uid="uid://wsvdb4844wue"]
 
 [ext_resource type="Texture2D" uid="uid://bccaqmdm3qjtm" path="res://ui/transition_ui/health_points/ninja_health_point/art/ninja_health_point.png" id="1_kwx36"]
 
-[node name="NinjaHealthPoint" type="TextureRect"]
+[node name="NinjaHealthPoint" type="TextureRect" unique_id=872172480]
 texture_filter = 1
 texture = ExtResource("1_kwx36")

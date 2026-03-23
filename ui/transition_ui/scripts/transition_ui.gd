@@ -16,6 +16,10 @@ var lvlToUse : int = 0
 @onready var enemy_hp_container = $TransitionSprite/EnemyHPContainer
 #endregion
 
+## Used to get parent to change a tiny bit earlier than in code
+func _start_audio():
+	get_parent().child_update_audio()
+
 func _reset_level():
 	lvlToUse = 0
 
@@ -47,6 +51,9 @@ func _lose_current_level():
 		
 		await get_tree().create_timer(0.5).timeout 
 
+
+func _call_parent_tally() -> void:
+	get_parent()._tally_extra_lives()
 
 ## Removes player health from [player_hp_container].
 ## [br] Used in [PlayerHitAugh], [PlayerHitOuch], [GameOver].

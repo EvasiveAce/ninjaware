@@ -77,6 +77,11 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed('Skip'):
+		if current_level != 3:
+			portal_entered()
+		else:
+			_on_enemy_enter()
 	progress_bar.value = timer.time_left
 	_player_out_of_bounds()
 	_check_for_coin()
@@ -103,11 +108,11 @@ func _check_for_coin():
 ## Sets up the health for both the player and enemy.
 ## [br] If [revival], includes additional animation.
 func _health_set_up(revival : bool):
+	_arrays_reset()
 	_stop_scene()
 	player.reset_momentum()
 	level_speed = level_speed_default
 	player.speed_factor = player_speed_default
-	_arrays_reset()
 	for hp in player_hp:
 		await get_tree().create_timer(0.1).timeout
 		player_hp_container.add_child(player_hp_entity.instantiate())
@@ -165,6 +170,14 @@ func _arrays_reset():
 	array_of_levels.append($Level11)
 	array_of_levels.append($Level12)
 
+## Changes from "Arcade" mode to Main Bus
+func _update_audio_bus(is_arcade : bool):
+	var target_bus = "Arcade" if is_arcade else "Master"
+	$Music.bus = target_bus
+
+## For TransitionUI use
+func child_update_audio():
+	_update_audio_bus(false)
 
 ## Returns the "Start Point" position in the current tilemap layer.
 func _find_start_point() -> Vector2i:
@@ -210,8 +223,7 @@ func _add_local_level():
 
 ## Disables the player's movement, player's animation tree, and scene timer.
 func _stop_scene():
-	if array_of_levels:
-		array_of_levels[current_level].get_node("Music").stop()
+	_update_audio_bus(true)
 	player.reset_momentum()
 	GlobalScene.movement_enabled = false
 	player_tree.active = false
@@ -220,15 +232,6 @@ func _stop_scene():
 
 ## Enables the player's movement, player's animation tree, and scene timer.
 func _start_scene():
-	var music_player = array_of_levels[current_level].get_node_or_null("Music") as AudioStreamPlayer
-	
-	if music_player and music_player.stream:
-		var song_length = music_player.stream.get_length()
-		var target_pitch = song_length / level_speed
-		music_player.pitch_scale = target_pitch
-		music_player.play()
-
-	array_of_levels[current_level].get_node("Music").play()
 	timer.start(level_speed)
 	player_tree.active = true
 	GlobalScene.movement_enabled = true
@@ -264,6 +267,45 @@ func portal_entered() -> void:
 	_start_scene()
 
 
+func _tally_extra_lives() -> void:
+	var extra_lives = player_hp_container.get_children()
+
+	for life in extra_lives:
+	# 1. Capture the original global position AND the specific scale (e.g., 8.0)
+		var start_pos = life.global_position
+		var original_scale = life.get_parent().scale 
+		
+		# 2. Break it out of the container so it can move freely
+		player_hp_container.remove_child(life)
+		$TransitionUI/ArcadeOverlayLives.visible = true
+		$TransitionUI.add_child(life)
+		
+		# 3. Re-apply the position and the 8.0 scale immediately
+		life.global_position = start_pos
+		life.scale = original_scale 
+
+		# 4. Play the coin/life sound
+		if $TransitionUI.has_node("LivesAdded"):
+			$TransitionUI/LivesAdded.play()
+
+		# 5. Create the slide animation (X axis only)
+		var tween = create_tween().set_parallel(true)
+		
+		# Move to -500 (extra far to account for the large 8.0 scale)
+		# Using TRANS_LINEAR so it doesn't "pop" or bounce
+		tween.tween_property(life, "global_position:x", -500, .5).set_trans(Tween.TRANS_CUBIC)
+
+
+		# 6. Delete the icon once it is off-screen
+		tween.finished.connect(life.queue_free)
+
+		# 7. Pause briefly for each heart to create the "tally" feel
+		await get_tree().create_timer(0.5).timeout 
+
+	# Final pause to let the last heart reach the edge before continuing
+	await get_tree().create_timer(0.4).timeout
+
+
 ## When the player enters the enemy.
 func _on_enemy_enter() -> void:
 	_stop_scene()
@@ -271,7 +313,7 @@ func _on_enemy_enter() -> void:
 	if enemy_hp_container.get_child_count() == 1:
 		await _transition_out()
 		await _enemy_kill()
-		await _revive_animation()
+		##await _revive_animation()
 		## Just to stop breaking between stages
 		await _health_set_up(true)
 	else:

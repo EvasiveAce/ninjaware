@@ -24,7 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://05yn0aaq5m5x" path="res://entities/stages/base_stage/art/level_border.png" id="22_8k3qd"]
 [ext_resource type="PackedScene" uid="uid://cxhirmhnvqi3c" path="res://ui/transition_ui/scenes/transition_ui.tscn" id="23_fb6le"]
 
-[node name="PotatomousStage" type="Node2D" unique_id=2035529796]
+[node name="PotatomousStage" type="Node2D" unique_id=2035529796 groups=["Stage"]]
 texture_filter = 1
 script = ExtResource("1_f5yus")
 player_hp_entity = ExtResource("2_vq27i")

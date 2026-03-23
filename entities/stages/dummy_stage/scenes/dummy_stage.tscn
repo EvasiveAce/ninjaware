@@ -23,8 +23,10 @@
 [ext_resource type="Theme" uid="uid://tufc51t2fgr3" path="res://entities/stages/base_stage/progress_bar/themes/progress_bar.tres" id="19_2fs12"]
 [ext_resource type="PackedScene" uid="uid://cxhirmhnvqi3c" path="res://ui/transition_ui/scenes/transition_ui.tscn" id="20_v5h82"]
 [ext_resource type="Texture2D" uid="uid://05yn0aaq5m5x" path="res://entities/stages/base_stage/art/level_border.png" id="22_8sqik"]
+[ext_resource type="AudioStream" uid="uid://brlshdm3xju3v" path="res://entities/stages/base_stage/progress_bar/audio/beep.wav" id="23_x64ig"]
+[ext_resource type="AudioStream" uid="uid://dji8gh03rwfg4" path="res://entities/stages/dummy_stage/audio/Boss (Sketch Demo).wav" id="24_trqsd"]
 
-[node name="DummyStage" type="Node2D" unique_id=464841658]
+[node name="DummyStage" type="Node2D" unique_id=464841658 groups=["Stage"]]
 script = ExtResource("1_oahpv")
 player_hp_entity = ExtResource("2_j6e4s")
 enemy_hp_entity = ExtResource("3_j6e4s")
@@ -97,6 +99,13 @@ size_flags_vertical = 8
 theme = ExtResource("19_2fs12")
 show_percentage = false
 
+[node name="Beep" type="AudioStreamPlayer" parent="ProgressBar" unique_id=995230810]
+stream = ExtResource("23_x64ig")
+volume_db = -5.0
+pitch_scale = 1.5
+
+[node name="Timer" type="Timer" parent="ProgressBar" unique_id=682700893]
+
 [node name="BackgroundSprite" type="Sprite2D" parent="." unique_id=244172866]
 texture_filter = 1
 position = Vector2(960, 540)
@@ -104,5 +113,10 @@ texture = ExtResource("22_8sqik")
 
 [node name="TransitionUI" parent="." unique_id=1578950508 instance=ExtResource("20_v5h82")]
 position = Vector2(961, 540)
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=239846213]
+stream = ExtResource("24_trqsd")
+autoplay = true
+bus = &"Arcade"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
