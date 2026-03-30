@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://b6jesxmsjrasx" path="res://entities/stages/potatomous_stage/scenes/potatomous_3.tscn" id="23_dvw77"]
 [ext_resource type="PackedScene" uid="uid://bq0kdal6cp4xc" path="res://entities/stages/dummy_stage/scenes/dummy.tscn" id="24_fhqjb"]
 [ext_resource type="PackedScene" uid="uid://dki5r8g01nb6a" path="res://entities/stages/dummy_stage/scenes/intro_tile_scene.tscn" id="25_6bx6u"]
+[ext_resource type="PackedScene" uid="uid://dvm8mdutwcmjb" path="res://entities/stages/southerland_stage/snow_cannon/scenes/cannon.tscn" id="25_agml0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fr38o"]
 resource_name = "IceSheet"
@@ -379,6 +380,10 @@ scenes/3/scene = ExtResource("23_dvw77")
 resource_name = "Dummy"
 scenes/1/scene = ExtResource("24_fhqjb")
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ldqly"]
+resource_name = "SnowCannon"
+scenes/1/scene = ExtResource("25_agml0")
+
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_6bx6u"]
 resource_name = "SantaOutline"
 scenes/1/scene = ExtResource("25_6bx6u")
@@ -393,3 +398,4 @@ sources/4 = SubResource("TileSetScenesCollectionSource_tf8ea")
 sources/5 = SubResource("TileSetScenesCollectionSource_bsxmm")
 sources/6 = SubResource("TileSetScenesCollectionSource_u2kvv")
 sources/9 = SubResource("TileSetScenesCollectionSource_6bx6u")
+sources/7 = SubResource("TileSetScenesCollectionSource_ldqly")
