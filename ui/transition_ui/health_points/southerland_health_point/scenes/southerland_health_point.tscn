@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c8hwusg4bwifb"]
+
+[ext_resource type="Texture2D" uid="uid://dsfef8g3pucd0" path="res://ui/transition_ui/health_points/southerland_health_point/art/southerland_health_point.png" id="1_vodp5"]
+
+[node name="TextureRect" type="TextureRect" unique_id=1314686582]
+texture_filter = 1
+offset_right = 22.0
+offset_bottom = 16.0
+texture = ExtResource("1_vodp5")

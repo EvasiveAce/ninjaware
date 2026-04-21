@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c4k8hsfcb6ryr" path="res://entities/stages/southerland_stage/art/cannon_sprite_sheet.png" id="1_lyn32"]
 [ext_resource type="Script" uid="uid://lk3fyrdh2r7u" path="res://entities/stages/southerland_stage/snow_cannon/scripts/cannon.gd" id="2_pw7kv"]
+[ext_resource type="AudioStream" uid="uid://ce6m58hfo08se" path="res://entities/stages/southerland_stage/snow_cannon/audio/cannon_shoot.wav" id="3_crfo4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pw7kv"]
 atlas = ExtResource("1_lyn32")
@@ -101,34 +102,36 @@ animations = [{
 size = Vector2(16, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pw7kv"]
-size = Vector2(467, 8)
+size = Vector2(454, 314)
 
 [node name="Cannon" type="AnimatedSprite2D" unique_id=508115387]
 z_index = -1
 texture_filter = 1
 position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_umvlw")
-animation = &"Stop"
+animation = &"Start"
 script = ExtResource("2_pw7kv")
 
-[node name="Collision" type="Area2D" parent="." unique_id=1096618196]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=263755943]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision" unique_id=527761893]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=527761893]
+position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_lyn32")
 
 [node name="SightLine" type="Area2D" parent="." unique_id=1526374368]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SightLine" unique_id=1785476674]
-position = Vector2(-228.5, -4)
+position = Vector2(-235, 0)
 shape = SubResource("RectangleShape2D_pw7kv")
+debug_color = Color(0, 0.6, 0.69803923, 0)
 
-[node name="PreShotTimer" type="Timer" parent="." unique_id=1543216209]
-
-[node name="PostShotTimer" type="Timer" parent="." unique_id=583244240]
+[node name="ShotTimer" type="Timer" parent="." unique_id=1543216209]
 
 [node name="SnowballArray" type="Node2D" parent="." unique_id=64877291]
 
+[node name="ShotAudio" type="AudioStreamPlayer" parent="." unique_id=1838092425]
+stream = ExtResource("3_crfo4")
+
 [connection signal="body_entered" from="SightLine" to="." method="_on_sight_line_body_entered"]
 [connection signal="body_exited" from="SightLine" to="." method="_on_sight_line_body_exited"]
-[connection signal="timeout" from="PreShotTimer" to="." method="_on_pre_shot_timer_timeout"]
-[connection signal="timeout" from="PostShotTimer" to="." method="_on_post_shot_timer_timeout"]
+[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

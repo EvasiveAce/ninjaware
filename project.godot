@@ -19,6 +19,10 @@ run/main_scene="uid://41s0x14fwb53"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://bccaqmdm3qjtm"
 
+[audio]
+
+buses/default_bus_layout="uid://dnilrd15vcal0"
+
 [autoload]
 
 GlobalScene="*res://_autoloads/global/scripts/global_scene.gd"
@@ -38,6 +42,7 @@ window/stretch/mode="canvas_items"
 
 Player=""
 Stage=""
+RightCannon=""
 
 [input]
 

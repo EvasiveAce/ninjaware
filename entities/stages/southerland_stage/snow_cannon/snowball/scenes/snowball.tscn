@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://k8vcw6n1hx43"]
 
 [ext_resource type="Texture2D" uid="uid://3otj1q7m2bxj" path="res://entities/stages/southerland_stage/art/snow_ball_sprite_sheet.png" id="1_76xqo"]
+[ext_resource type="Texture2D" uid="uid://qk0o8abjcvwk" path="res://entities/stages/southerland_stage/art/snow_ball_hit_sprite_sheet.png" id="2_loyy6"]
 [ext_resource type="Script" uid="uid://bie4mx5kaaxyu" path="res://entities/stages/southerland_stage/snow_cannon/snowball/scripts/snowball.gd" id="2_rjgwe"]
+[ext_resource type="AudioStream" uid="uid://i4pd5f3db5vm" path="res://entities/stages/southerland_stage/snow_cannon/snowball/audio/snowball_hit.wav" id="4_ksush"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rjgwe"]
 atlas = ExtResource("1_76xqo")
@@ -18,6 +20,18 @@ region = Rect2(0, 10, 10, 10)
 [sub_resource type="AtlasTexture" id="AtlasTexture_uly4n"]
 atlas = ExtResource("1_76xqo")
 region = Rect2(10, 10, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mn1kl"]
+atlas = ExtResource("2_loyy6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7141c"]
+atlas = ExtResource("2_loyy6")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oc45c"]
+atlas = ExtResource("2_loyy6")
+region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mn1kl"]
 animations = [{
@@ -37,19 +51,31 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mn1kl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7141c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oc45c")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 12.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_76xqo"]
 radius = 4.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_76xqo"]
-size = Vector2(4, 2)
-
 [node name="Snowball" type="AnimatedSprite2D" unique_id=220421731]
 texture_filter = 1
+position = Vector2(-3, -6)
 sprite_frames = SubResource("SpriteFrames_mn1kl")
 autoplay = "default"
-frame_progress = 0.21394974
+frame_progress = 0.9366908
 flip_h = true
 script = ExtResource("2_rjgwe")
 
@@ -58,11 +84,7 @@ script = ExtResource("2_rjgwe")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1289717723]
 shape = SubResource("CircleShape2D_76xqo")
 
-[node name="Area2D2" type="Area2D" parent="." unique_id=400559687]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" unique_id=1224795864]
-position = Vector2(0, -5)
-shape = SubResource("RectangleShape2D_76xqo")
+[node name="SnowballHit" type="AudioStreamPlayer" parent="." unique_id=1804430450]
+stream = ExtResource("4_ksush")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]

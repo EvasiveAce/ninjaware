@@ -25,6 +25,11 @@ var skid_timer : float = 0.0
 var skid_min_duration : float = .2
 #endregion
 
+#region -- Texture Setup --
+@onready var ninja_texture = preload("res://entities/ninja/art/ninja_sheet.png")
+@onready var ninja_snow_texture = preload("res://entities/ninja/art/ninja_snow_sheet.png")
+#endregion
+
 #region -- Animation Setup --
 ## The animation tree.
 ## [br] Used for the [state_machine]. 
@@ -106,9 +111,13 @@ func _set_direction(delta : float):
 			if direction < 0:
 				$PlayerSprite.flip_h = true
 				$CollisionShape2D.position.x = -1.5
+				$SnowCloak.flip_h = true
+				$SnowCloak.position.x = -4.0
 			elif direction > 0:
 				$PlayerSprite.flip_h = false
 				$CollisionShape2D.position.x = 1.5
+				$SnowCloak.flip_h = false
+				$SnowCloak.position.x = 4.0
 
 
 	if is_skidding:
@@ -117,11 +126,18 @@ func _set_direction(delta : float):
 
 ## Sets the movement speeds to the [speed_factor].
 func _set_speed():
-	max_walk_speed = 75.0 * speed_factor
-	max_run_speed = 135.0 * speed_factor
-	max_sprint_speed = 180.0 * speed_factor
-	walk_accel = 337.5 * speed_factor
-	stop_decel = 600.0 * speed_factor
+	if $PlayerSprite.texture == ninja_snow_texture:
+		max_walk_speed = (75.0 * speed_factor) * .5
+		max_run_speed = (135.0 * speed_factor) * .5
+		max_sprint_speed = (180.0 * speed_factor) * .5
+		walk_accel = (337.5 * speed_factor) * .5
+		stop_decel = (600.0 * speed_factor) * .5
+	else:
+		max_walk_speed = 75.0 * speed_factor
+		max_run_speed = 135.0 * speed_factor
+		max_sprint_speed = 180.0 * speed_factor
+		walk_accel = 337.5 * speed_factor
+		stop_decel = 600.0 * speed_factor
 
 
 ## Applies gravity if needed.
@@ -185,6 +201,14 @@ func reset_momentum():
 	velocity.x = 0
 	velocity.y = 0
 
+func snowball_hit() -> void:
+	$PlayerSprite.texture = ninja_snow_texture
+	$SnowCloak.play("playing")
+	$SnowTimer.start(2.5)
+
+func _on_snow_timer_timeout() -> void:
+	$PlayerSprite.texture = ninja_texture
+	$SnowCloak.play("stopped")
 
 ## Bounces on Potato Bomb using [_jump_speed()].
 ## [br] Used in [potato_bomb.gd].

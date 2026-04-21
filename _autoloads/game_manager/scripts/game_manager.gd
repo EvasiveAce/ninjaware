@@ -36,7 +36,6 @@ func _start_game(stage_to_use):
 
 	current_stage_to_use = stage_to_use
 	var stage = current_stage_to_use.instantiate()
-	print(stage)
 	add_child(stage)
 
 	for child in stage.get_node('TransitionUI').get_children():
@@ -83,7 +82,6 @@ func _on_potatomous_animation_finished(_anim_name: String) -> void:
 	if _anim_name == "TransitionIn":
 		playback.travel("PotatomousCutscene")
 	elif _anim_name == "PotatomousCutscene":
-		print('her?')
 		_start_game(potatomous_stage)
 
 # func _on_potatomous_stage_finished(_anim_name: String) -> void:

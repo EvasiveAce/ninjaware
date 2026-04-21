@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cnu887tar71od"]
+
+[ext_resource type="Texture2D" uid="uid://r7v5t1yqnaqf" path="res://entities/stages/base_stage/tile_obstacles/trees/tree_alt_3.png" id="1_g6oad"]
+
+[node name="TreeAlt3" type="Sprite2D" unique_id=1845704898]
+z_index = 2
+texture_filter = 1
+position = Vector2(0, -4.5)
+texture = ExtResource("1_g6oad")

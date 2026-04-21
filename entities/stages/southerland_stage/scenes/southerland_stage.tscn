@@ -2,14 +2,33 @@
 
 [ext_resource type="Script" uid="uid://bsyc8h0fqtdgr" path="res://entities/stages/southerland_stage/scripts/southerland_stage.gd" id="1_5ugi0"]
 [ext_resource type="Texture2D" uid="uid://kll6eu4dqu2" path="res://entities/stages/base_stage/art/snow_world_sky.png" id="1_jvbnj"]
+[ext_resource type="PackedScene" uid="uid://wsvdb4844wue" path="res://ui/transition_ui/health_points/ninja_health_point/scenes/ninja_health_point.tscn" id="2_fxy3x"]
 [ext_resource type="Texture2D" uid="uid://c7bagfx6uqf4j" path="res://entities/stages/base_stage/art/snow_world_mountain.png" id="2_qsdvi"]
 [ext_resource type="Texture2D" uid="uid://dp2nkj2u14jm3" path="res://entities/stages/base_stage/art/snow_world_tree.png" id="3_5ugi0"]
+[ext_resource type="PackedScene" uid="uid://c8hwusg4bwifb" path="res://ui/transition_ui/health_points/southerland_health_point/scenes/southerland_health_point.tscn" id="3_jke8l"]
 [ext_resource type="PackedScene" uid="uid://m7u5e3x6nme8" path="res://entities/ninja/scenes/player.tscn" id="5_6umha"]
 [ext_resource type="TileSet" uid="uid://csgeol2lhjxop" path="res://entities/stages/base_stage/tile_maps/snow/resources/ice_tile_sheet.tres" id="6_6umha"]
 [ext_resource type="PackedScene" uid="uid://b3df3a540bfq8" path="res://entities/stages/southerland_stage/levels/level_1.tscn" id="7_63owq"]
+[ext_resource type="PackedScene" uid="uid://br08ql70hdiro" path="res://entities/stages/southerland_stage/levels/level_2.tscn" id="8_kyaou"]
+[ext_resource type="PackedScene" uid="uid://djyec62lvrmyf" path="res://entities/stages/southerland_stage/levels/level_3.tscn" id="9_8sic6"]
+[ext_resource type="PackedScene" uid="uid://b7gkg1365i3gf" path="res://entities/stages/southerland_stage/levels/level_4.tscn" id="10_83nip"]
+[ext_resource type="PackedScene" uid="uid://jop6jcgis4vv" path="res://entities/stages/southerland_stage/levels/level_5.tscn" id="11_ie8x7"]
+[ext_resource type="PackedScene" uid="uid://cx4q0bwww42ib" path="res://entities/stages/southerland_stage/levels/level_6.tscn" id="12_83nip"]
+[ext_resource type="PackedScene" uid="uid://cc4vfq7nk2tg1" path="res://entities/stages/southerland_stage/levels/level_7.tscn" id="13_ie8x7"]
+[ext_resource type="PackedScene" uid="uid://cwhab71vuet7s" path="res://entities/stages/southerland_stage/levels/level_8.tscn" id="14_3vvxj"]
+[ext_resource type="PackedScene" uid="uid://btjbnuqlwkjwk" path="res://entities/stages/southerland_stage/levels/level_9.tscn" id="15_ggk2s"]
+[ext_resource type="PackedScene" uid="uid://bxgubpfbs7rwx" path="res://entities/stages/southerland_stage/levels/level_10.tscn" id="16_o20vb"]
+[ext_resource type="PackedScene" uid="uid://bewffxfxsxkec" path="res://entities/stages/southerland_stage/levels/level_11.tscn" id="17_o20vb"]
+[ext_resource type="PackedScene" uid="uid://cnyrm540s6c36" path="res://entities/stages/southerland_stage/levels/level_12.tscn" id="18_vbwtd"]
+[ext_resource type="Theme" uid="uid://tufc51t2fgr3" path="res://entities/stages/base_stage/progress_bar/themes/progress_bar.tres" id="21_dcmy6"]
+[ext_resource type="Texture2D" uid="uid://05yn0aaq5m5x" path="res://entities/stages/base_stage/art/level_border.png" id="22_p6wi1"]
+[ext_resource type="PackedScene" uid="uid://cxhirmhnvqi3c" path="res://ui/transition_ui/scenes/transition_ui.tscn" id="23_0ut1u"]
+[ext_resource type="AudioStream" uid="uid://dji8gh03rwfg4" path="res://entities/stages/dummy_stage/audio/Boss (Sketch Demo).wav" id="24_pa4q5"]
 
 [node name="SoutherlandStage" type="Node2D" unique_id=616858807 groups=["Stage"]]
 script = ExtResource("1_5ugi0")
+player_hp_entity = ExtResource("2_fxy3x")
+enemy_hp_entity = ExtResource("3_jke8l")
 
 [node name="NightSky" type="Sprite2D" parent="." unique_id=1952506408]
 z_index = -1
@@ -47,6 +66,51 @@ tile_map_data = PackedByteArray("AAAWABYAAAAEAAYAAAAXABYAAAAEAAYAAAAYABYAAAAEAAY
 tile_set = ExtResource("6_6umha")
 
 [node name="Level1" parent="." unique_id=927177387 instance=ExtResource("7_63owq")]
-position = Vector2(0, -392)
+
+[node name="Level2" parent="." unique_id=411585838 instance=ExtResource("8_kyaou")]
+
+[node name="Level3" parent="." unique_id=612811963 instance=ExtResource("9_8sic6")]
+
+[node name="Level4" parent="." unique_id=112850939 instance=ExtResource("10_83nip")]
+
+[node name="Level5" parent="." unique_id=938198174 instance=ExtResource("11_ie8x7")]
+
+[node name="Level6" parent="." unique_id=1773383192 instance=ExtResource("12_83nip")]
+
+[node name="Level7" parent="." unique_id=1518722196 instance=ExtResource("13_ie8x7")]
+
+[node name="Level8" parent="." unique_id=1319316122 instance=ExtResource("14_3vvxj")]
+
+[node name="Level9" parent="." unique_id=646070159 instance=ExtResource("15_ggk2s")]
+
+[node name="Level10" parent="." unique_id=905312342 instance=ExtResource("16_o20vb")]
+
+[node name="Level11" parent="." unique_id=380017363 instance=ExtResource("17_o20vb")]
+
+[node name="Level12" parent="." unique_id=64843636 instance=ExtResource("18_vbwtd")]
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1095676103]
+texture_filter = 1
+offset_top = 984.0
+offset_right = 1920.0
+offset_bottom = 1056.0
+size_flags_vertical = 8
+theme = ExtResource("21_dcmy6")
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="ProgressBar" unique_id=425778168]
+
+[node name="BackgroundSprite" type="Sprite2D" parent="." unique_id=1217182945]
+texture_filter = 1
+position = Vector2(960, 540)
+texture = ExtResource("22_p6wi1")
+
+[node name="TransitionUI" parent="." unique_id=1578950508 instance=ExtResource("23_0ut1u")]
+position = Vector2(960, 540)
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=709925366]
+stream = ExtResource("24_pa4q5")
+autoplay = true
+bus = &"Arcade"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -4,4 +4,4 @@ extends BaseStage
 class_name DummyStage
 
 func _init() -> void:
-	anim_tree_scene = preload('res://entities/stages/dummy_stage/scenes/dummy_animation_tree.tscn')
+	current_enemy = "Dummy"

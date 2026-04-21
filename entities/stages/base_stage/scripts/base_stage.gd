@@ -43,34 +43,27 @@ var player_speed_default : float
 #endregion
 
 #region -- Transition Setup --
-## Scene for specific stage animation
-var anim_tree_scene : PackedScene 
 ## The transition scene animation tree.
 ## [br] Used for the [animation_finished] signal.
-var anim_tree : AnimationTree
+@onready var anim_tree : AnimationTree = $TransitionUI/AnimationTree
+
 ## State machine for the animation tree playback.
 ## [br] Used for most animations. 
 var state_machine : AnimationNodeStateMachinePlayback
+
 ## Player HP Container for losing/adding health.
 @onready var player_hp_container = $TransitionUI/TransitionSprite/PlayerHPContainer
+
 ## Enemy HP Container for losing/adding health.
 @onready var enemy_hp_container = $TransitionUI/TransitionSprite/EnemyHPContainer
+
+## Enemy Name for Transition UI
+var current_enemy : String
 #endregion
 
-
 func _ready() -> void:
-	if anim_tree_scene:
-		anim_tree = anim_tree_scene.instantiate()
-		$TransitionUI.add_child(anim_tree)
-		
-		# 4. LINK IT TO THE PLAYER
-		anim_tree.anim_player = $TransitionUI/AnimationPlayer.get_path()
-		
-		# 5. INITIALIZE THE STATE MACHINE
-		state_machine = anim_tree.get("parameters/playback")
-		anim_tree.active = true
-	else:
-		push_error("No AnimationTree scene assigned!")
+	state_machine = anim_tree.get("parameters/playback")
+	anim_tree.active = true
 	level_speed_default = level_speed
 	player_speed_default = player.speed_factor
 	await _health_set_up(false)
@@ -175,9 +168,17 @@ func _update_audio_bus(is_arcade : bool):
 	var target_bus = "Arcade" if is_arcade else "Master"
 	$Music.bus = target_bus
 
-## For TransitionUI use
+## For TransitionUI use (Updates Audio Bus)
 func child_update_audio():
 	_update_audio_bus(false)
+
+## For TransitionUI use (Stops Music)
+func child_stop_audio():
+	$Music.playing = false
+
+## For TransitionUI use (Begins Music)
+func child_begin_audio():
+	$Music.playing = true
 
 ## Returns the "Start Point" position in the current tilemap layer.
 func _find_start_point() -> Vector2i:

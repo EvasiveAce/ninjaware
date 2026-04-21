@@ -1,0 +1,138 @@
+[gd_scene format=3 uid="uid://bno85iwe0r6e7"]
+
+[ext_resource type="Texture2D" uid="uid://c4k8hsfcb6ryr" path="res://entities/stages/southerland_stage/art/cannon_sprite_sheet.png" id="1_7csp2"]
+[ext_resource type="Script" uid="uid://lk3fyrdh2r7u" path="res://entities/stages/southerland_stage/snow_cannon/scripts/cannon.gd" id="2_5nfnr"]
+[ext_resource type="AudioStream" uid="uid://ce6m58hfo08se" path="res://entities/stages/southerland_stage/snow_cannon/audio/cannon_shoot.wav" id="3_g24rk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pw7kv"]
+atlas = ExtResource("1_7csp2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crfo4"]
+atlas = ExtResource("1_7csp2")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mkfp7"]
+atlas = ExtResource("1_7csp2")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lb3e7"]
+atlas = ExtResource("1_7csp2")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7n3h"]
+atlas = ExtResource("1_7csp2")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jnft"]
+atlas = ExtResource("1_7csp2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_umvlw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pw7kv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crfo4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crfo4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkfp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkfp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lb3e7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m7n3h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkfp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkfp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkfp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkfp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkfp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkfp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkfp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkfp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkfp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkfp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkfp7")
+}],
+"loop": false,
+"name": &"Start",
+"speed": 36.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jnft")
+}],
+"loop": false,
+"name": &"Stop",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lyn32"]
+size = Vector2(16, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pw7kv"]
+size = Vector2(454, 314)
+
+[node name="RightCannon" type="AnimatedSprite2D" unique_id=508115387 groups=["RightCannon"]]
+z_index = -1
+texture_filter = 1
+position = Vector2(0, -3)
+sprite_frames = SubResource("SpriteFrames_umvlw")
+animation = &"Stop"
+flip_h = true
+script = ExtResource("2_5nfnr")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=263755943]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=527761893 groups=["RightCannon"]]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_lyn32")
+
+[node name="SightLine" type="Area2D" parent="." unique_id=1526374368]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SightLine" unique_id=1785476674]
+position = Vector2(235, 0)
+shape = SubResource("RectangleShape2D_pw7kv")
+debug_color = Color(0, 0.6, 0.69803923, 0)
+
+[node name="ShotTimer" type="Timer" parent="." unique_id=1543216209]
+
+[node name="SnowballArray" type="Node2D" parent="." unique_id=64877291]
+
+[node name="ShotAudio" type="AudioStreamPlayer" parent="." unique_id=1838092425]
+stream = ExtResource("3_g24rk")
+
+[connection signal="body_entered" from="SightLine" to="." method="_on_sight_line_body_entered"]
+[connection signal="body_exited" from="SightLine" to="." method="_on_sight_line_body_exited"]
+[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]
