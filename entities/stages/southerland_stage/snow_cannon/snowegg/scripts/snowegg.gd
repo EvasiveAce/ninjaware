@@ -1,10 +1,10 @@
-extends AnimatedSprite2D
+extends AnimatableBody2D
 
 var movement : float
 
 func _on_area_2d_body_entered(player: Node2D) -> void:
 	if player.name == "Player":
-		player.snowball_hit()
+		player.snowegg_hit()
 		$SnowballHit.play()
 		_hit()
 
@@ -12,7 +12,7 @@ func _on_area_2d_body_entered(player: Node2D) -> void:
 		$SnowballHit.play()
 		_hit()
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if !GlobalScene.movement_enabled:
 		movement = 0
 		await get_tree().create_timer(.5).timeout
@@ -26,14 +26,15 @@ func _process(_delta: float) -> void:
 
 func _hit() -> void:
 	movement = 0
-	$Area2D/CollisionShape2D.set_deferred("disabled", true)
-	play("explode")
-	await animation_finished
+	$SnoweggSprite.visible = false
+	$CollisionShape2D.set_deferred("disabled", true)
+	$SnoweggAnimatedSprite.play("explode")
+	await $SnoweggAnimatedSprite.animation_finished
 	queue_free()
 
 
 func setup(movement_speed : float, position_to_set : Vector2) -> void:
 	movement = movement_speed
 	position = position_to_set
-	if movement_speed < 0:
-		flip_h = false
+	if movement_speed < 0 :
+		$SnoweggSprite.flip_h = true

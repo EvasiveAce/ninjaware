@@ -61,7 +61,6 @@ func _handle_animation():
 	if not is_on_floor():
 		if velocity.y < 0:  # Moving up = jumping
 			if state_machine.get_current_node() != "Jump":
-				$JumpPlayer.play()
 				state_machine.travel("Jump")
 		else:  # Moving down = falling
 			if state_machine.get_current_node() != "Fall":
@@ -154,10 +153,12 @@ func _handle_jump():
 	if Input.is_action_just_pressed("ui_accept"):
 		if is_on_floor(): 
 			# Store the current horizontal speed when jumping
+			$JumpPlayer.play()
 			air_speed = abs(velocity.x)
 			velocity.y = _jump_speed()
 		elif !$CoyoteTimeTimer.is_stopped():
 			# Coyote jump - only if timer is active and we're falling
+			$JumpPlayer.play()
 			air_speed = abs(velocity.x)
 			velocity.y = _jump_speed()
 			PopupText.display_text("Coyote'd!", position, 32, 4)
@@ -176,6 +177,7 @@ func _handle_misc_jump(was_on_floor : bool):
 
 	if !was_on_floor && is_on_floor():
 		if jump_buffered:
+			$JumpPlayer.play()
 			jump_buffered = false
 			velocity.y = _jump_speed()
 			PopupText.display_text("Buffered!", position, 32, 4)
@@ -204,11 +206,16 @@ func reset_momentum():
 func snowball_hit() -> void:
 	$PlayerSprite.texture = ninja_snow_texture
 	$SnowCloak.play("playing")
-	$SnowTimer.start(2.5)
+	$SnowTimer.start(1.0)
 
 func _on_snow_timer_timeout() -> void:
 	$PlayerSprite.texture = ninja_texture
 	$SnowCloak.play("stopped")
+
+func snowegg_hit() -> void:
+	$PlayerSprite.texture = ninja_snow_texture
+	$SnowCloak.play("playing")
+	$SnowTimer.start(2.5)
 
 ## Bounces on Potato Bomb using [_jump_speed()].
 ## [br] Used in [potato_bomb.gd].

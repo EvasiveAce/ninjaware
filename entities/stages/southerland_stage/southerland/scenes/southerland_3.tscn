@@ -107,7 +107,6 @@ animations = [{
 size = Vector2(454, 314)
 
 [node name="Southerland" type="Node2D" unique_id=926904481]
-z_index = -2
 texture_filter = 1
 position = Vector2(0, -4)
 script = ExtResource("1_b131a")
@@ -121,9 +120,8 @@ disabled = true
 
 [node name="SoutherlandSprite" type="AnimatedSprite2D" parent="." unique_id=210671767]
 sprite_frames = SubResource("SpriteFrames_4acn2")
-animation = &"Start"
-autoplay = "Start"
-frame_progress = 0.9067651
+animation = &"Stop"
+autoplay = "Stop"
 flip_h = true
 
 [node name="SightLine" type="Area2D" parent="." unique_id=2104785218]

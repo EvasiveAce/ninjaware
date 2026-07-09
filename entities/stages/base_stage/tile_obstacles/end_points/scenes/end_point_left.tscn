@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://buxj7mrua1lek"]
+[gd_scene format=3 uid="uid://buxj7mrua1lek"]
 
 [ext_resource type="Texture2D" uid="uid://b87agox7txjne" path="res://entities/stages/base_stage/tile_obstacles/end_points/art/end_points.png" id="1_uuq2x"]
 [ext_resource type="Script" uid="uid://c555b1cvjvimk" path="res://entities/stages/base_stage/tile_obstacles/end_points/scripts/end_point.gd" id="2_2mg3h"]
@@ -41,7 +41,7 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6bs4g"]
 
-[node name="EndPoint" type="AnimatedSprite2D"]
+[node name="EndPoint" type="AnimatedSprite2D" unique_id=1305333610]
 texture_filter = 1
 position = Vector2(1.5, 7)
 sprite_frames = SubResource("SpriteFrames_ft1wb")
@@ -49,9 +49,10 @@ animation = &"Portal"
 autoplay = "Portal"
 script = ExtResource("2_2mg3h")
 
-[node name="EndPointArea2D" type="Area2D" parent="."]
+[node name="EndPointArea2D" type="Area2D" parent="." unique_id=548497234]
 
-[node name="EndPointCollisionShape2D" type="CollisionShape2D" parent="EndPointArea2D"]
+[node name="EndPointCollisionShape2D" type="CollisionShape2D" parent="EndPointArea2D" unique_id=2116091775]
 shape = SubResource("CircleShape2D_6bs4g")
+disabled = true
 
 [connection signal="body_entered" from="EndPointArea2D" to="." method="_on_end_point_area_2d_body_entered"]

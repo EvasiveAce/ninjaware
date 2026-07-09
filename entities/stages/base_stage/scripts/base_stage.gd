@@ -225,6 +225,12 @@ func _add_local_level():
 ## Disables the player's movement, player's animation tree, and scene timer.
 func _stop_scene():
 	_update_audio_bus(true)
+	var end_point_path = "EndPoint/EndPointArea2D/EndPointCollisionShape2D"
+	var collision_shape = array_of_levels[current_level].get_node_or_null(end_point_path)
+	
+	if collision_shape:
+		collision_shape.set_deferred("disabled", true)
+	
 	player.reset_momentum()
 	GlobalScene.movement_enabled = false
 	player_tree.active = false
@@ -236,6 +242,11 @@ func _start_scene():
 	timer.start(level_speed)
 	player_tree.active = true
 	GlobalScene.movement_enabled = true
+	var end_point_path = "EndPoint/EndPointArea2D/EndPointCollisionShape2D"
+	var collision_shape = array_of_levels[current_level].get_node_or_null(end_point_path)
+	
+	if collision_shape:
+		collision_shape.set_deferred("disabled", false)
 
 
 ## Awaits [Timer] signal for a timeout.
@@ -267,6 +278,32 @@ func portal_entered() -> void:
 
 	_start_scene()
 
+
+func rocket_enter() -> void:
+	player.visible = false
+	GlobalScene.movement_enabled = false
+	_stop_scene()
+	await get_tree().create_timer(5.0).timeout
+
+	
+	await _transition_out()
+	array_of_levels[current_level].enabled = false
+	current_level += 1
+	array_of_levels[current_level].enabled = true
+	await _transition_in()
+	await get_tree().create_timer(2.75).timeout
+
+	timer.start(level_speed)
+	player_tree.active = true
+	GlobalScene.movement_enabled = true
+	player.position = Vector2(150, 456)
+	player.visible = true
+
+	var end_point_path = "EndPoint/EndPointArea2D/EndPointCollisionShape2D"
+	var collision_shape = array_of_levels[current_level].get_node_or_null(end_point_path)
+	
+	if collision_shape:
+		collision_shape.set_deferred("disabled", false)
 
 func _tally_extra_lives() -> void:
 	var extra_lives = player_hp_container.get_children()

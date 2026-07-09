@@ -4,7 +4,7 @@ var is_right_cannon : bool = false
 var is_first_shot : bool = true
 
 
-var snowball_scene = preload("res://entities/stages/southerland_stage/snow_cannon/snowegg/scenes/snowegg.tscn")
+var snowball_scene = preload("res://entities/stages/southerland_stage/snow_cannon/snowball/scenes/snowball.tscn")
 
 
 func _ready() -> void:
@@ -30,17 +30,17 @@ func _on_frame_changed() -> void:
 		if frame == 3:
 			$ShotAudio.play()
 			var snowball = snowball_scene.instantiate()
-			var snowball_multiplier = 0.20
+			var snowball_multiplier = 0.3
 
 			var current_lvl_speed = get_parent().get_parent().level_speed
 
 			if current_lvl_speed == 5.0: 
-				snowball_multiplier = 0.45
+				snowball_multiplier = 0.55
 			elif current_lvl_speed == 5.5: 
-				snowball_multiplier = 0.30
+				snowball_multiplier = 0.40
 			if is_right_cannon:
-				snowball.setup(-snowball_multiplier * current_lvl_speed, Vector2(10, 0))
+				snowball.setup(-snowball_multiplier * current_lvl_speed, Vector2(3, 0))
 			else:
-				snowball.setup(snowball_multiplier * current_lvl_speed, Vector2(-10, 0))
+				snowball.setup(snowball_multiplier * current_lvl_speed, Vector2(-3, 0))
 			$SnowballArray.add_child(snowball)
 			await animation_finished

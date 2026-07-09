@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://bnqhi0ouyobun"]
+
+[ext_resource type="Texture2D" uid="uid://be7amyu5p4sli" path="res://entities/stages/southerland_stage/art/cannon_snow_sprite_sheet.png" id="1_350cx"]
+[ext_resource type="Script" uid="uid://dyjja24wsgbw5" path="res://entities/stages/southerland_stage/snow_cannon/scripts/snow_cannon.gd" id="2_350cx"]
+[ext_resource type="Texture2D" uid="uid://cnfthu1sjyy75" path="res://entities/stages/southerland_stage/art/cannon_snow_sprite_overlay.png" id="3_350cx"]
+[ext_resource type="AudioStream" uid="uid://ce6m58hfo08se" path="res://entities/stages/southerland_stage/snow_cannon/audio/cannon_shoot.wav" id="4_wst4q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3rk6"]
+atlas = ExtResource("1_350cx")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xoueg"]
+atlas = ExtResource("1_350cx")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wst4q"]
+atlas = ExtResource("1_350cx")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7jrhj"]
+atlas = ExtResource("1_350cx")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_umvlw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3rk6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xoueg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wst4q")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_7jrhj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wst4q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xoueg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3rk6")
+}],
+"loop": false,
+"name": &"Start",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lyn32"]
+size = Vector2(16, 16)
+
+[node name="SnowCannon" type="AnimatedSprite2D" unique_id=508115387]
+z_index = -1
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_umvlw")
+animation = &"Start"
+script = ExtResource("2_350cx")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=263755943]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=527761893]
+shape = SubResource("RectangleShape2D_lyn32")
+
+[node name="SnowballArray" type="Node2D" parent="." unique_id=64877291]
+
+[node name="CannonOverlay" type="Sprite2D" parent="." unique_id=118255737]
+position = Vector2(1.5, 0)
+texture = ExtResource("3_350cx")
+
+[node name="ShotAudio" type="AudioStreamPlayer" parent="." unique_id=1838092425]
+stream = ExtResource("4_wst4q")
+
+[connection signal="frame_changed" from="." to="." method="_on_frame_changed"]

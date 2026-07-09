@@ -5,19 +5,19 @@
 [ext_resource type="Script" uid="uid://bie4mx5kaaxyu" path="res://entities/stages/southerland_stage/snow_cannon/snowball/scripts/snowball.gd" id="2_rjgwe"]
 [ext_resource type="AudioStream" uid="uid://i4pd5f3db5vm" path="res://entities/stages/southerland_stage/snow_cannon/snowball/audio/snowball_hit.wav" id="4_ksush"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rjgwe"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksush"]
 atlas = ExtResource("1_76xqo")
 region = Rect2(0, 0, 10, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_loyy6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_uly4n"]
 atlas = ExtResource("1_76xqo")
 region = Rect2(10, 0, 10, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ksush"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_r60x0"]
 atlas = ExtResource("1_76xqo")
 region = Rect2(0, 10, 10, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_uly4n"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkcmy"]
 atlas = ExtResource("1_76xqo")
 region = Rect2(10, 10, 10, 10)
 
@@ -37,16 +37,16 @@ region = Rect2(32, 0, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rjgwe")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_loyy6")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_ksush")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uly4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r60x0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkcmy")
 }],
 "loop": true,
 "name": &"default",
@@ -75,7 +75,7 @@ texture_filter = 1
 position = Vector2(-3, -6)
 sprite_frames = SubResource("SpriteFrames_mn1kl")
 autoplay = "default"
-frame_progress = 0.9366908
+frame_progress = 0.6238079
 flip_h = true
 script = ExtResource("2_rjgwe")
 

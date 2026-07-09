@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://ce6m58hfo08se" path="res://entities/stages/southerland_stage/snow_cannon/audio/cannon_shoot.wav" id="3_5571s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jbgdh"]
-size = Vector2(18, 32)
+size = Vector2(21, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_375my"]
 atlas = ExtResource("1_jbgdh")
@@ -103,11 +103,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_375my"]
-size = Vector2(454, 314)
-
 [node name="Southerland" type="Node2D" unique_id=926904481]
-z_index = -2
 texture_filter = 1
 position = Vector2(0, -4)
 script = ExtResource("1_375my")
@@ -115,24 +111,15 @@ script = ExtResource("1_375my")
 [node name="SoutherlandArea2D" type="Area2D" parent="." unique_id=1821616418]
 
 [node name="SoutherlandCollisionShape2D" type="CollisionShape2D" parent="SoutherlandArea2D" unique_id=49268064]
-position = Vector2(0, 10)
+position = Vector2(-0.5, 10)
 shape = SubResource("RectangleShape2D_jbgdh")
 disabled = true
 
 [node name="SoutherlandSprite" type="AnimatedSprite2D" parent="." unique_id=210671767]
 sprite_frames = SubResource("SpriteFrames_4acn2")
-animation = &"Start"
-autoplay = "Start"
+animation = &"Stop"
+autoplay = "Stop"
 flip_h = true
-
-[node name="SightLine" type="Area2D" parent="." unique_id=2104785218]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SightLine" unique_id=141428646]
-position = Vector2(-235, 0)
-shape = SubResource("RectangleShape2D_375my")
-debug_color = Color(0, 0.6, 0.69803923, 0)
-
-[node name="ShotTimer" type="Timer" parent="." unique_id=364466162]
 
 [node name="SnowballArray" type="Node2D" parent="." unique_id=962956513]
 
@@ -141,6 +128,3 @@ stream = ExtResource("3_5571s")
 
 [connection signal="body_entered" from="SoutherlandArea2D" to="." method="_on_southerland_area_2d_body_entered"]
 [connection signal="frame_changed" from="SoutherlandSprite" to="." method="_on_southerland_sprite_frame_changed"]
-[connection signal="body_entered" from="SightLine" to="." method="_on_sight_line_body_entered"]
-[connection signal="body_exited" from="SightLine" to="." method="_on_sight_line_body_exited"]
-[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

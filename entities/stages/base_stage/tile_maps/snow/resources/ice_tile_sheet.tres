@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://dijt45igneslu" path="res://entities/stages/southerland_stage/rocket/scenes/rocket.tscn" id="16_lrq06"]
 [ext_resource type="PackedScene" uid="uid://c68vcvgoof2i3" path="res://entities/stages/base_stage/tile_obstacles/start_points/scenes/start_point.tscn" id="17_pmfl7"]
 [ext_resource type="PackedScene" uid="uid://can0ukqowhqw7" path="res://entities/stages/base_stage/tile_obstacles/start_points/scenes/start_point_up.tscn" id="18_fweak"]
+[ext_resource type="PackedScene" uid="uid://dynb5lqfy2ii0" path="res://entities/stages/southerland_stage/rocket/scenes/rocket_explode.tscn" id="18_t33ff"]
 [ext_resource type="PackedScene" uid="uid://mlgyl1vb3f6s" path="res://entities/stages/base_stage/tile_obstacles/start_points/scenes/start_point_black.tscn" id="19_1kjl7"]
 [ext_resource type="PackedScene" uid="uid://b23t3g4yoxwox" path="res://entities/stages/base_stage/tile_obstacles/start_points/scenes/start_point_down.tscn" id="20_lo2if"]
 [ext_resource type="PackedScene" uid="uid://cks0d5te5trda" path="res://entities/stages/potatomous_stage/scenes/potatomous_1.tscn" id="21_nctij"]
@@ -36,6 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://dvm8mdutwcmjb" path="res://entities/stages/southerland_stage/snow_cannon/scenes/cannon.tscn" id="25_agml0"]
 [ext_resource type="PackedScene" uid="uid://bno85iwe0r6e7" path="res://entities/stages/southerland_stage/snow_cannon/scenes/cannon_right.tscn" id="26_ldqly"]
 [ext_resource type="PackedScene" uid="uid://b5hwm5ni70sok" path="res://entities/stages/southerland_stage/southerland/scenes/southerland.tscn" id="27_sksg1"]
+[ext_resource type="PackedScene" uid="uid://bnqhi0ouyobun" path="res://entities/stages/southerland_stage/snow_cannon/scenes/snow_cannon.tscn" id="36_q3x48"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fr38o"]
 resource_name = "IceSheet"
@@ -403,6 +405,7 @@ scenes/1/scene = ExtResource("15_5fu0b")
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_jrac3"]
 resource_name = "Rocket"
 scenes/1/scene = ExtResource("16_lrq06")
+scenes/2/scene = ExtResource("18_t33ff")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_vr860"]
 resource_name = "PotatoBomb"
@@ -439,6 +442,7 @@ scenes/1/scene = ExtResource("24_fhqjb")
 resource_name = "SnowCannon"
 scenes/1/scene = ExtResource("25_agml0")
 scenes/2/scene = ExtResource("26_ldqly")
+scenes/3/scene = ExtResource("36_q3x48")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_6bx6u"]
 resource_name = "SantaOutline"

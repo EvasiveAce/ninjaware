@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://s3013g2hdjpt"]
+
+[ext_resource type="Texture2D" uid="uid://c7bqt0kdhw2ou" path="res://entities/stages/southerland_stage/art/snow_egg.png" id="1_orpaj"]
+[ext_resource type="AudioStream" uid="uid://i4pd5f3db5vm" path="res://entities/stages/southerland_stage/snow_cannon/snowball/audio/snowball_hit.wav" id="2_ag5mw"]
+[ext_resource type="Texture2D" uid="uid://qk0o8abjcvwk" path="res://entities/stages/southerland_stage/art/snow_ball_hit_sprite_sheet.png" id="2_w68qr"]
+[ext_resource type="Script" uid="uid://6v8n8kwrxbps" path="res://entities/stages/southerland_stage/snow_cannon/snowegg/scripts/snowegg.gd" id="3_aqmgj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_orpaj"]
+size = Vector2(22, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x36ph"]
+atlas = ExtResource("2_w68qr")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orpaj"]
+atlas = ExtResource("2_w68qr")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ag5mw"]
+atlas = ExtResource("2_w68qr")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fl8hf"]
+atlas = ExtResource("2_w68qr")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x36ph"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x36ph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_orpaj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ag5mw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fl8hf")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 12.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_che6o"]
+radius = 6.0
+height = 22.0
+
+[node name="Snowegg" type="AnimatableBody2D" unique_id=409950131]
+texture_filter = 1
+position = Vector2(-3, -6)
+script = ExtResource("3_aqmgj")
+
+[node name="SnowballHit" type="AudioStreamPlayer" parent="." unique_id=1804430450]
+stream = ExtResource("2_ag5mw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1289717723]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_orpaj")
+
+[node name="SnoweggSprite" type="Sprite2D" parent="." unique_id=1948019608]
+texture = ExtResource("1_orpaj")
+
+[node name="SnoweggAnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=982495629]
+sprite_frames = SubResource("SpriteFrames_x36ph")
+animation = &"explode"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=685888421]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1605272585]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_che6o")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
