@@ -27,7 +27,6 @@
 
 [node name="DummyStage" type="Node2D" unique_id=464841658 groups=["Stage"]]
 script = ExtResource("1_oahpv")
-player_hp = 1
 player_hp_entity = ExtResource("2_j6e4s")
 enemy_hp_entity = ExtResource("3_j6e4s")
 
@@ -111,6 +110,7 @@ position = Vector2(960, 540)
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=239846213]
 stream = ExtResource("24_trqsd")
+volume_db = -48.785
 autoplay = true
 bus = &"Arcade"
 

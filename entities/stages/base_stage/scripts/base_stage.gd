@@ -36,7 +36,7 @@ static var array_of_levels : Array[Node]
 @export_group("Level Setup")
 ## The level timer in seconds.
 ## [br] [Default for levels 1 - 4]
-@export_range(1, 100) var level_speed : float = 6.0
+@export_range(1, 100) var level_speed : float = 14.0
 ## Default for game overs
 var level_speed_default : float
 var player_speed_default : float
@@ -103,7 +103,7 @@ func _check_for_coin():
 func _health_set_up(revival : bool):
 	_arrays_reset()
 	_stop_scene()
-	player.reset_momentum()
+
 	level_speed = level_speed_default
 	player.speed_factor = player_speed_default
 	for hp in player_hp:
@@ -122,16 +122,14 @@ func _health_set_up(revival : bool):
 		enemy_hp_container.add_child(enemy_hp_entity.instantiate())
 		$TransitionUI/LivesEnemyAdded.play()
 
-	player.reset_momentum()
+
 	player.position = _find_start_point()
 	array_of_levels[current_level].enabled = true
 
 	await _battle_intro()
-	timer.start(level_speed)
-	progress_bar.max_value = timer.wait_time
 	await _battle_transition_in()
 
-	_start_scene()
+	_start_scene(true)
 
 
 ## Resets the level array after Game Over or inital HP setup.
@@ -223,7 +221,7 @@ func _add_local_level():
 
 
 ## Disables the player's movement, player's animation tree, and scene timer.
-func _stop_scene():
+func _stop_scene(stop_timer: bool = true):
 	_update_audio_bus(true)
 	var end_point_path = "EndPoint/EndPointArea2D/EndPointCollisionShape2D"
 	var collision_shape = array_of_levels[current_level].get_node_or_null(end_point_path)
@@ -231,15 +229,35 @@ func _stop_scene():
 	if collision_shape:
 		collision_shape.set_deferred("disabled", true)
 	
-	player.reset_momentum()
+
 	GlobalScene.movement_enabled = false
 	player_tree.active = false
-	timer.stop()
+	if stop_timer:
+		timer.stop()
+
+
+func _play_start_point_smoke() -> void:
+	var level := array_of_levels[current_level]
+	var start_point := level.find_child("StartPoint", true, false)
+
+	if start_point == null:
+		push_warning("StartPoint not found in " + level.name)
+		return
+
+	if start_point.has_method("play_spawn"):
+		start_point.call("play_spawn")
 
 
 ## Enables the player's movement, player's animation tree, and scene timer.
-func _start_scene():
-	timer.start(level_speed)
+func _start_scene(start_timer: bool = false):
+	if start_timer:
+		timer.start(level_speed)
+		progress_bar.max_value = timer.wait_time
+		progress_bar.value = level_speed
+
+
+	_play_start_point_smoke()
+
 	player_tree.active = true
 	GlobalScene.movement_enabled = true
 	var end_point_path = "EndPoint/EndPointArea2D/EndPointCollisionShape2D"
@@ -270,13 +288,12 @@ func _on_timer_timeout() -> void:
 ## When the player enters a portal.
 ## [br] Used in [end_point.gd].
 func portal_entered() -> void:
-	_stop_scene()
+	_stop_scene(false)
 
-	await _transition_out()
 	_add_local_level()
-	await _transition_in()
-
-	_start_scene()
+	await get_tree().process_frame
+	
+	_start_scene(false)
 
 
 func rocket_enter() -> void:
@@ -365,19 +382,19 @@ func _on_enemy_enter() -> void:
 	array_of_levels.pop_front()
 	current_level = 0
 
-	if level_speed == 5.5:
-		level_speed = 5.0
-		player.speed_factor = 5.5
+	if level_speed == 13:
+		level_speed = 11
+		player.speed_factor = 6
 	else:
-		level_speed = 5.5
-		player.speed_factor = 5.0
+		level_speed = 13
+		player.speed_factor = 5.25
 
 	array_of_levels[current_level].enabled = true
 	player.position = _find_start_point()
 
 	await _enemy_hit_transition_in()
 
-	_start_scene()
+	_start_scene(true)
 
 #region -- Battle Animations --
 func _battle_start():

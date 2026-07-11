@@ -48,12 +48,12 @@ func _begin_audio():
 func _reset_level():
 	lvlToUse = 0
 
-func _get_current_level():
-	lvlToUse += 1
-	if lvlToUse <= 9:
-		$TransitionSprite/LevelNode/NumberLabel.text = "0" + str(lvlToUse)
-	else:
-		$TransitionSprite/LevelNode/NumberLabel.text = str(lvlToUse)
+# func _get_current_level():
+# 	lvlToUse += 1
+# 	if lvlToUse <= 9:
+# 		$TransitionSprite/LevelNode/NumberLabel.text = "0" + str(lvlToUse)
+# 	else:
+# 		$TransitionSprite/LevelNode/NumberLabel.text = str(lvlToUse)
 
 func _lose_current_level():
 	var target_level : int = 1
@@ -64,17 +64,17 @@ func _lose_current_level():
 	else:
 		target_level = 1
 	
-	while lvlToUse > target_level:
-		lvlToUse -= 1
+	# while lvlToUse > target_level:
+	# 	lvlToUse -= 1
 		
-		if lvlToUse <= 9:
-			$TransitionSprite/LevelNode/NumberLabel.text = "0" + str(lvlToUse)
-		else:
-			$TransitionSprite/LevelNode/NumberLabel.text = str(lvlToUse)
+	# 	if lvlToUse <= 9:
+	# 		$TransitionSprite/LevelNode/NumberLabel.text = "0" + str(lvlToUse)
+	# 	else:
+	# 		$TransitionSprite/LevelNode/NumberLabel.text = str(lvlToUse)
 		
-		$LostLevel.play() 
+	# 	$LostLevel.play() 
 		
-		await get_tree().create_timer(0.5).timeout 
+	# 	await get_tree().create_timer(0.5).timeout 
 
 
 func _call_parent_tally() -> void:

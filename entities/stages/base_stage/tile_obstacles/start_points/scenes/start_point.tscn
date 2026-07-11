@@ -1,9 +1,61 @@
-[gd_scene load_steps=2 format=3 uid="uid://c68vcvgoof2i3"]
+[gd_scene format=3 uid="uid://c68vcvgoof2i3"]
 
 [ext_resource type="Texture2D" uid="uid://bb3s115vclfov" path="res://entities/stages/base_stage/tile_obstacles/start_points/art/start_point.png" id="1_43qnh"]
+[ext_resource type="Texture2D" uid="uid://c1ehpj232tyxt" path="res://entities/ninja/art/smoke_cloud.png" id="2_0sd82"]
+[ext_resource type="Script" uid="uid://mi245i1rpxmd" path="res://entities/stages/base_stage/tile_obstacles/start_points/scripts/start_point.gd" id="2_1mcsw"]
+[ext_resource type="AudioStream" uid="uid://1hhy5qnegeuv" path="res://entities/ninja/audio/smoke_screen.wav" id="4_6v85d"]
 
-[node name="StartPoint" type="Sprite2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mje1m"]
+atlas = ExtResource("2_0sd82")
+region = Rect2(0, 0, 45, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qygyv"]
+atlas = ExtResource("2_0sd82")
+region = Rect2(45, 0, 45, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xl4l3"]
+atlas = ExtResource("2_0sd82")
+region = Rect2(0, 40, 45, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yumpx"]
+atlas = ExtResource("2_0sd82")
+region = Rect2(45, 40, 45, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1mcsw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mje1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qygyv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xl4l3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yumpx")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": 0,
+"name": &"Smoke",
+"speed": 10.0
+}]
+
+[node name="StartPoint" type="Sprite2D" unique_id=232008335]
 z_index = -1
 texture_filter = 1
 position = Vector2(3, -3)
 texture = ExtResource("1_43qnh")
+script = ExtResource("2_1mcsw")
+
+[node name="Smoke" type="AnimatedSprite2D" parent="." unique_id=1131708489]
+z_index = 1
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_1mcsw")
+animation = &"Smoke"
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="." unique_id=2102931840]
+stream = ExtResource("4_6v85d")

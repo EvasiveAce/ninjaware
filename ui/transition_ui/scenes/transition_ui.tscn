@@ -94,7 +94,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0ociy")
 }],
-"loop": false,
+"loop": 0,
 "name": &"hit",
 "speed": 16.0
 }, {
@@ -102,7 +102,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_q8nxu")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 16.0
 }, {
@@ -113,7 +113,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7faum")
 }],
-"loop": true,
+"loop": 1,
 "name": &"laugh",
 "speed": 2.0
 }]
@@ -191,7 +191,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xojix")
 }],
-"loop": false,
+"loop": 0,
 "name": &"hit",
 "speed": 16.0
 }, {
@@ -199,7 +199,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_64g52")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 16.0
 }, {
@@ -222,7 +222,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vhss1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"laugh",
 "speed": 8.0
 }]
@@ -297,7 +297,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jqvcd")
 }],
-"loop": false,
+"loop": 0,
 "name": &"hit",
 "speed": 8.0
 }, {
@@ -305,7 +305,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3cuq4")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 16.0
 }, {
@@ -319,7 +319,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ejcqh")
 }],
-"loop": true,
+"loop": 1,
 "name": &"laugh",
 "speed": 8.0
 }]
@@ -535,19 +535,19 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("TransitionSprite/LevelNode:visible")
+tracks/14/path = NodePath("TransitionSprite/TextLabel:text")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [""]
 }
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("TransitionSprite/LevelNode/NumberLabel:text")
+tracks/15/path = NodePath("TransitionSprite/TextLabel:text")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -559,38 +559,26 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("TransitionSprite/LevelNode/LevelLabel:text")
+tracks/16/path = NodePath("TransitionSprite:frame")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [""]
+"values": [0]
 }
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("TransitionSprite/LevelNode/SlashLabel:text")
+tracks/17/path = NodePath("TransitionSprite/TextLabel:visible")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [""]
-}
-tracks/18/type = "value"
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/path = NodePath("TransitionSprite:frame")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y2f0o"]
@@ -987,29 +975,15 @@ text = "G"
 label_settings = SubResource("LabelSettings_t8q51")
 horizontal_alignment = 1
 
-[node name="LevelNode" type="HBoxContainer" parent="TransitionSprite" unique_id=1952307993]
-visible = false
-offset_left = -200.0
-offset_top = -50.0
-offset_right = 200.0
-offset_bottom = 73.0
-alignment = 1
-
-[node name="NumberLabel" type="Label" parent="TransitionSprite/LevelNode" unique_id=934789295]
+[node name="TextLabel" type="Label" parent="TransitionSprite" unique_id=934789295]
 custom_minimum_size = Vector2(128, 96)
-layout_mode = 2
+offset_left = -217.0
+offset_top = -59.0
+offset_right = 237.0
+offset_bottom = 64.0
 label_settings = ExtResource("8_y2f0o")
 horizontal_alignment = 1
-
-[node name="SlashLabel" type="Label" parent="TransitionSprite/LevelNode" unique_id=300755084]
-layout_mode = 2
-label_settings = ExtResource("8_y2f0o")
-horizontal_alignment = 1
-
-[node name="LevelLabel" type="Label" parent="TransitionSprite/LevelNode" unique_id=1048666080]
-custom_minimum_size = Vector2(96, 96)
-layout_mode = 2
-label_settings = ExtResource("8_y2f0o")
+vertical_alignment = 1
 
 [node name="SubtitleLabel" type="Label" parent="TransitionSprite" unique_id=1052728450]
 visible = false

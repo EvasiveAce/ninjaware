@@ -55,7 +55,6 @@ func _physics_process(delta: float) -> void:
 		
 		_handle_animation()
 
-
 ## Handle player animation states.
 func _handle_animation():
 	if not is_on_floor():
