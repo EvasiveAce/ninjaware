@@ -20,7 +20,7 @@ func _process(_delta: float) -> void:
 		return
 	if GlobalScene.movement_enabled and is_first_shot:
 		is_first_shot = false
-		await get_tree().create_timer(.1 / get_parent().get_parent().level_speed).timeout
+		await get_tree().create_timer(.1 / get_parent().get_parent().get_parent().level_speed).timeout
 		play("Start")
 	if frame_progress == 1 and !is_first_shot and $SnowballArray.get_child_count() == 0:
 		play("Start")
@@ -32,7 +32,7 @@ func _on_frame_changed() -> void:
 			var snowball = snowball_scene.instantiate()
 			var snowball_multiplier = 0.3
 
-			var current_lvl_speed = get_parent().get_parent().level_speed
+			var current_lvl_speed = get_parent().get_parent().get_parent().level_speed
 
 			if current_lvl_speed == 5.0: 
 				snowball_multiplier = 0.55

@@ -55,14 +55,14 @@ func _reset_level():
 # 	else:
 # 		$TransitionSprite/LevelNode/NumberLabel.text = str(lvlToUse)
 
-func _lose_current_level():
-	var target_level : int = 1
-	if lvlToUse >= 9:
-		target_level = 9
-	elif lvlToUse >= 5:
-		target_level = 5
-	else:
-		target_level = 1
+# func _lose_current_level():
+# 	var target_level : int = 1
+# 	if lvlToUse >= 9:
+# 		target_level = 9
+# 	elif lvlToUse >= 5:
+# 		target_level = 5
+# 	else:
+# 		target_level = 1
 	
 	# while lvlToUse > target_level:
 	# 	lvlToUse -= 1

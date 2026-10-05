@@ -30,13 +30,19 @@ static var array_of_levels : Array[Node]
 @onready var player_tree : AnimationTree = $Player/AnimationTree
 ## Timer for the stage.
 @onready var timer : Timer = $Timer
-## Progress bar for the timer progression.
-@onready var progress_bar : ProgressBar = $ProgressBar
+## Bomb Fuse
+@onready var bomb_timer = $BombTimer
+@onready var bomb_texture_2 = $BombTimer/BombTexture2
+@onready var fuse = $BombTimer/Fuse
+@onready var fire = $BombTimer/Fire
+var fuse_max_width: float
 
 @export_group("Level Setup")
 ## The level timer in seconds.
 ## [br] [Default for levels 1 - 4]
-@export_range(1, 100) var level_speed : float = 14.0
+@export var level_speeds : Array[float]
+## Current level timer speed.
+var level_speed: float
 ## Default for game overs
 var level_speed_default : float
 var player_speed_default : float
@@ -64,8 +70,10 @@ var current_enemy : String
 func _ready() -> void:
 	state_machine = anim_tree.get("parameters/playback")
 	anim_tree.active = true
+	level_speed = level_speeds[0]
 	level_speed_default = level_speed
 	player_speed_default = player.speed_factor
+	fuse_max_width = fuse.size.x
 	await _health_set_up(false)
 
 
@@ -75,10 +83,42 @@ func _process(_delta: float) -> void:
 			portal_entered()
 		else:
 			_on_enemy_enter()
-	progress_bar.value = timer.time_left
+	_update_bomb_timer()
 	_player_out_of_bounds()
 	_check_for_coin()
 
+
+func _update_bomb_timer() -> void:
+	if timer.wait_time <= 0.0:
+		return
+
+	var ratio = clamp(timer.time_left / timer.wait_time, 0.0, 1.0)
+
+	var raw_width = fuse_max_width * ratio
+	var fuse_width = floor(raw_width / 8.0) * 8.0
+
+	fuse.size.x = fuse_width
+	_update_fire_position(fuse_width)
+
+
+func _update_fire_position(fuse_width: float) -> void:
+
+	if not timer.is_stopped() and fuse_width == 0.0 and bomb_texture_2.visible:
+		bomb_texture_2.visible = false
+		fire.position.y = fire.position.y - 20.0
+	
+	if fuse_width <= 8.0:
+		fire.position.x = fuse.position.x + fuse_width + 4
+	else: 
+		fire.position.x = fuse.position.x + fuse_width
+
+
+
+func _advance_level_speed() -> void:
+	var current_index = level_speeds.find(level_speed)
+
+	if current_index < level_speeds.size() - 1:
+		level_speed = level_speeds[current_index + 1]
 
 ## Checks to see if player is out of bounds, and emits [timeout] if so.
 func _player_out_of_bounds():
@@ -123,7 +163,7 @@ func _health_set_up(revival : bool):
 		$TransitionUI/LivesEnemyAdded.play()
 
 
-	player.position = _find_start_point()
+	player.global_position = _find_start_point()
 	array_of_levels[current_level].enabled = true
 
 	await _battle_intro()
@@ -136,30 +176,30 @@ func _health_set_up(revival : bool):
 func _arrays_reset():
 	array_of_levels = []
 	current_level = 0
-	$Level1.enabled = false
-	$Level2.enabled = false
-	$Level3.enabled = false
-	$Level4.enabled = false
-	$Level5.enabled = false
-	$Level6.enabled = false
-	$Level7.enabled = false
-	$Level8.enabled = false
-	$Level9.enabled = false
-	$Level10.enabled = false
-	$Level11.enabled = false
-	$Level12.enabled = false
-	array_of_levels.append($Level1)
-	array_of_levels.append($Level2)
-	array_of_levels.append($Level3)
-	array_of_levels.append($Level4)
-	array_of_levels.append($Level5)
-	array_of_levels.append($Level6)
-	array_of_levels.append($Level7)
-	array_of_levels.append($Level8)
-	array_of_levels.append($Level9)
-	array_of_levels.append($Level10)
-	array_of_levels.append($Level11)
-	array_of_levels.append($Level12)
+	$Stages/Level1.enabled = false
+	$Stages/Level2.enabled = false
+	$Stages/Level3.enabled = false
+	$Stages/Level4.enabled = false
+	$Stages/Level5.enabled = false
+	$Stages/Level6.enabled = false
+	$Stages/Level7.enabled = false
+	$Stages/Level8.enabled = false
+	$Stages/Level9.enabled = false
+	$Stages/Level10.enabled = false
+	$Stages/Level11.enabled = false
+	$Stages/Level12.enabled = false
+	array_of_levels.append($Stages/Level1)
+	array_of_levels.append($Stages/Level2)
+	array_of_levels.append($Stages/Level3)
+	array_of_levels.append($Stages/Level4)
+	array_of_levels.append($Stages/Level5)
+	array_of_levels.append($Stages/Level6)
+	array_of_levels.append($Stages/Level7)
+	array_of_levels.append($Stages/Level8)
+	array_of_levels.append($Stages/Level9)
+	array_of_levels.append($Stages/Level10)
+	array_of_levels.append($Stages/Level11)
+	array_of_levels.append($Stages/Level12)
 
 ## Changes from "Arcade" mode to Main Bus
 func _update_audio_bus(is_arcade : bool):
@@ -179,26 +219,19 @@ func child_begin_audio():
 	$Music.playing = true
 
 ## Returns the "Start Point" position in the current tilemap layer.
-func _find_start_point() -> Vector2i:
-	var used_cells
-	if array_of_levels[current_level].get_used_cells_by_id(4, Vector2i.ZERO, 1) != []:
-		used_cells = array_of_levels[current_level].get_used_cells_by_id(4, Vector2i.ZERO, 1)
+func _find_start_point() -> Vector2:
+	var used_cells = array_of_levels[current_level].get_used_cells_by_id(
+		1,
+		Vector2i.ZERO,
+		2
+	)
 
-	elif array_of_levels[current_level].get_used_cells_by_id(4, Vector2i.ZERO, 2) != []:
-		used_cells = array_of_levels[current_level].get_used_cells_by_id(4, Vector2i.ZERO, 2)
-	
-	elif array_of_levels[current_level].get_used_cells_by_id(4, Vector2i.ZERO, 3) != []:
-		used_cells = array_of_levels[current_level].get_used_cells_by_id(4, Vector2i.ZERO, 3)
-	
-	elif array_of_levels[current_level].get_used_cells_by_id(4, Vector2i.ZERO, 4) != []:
-		used_cells = array_of_levels[current_level].get_used_cells_by_id(4, Vector2i.ZERO, 4)
+	var world_position = array_of_levels[current_level].to_global(
+		array_of_levels[current_level].map_to_local(used_cells[0])
+	)
 
-	# Level 1 Stage 1
-	else:
-		used_cells = array_of_levels[current_level].get_used_cells_by_id(9, Vector2i.ZERO, 1)
+	world_position.y -= 28
 
-	var world_position = array_of_levels[current_level].to_global(array_of_levels[current_level].map_to_local(used_cells[0]))
-	world_position -= Vector2(8, 28)
 	return world_position
 
 
@@ -208,7 +241,7 @@ func _reset_local_levels():
 	array_of_levels[current_level].enabled = false
 	current_level = 0
 	array_of_levels[current_level].enabled = true
-	player.position = _find_start_point()
+	player.global_position = _find_start_point()
 
 
 ## Adds 1 to the [current_level].
@@ -217,13 +250,13 @@ func _add_local_level():
 	array_of_levels[current_level].enabled = false
 	current_level += 1
 	array_of_levels[current_level].enabled = true
-	player.position = _find_start_point()
+	player.global_position = _find_start_point()
 
 
 ## Disables the player's movement, player's animation tree, and scene timer.
 func _stop_scene(stop_timer: bool = true):
 	_update_audio_bus(true)
-	var end_point_path = "EndPoint/EndPointArea2D/EndPointCollisionShape2D"
+	var end_point_path = ""
 	var collision_shape = array_of_levels[current_level].get_node_or_null(end_point_path)
 	
 	if collision_shape:
@@ -236,31 +269,19 @@ func _stop_scene(stop_timer: bool = true):
 		timer.stop()
 
 
-func _play_start_point_smoke() -> void:
-	var level := array_of_levels[current_level]
-	var start_point := level.find_child("StartPoint", true, false)
-
-	if start_point == null:
-		push_warning("StartPoint not found in " + level.name)
-		return
-
-	if start_point.has_method("play_spawn"):
-		start_point.call("play_spawn")
-
 
 ## Enables the player's movement, player's animation tree, and scene timer.
 func _start_scene(start_timer: bool = false):
 	if start_timer:
 		timer.start(level_speed)
-		progress_bar.max_value = timer.wait_time
-		progress_bar.value = level_speed
 
 
-	_play_start_point_smoke()
+
+	player.start_smoke()
 
 	player_tree.active = true
 	GlobalScene.movement_enabled = true
-	var end_point_path = "EndPoint/EndPointArea2D/EndPointCollisionShape2D"
+	var end_point_path = "EndPoint/EndPoint/EndPointArea2D/EndPointCollisionShape2D"
 	var collision_shape = array_of_levels[current_level].get_node_or_null(end_point_path)
 	
 	if collision_shape:
@@ -316,7 +337,7 @@ func rocket_enter() -> void:
 	player.position = Vector2(150, 456)
 	player.visible = true
 
-	var end_point_path = "EndPoint/EndPointArea2D/EndPointCollisionShape2D"
+	var end_point_path = ""
 	var collision_shape = array_of_levels[current_level].get_node_or_null(end_point_path)
 	
 	if collision_shape:
@@ -382,15 +403,10 @@ func _on_enemy_enter() -> void:
 	array_of_levels.pop_front()
 	current_level = 0
 
-	if level_speed == 13:
-		level_speed = 11
-		player.speed_factor = 6
-	else:
-		level_speed = 13
-		player.speed_factor = 5.25
+	_advance_level_speed()
 
 	array_of_levels[current_level].enabled = true
-	player.position = _find_start_point()
+	player.global_position = _find_start_point()
 
 	await _enemy_hit_transition_in()
 

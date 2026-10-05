@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://b703g8tfjpgjx"]
+
+[ext_resource type="Texture2D" uid="uid://k2j6pmn7dwvf" path="res://entities/stages/potatomous_stage/tile_obstacles/spikes/art/spike.png" id="1_3o5gl"]
+[ext_resource type="Script" uid="uid://driff6t5w6g2f" path="res://entities/stages/potatomous_stage/tile_obstacles/spikes/scripts/spike.gd" id="2_2f5d4"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_vlc5k"]
+points = PackedVector2Array(-12, 14, -9, 2, -8, 2, -5, 14)
+
+[node name="Spike" type="Sprite2D" unique_id=1672523506]
+texture_filter = 1
+texture = ExtResource("1_3o5gl")
+script = ExtResource("2_2f5d4")
+
+[node name="SpikeArea2D" type="Area2D" parent="." unique_id=288108826]
+
+[node name="SpikeCollisionShape2D" type="CollisionShape2D" parent="SpikeArea2D" unique_id=1883638699]
+position = Vector2(8, -6)
+shape = SubResource("ConvexPolygonShape2D_vlc5k")
+
+[connection signal="body_entered" from="SpikeArea2D" to="." method="_on_spike_area_2d_body_entered"]

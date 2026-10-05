@@ -17,6 +17,7 @@ hipass = 0.5
 wet = 0.05
 
 [resource]
+bus/0/volume_db = -21.826433
 bus/1/name = &"Arcade"
 bus/1/solo = false
 bus/1/mute = false

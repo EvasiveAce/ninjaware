@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://b6jo12b073drr"]
+
+[ext_resource type="Texture2D" uid="uid://c1ehpj232tyxt" path="res://entities/ninja/art/smoke_cloud.png" id="1_sy1gm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mje1m"]
+atlas = ExtResource("1_sy1gm")
+region = Rect2(0, 0, 45, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qygyv"]
+atlas = ExtResource("1_sy1gm")
+region = Rect2(45, 0, 45, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xl4l3"]
+atlas = ExtResource("1_sy1gm")
+region = Rect2(0, 40, 45, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yumpx"]
+atlas = ExtResource("1_sy1gm")
+region = Rect2(45, 40, 45, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7ybbk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mje1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qygyv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xl4l3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yumpx")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": 0,
+"name": &"smokebomb",
+"speed": 9.0
+}]
+
+[node name="SmokeBomb" type="Node2D" unique_id=1436265249]
+scale = Vector2(4, 4)
+
+[node name="SmokeBombAnimated" type="AnimatedSprite2D" parent="." unique_id=951292258]
+texture_filter = 1
+position = Vector2(3.5, -7.5)
+sprite_frames = SubResource("SpriteFrames_7ybbk")
+animation = &"smokebomb"
+autoplay = "smokebomb"

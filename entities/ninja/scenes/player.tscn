@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://c1u8hjdnykq7l" path="res://entities/ninja/scripts/player.gd" id="1_rg7kn"]
 [ext_resource type="AudioStream" uid="uid://drgncy66qa4ho" path="res://entities/ninja/audio/ninja_jump.wav" id="3_52sos"]
 [ext_resource type="Texture2D" uid="uid://dyl6dsrwjgihr" path="res://entities/ninja/art/snow_effect_sprite_sheet.png" id="4_rk3dc"]
+[ext_resource type="Texture2D" uid="uid://c1ehpj232tyxt" path="res://entities/ninja/art/smoke_cloud.png" id="4_ucmnm"]
+[ext_resource type="AudioStream" uid="uid://1hhy5qnegeuv" path="res://entities/ninja/audio/smoke_screen.wav" id="6_q0l0r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rg7kn"]
 size = Vector2(21, 30)
@@ -366,6 +368,22 @@ states/Walk/position = Vector2(650, 39)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_rg7kn"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_52sos"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_xwb2w"), "Walk", "Run", SubResource("AnimationNodeStateMachineTransition_omv0o"), "Run", "Walk", SubResource("AnimationNodeStateMachineTransition_bw35f"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_qo0kk"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_2hb64"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_qsune"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_vov0p"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_yq18l"), "Fall", "Walk", SubResource("AnimationNodeStateMachineTransition_n8jjm"), "Fall", "Run", SubResource("AnimationNodeStateMachineTransition_b4k72"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_nhcly"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_2gkp7"), "Walk", "Fall", SubResource("AnimationNodeStateMachineTransition_dsnr8"), "Run", "Fall", SubResource("AnimationNodeStateMachineTransition_brmje"), "Jump", "Walk", SubResource("AnimationNodeStateMachineTransition_ju8fe"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_miu1y"), "Run", "Skid", SubResource("AnimationNodeStateMachineTransition_qbvq2"), "Skid", "Run", SubResource("AnimationNodeStateMachineTransition_rk3dc"), "Skid", "Walk", SubResource("AnimationNodeStateMachineTransition_ucmnm"), "Walk", "Skid", SubResource("AnimationNodeStateMachineTransition_q0l0r")]
 graph_offset = Vector2(90, -95)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_mje1m"]
+atlas = ExtResource("4_ucmnm")
+region = Rect2(0, 0, 45, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qygyv"]
+atlas = ExtResource("4_ucmnm")
+region = Rect2(45, 0, 45, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xl4l3"]
+atlas = ExtResource("4_ucmnm")
+region = Rect2(0, 40, 45, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yumpx"]
+atlas = ExtResource("4_ucmnm")
+region = Rect2(45, 40, 45, 40)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ucmnm"]
 atlas = ExtResource("4_rk3dc")
 region = Rect2(0, 0, 60, 57)
@@ -402,6 +420,26 @@ region = Rect2(60, 114, 60, 57)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_mje1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qygyv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xl4l3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yumpx")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": 0,
+"name": &"smokebomb",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ucmnm")
 }, {
 "duration": 1.0,
@@ -423,7 +461,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_65ocl")
 }],
 "loop": 1,
-"name": &"playing",
+"name": &"snowcloak",
 "speed": 9.0
 }, {
 "frames": [{
@@ -469,7 +507,7 @@ parameters/Walk/TimeScale/scale = 8.0
 [node name="JumpPlayer" type="AudioStreamPlayer" parent="." unique_id=664913777]
 stream = ExtResource("3_52sos")
 
-[node name="SnowCloak" type="AnimatedSprite2D" parent="." unique_id=1933111222]
+[node name="MixedAnimations" type="AnimatedSprite2D" parent="." unique_id=1933111222]
 texture_filter = 1
 position = Vector2(4, 2)
 sprite_frames = SubResource("SpriteFrames_mje1m")
@@ -477,6 +515,13 @@ animation = &"stopped"
 autoplay = "stopped"
 
 [node name="SnowTimer" type="Timer" parent="." unique_id=654947350]
+
+[node name="SmokePlayer" type="AudioStreamPlayer" parent="." unique_id=1717020641]
+stream = ExtResource("6_q0l0r")
+
+[node name="DeathSmokePlayer" type="AudioStreamPlayer" parent="." unique_id=635831890]
+stream = ExtResource("6_q0l0r")
+pitch_scale = 0.75
 
 [connection signal="timeout" from="JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]
 [connection signal="timeout" from="SnowTimer" to="." method="_on_snow_timer_timeout"]

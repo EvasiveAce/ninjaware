@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dovvy0nkavoj"]
 
-[ext_resource type="Texture2D" uid="uid://3acaa1kj56bi" path="res://entities/stages/base_stage/tile_obstacles/twerkules/twerkules_sheet.png" id="1_eoyi7"]
+[ext_resource type="Texture2D" path="res://entities/stages/base_stage/tile_maps/tile_obstacles/twerkules/twerkules_sheet.png" id="1_eoyi7"]
 [ext_resource type="Script" uid="uid://bmvdqssg751sw" path="res://entities/stages/base_stage/tile_obstacles/twerkules/scripts/twerkules.gd" id="2_8yykq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8yykq"]

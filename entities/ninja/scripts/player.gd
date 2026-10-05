@@ -25,6 +25,10 @@ var skid_timer : float = 0.0
 var skid_min_duration : float = .2
 #endregion
 
+#region -- Extras Setup --
+const SMOKE_BOMB = preload("res://entities/ninja/smoke_bomb/scenes/smoke_bomb.tscn")
+#endregion
+
 #region -- Texture Setup --
 @onready var ninja_texture = preload("res://entities/ninja/art/ninja_sheet.png")
 @onready var ninja_snow_texture = preload("res://entities/ninja/art/ninja_snow_sheet.png")
@@ -109,13 +113,13 @@ func _set_direction(delta : float):
 			if direction < 0:
 				$PlayerSprite.flip_h = true
 				$CollisionShape2D.position.x = -1.5
-				$SnowCloak.flip_h = true
-				$SnowCloak.position.x = -4.0
+				$MixedAnimations.flip_h = true
+				$MixedAnimations.position.x = -4.0
 			elif direction > 0:
 				$PlayerSprite.flip_h = false
 				$CollisionShape2D.position.x = 1.5
-				$SnowCloak.flip_h = false
-				$SnowCloak.position.x = 4.0
+				$MixedAnimations.flip_h = false
+				$MixedAnimations.position.x = 4.0
 
 
 	if is_skidding:
@@ -204,38 +208,50 @@ func reset_momentum():
 
 func snowball_hit() -> void:
 	$PlayerSprite.texture = ninja_snow_texture
-	$SnowCloak.play("playing")
+	$MixedAnimations.play("snowcloak")
 	$SnowTimer.start(1.0)
 
 func _on_snow_timer_timeout() -> void:
 	$PlayerSprite.texture = ninja_texture
-	$SnowCloak.play("stopped")
+	$MixedAnimations.play("stopped")
 
 func snowegg_hit() -> void:
 	$PlayerSprite.texture = ninja_snow_texture
-	$SnowCloak.play("playing")
+	$MixedAnimations.play("snowcloak")
 	$SnowTimer.start(2.5)
 
-## Bounces on Potato Bomb using [_jump_speed()].
-## [br] Used in [potato_bomb.gd].
-func bounce_on_potato_bomb():
-	velocity.y = _jump_speed() * 1.5
-
-
-## Bounces on Potato Bomb using [_jump_speed()].
-## [br] Used in [potato_bomb_left_facing.gd].
-func bounce_on_potato_bomb_left_facing():
-	velocity.x = _jump_speed() * 1.5
-
-
-## Bounces on Potato Bomb using [_jump_speed()].
-## [br] Used in [potato_bomb_right_facing.gd].
-func bounce_on_potato_bomb_right_facing():
-	velocity.x = _jump_speed() * -1.5
-
+## Bounces on Spring using [_jump_speed()].
+## [br] Used in [spring.gd].
+func bounce_on_spring(direction: String) -> void:
+	match direction:
+		"up":
+			velocity.y = _jump_speed() * 1.5
+		"down":
+			velocity.y = _jump_speed() * -1.5
+		"left":
+			velocity.x = _jump_speed() * 1.5
+		"right":
+			velocity.x = _jump_speed() * -1.5
 
 ## Places player out of bounds to end level.
 ## [br] Used in [spike.gd].
 func enter_spike():
-	velocity.y = 0
+	GlobalScene.movement_enabled = false
+	reset_momentum()
+	$MixedAnimations.play("smokebomb")
+	$DeathSmokePlayer.play()
+	while $MixedAnimations.frame < 3:
+		await $MixedAnimations.frame_changed
+	$PlayerSprite.visible = false
+	await $MixedAnimations.animation_finished
 	position.y = 10000
+	$PlayerSprite.visible = true
+
+func start_smoke():
+	var smoke = SMOKE_BOMB.instantiate()
+	get_tree().current_scene.add_child(smoke)
+	smoke.global_position = global_position 
+	smoke.position.y += 28
+	$SmokePlayer.play()
+	await smoke.get_node('SmokeBombAnimated').animation_finished
+	smoke.queue_free()
