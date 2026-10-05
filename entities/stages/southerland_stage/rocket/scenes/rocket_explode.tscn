@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://dynb5lqfy2ii0"]
+
+[ext_resource type="Script" uid="uid://bw26bs3584f4i" path="res://entities/stages/southerland_stage/rocket/scripts/rocket_explode.gd" id="1_wu0eo"]
+[ext_resource type="Texture2D" uid="uid://n6ngpmmbgk05" path="res://entities/stages/southerland_stage/rocket/art/rocket.png" id="2_2h43s"]
+[ext_resource type="AudioStream" uid="uid://cb87tewn8ya25" path="res://entities/stages/southerland_stage/rocket/audio/rocket_start.wav" id="3_1cujl"]
+[ext_resource type="Texture2D" uid="uid://kiyxpnlxwlsk" path="res://entities/stages/southerland_stage/rocket/art/launch_sheet.png" id="4_d3gvi"]
+[ext_resource type="AudioStream" uid="uid://s315qusqf2da" path="res://entities/stages/southerland_stage/rocket/audio/rocket.wav" id="5_1c427"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6i7jg"]
+size = Vector2(12, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_juk0m"]
+atlas = ExtResource("4_d3gvi")
+region = Rect2(0, 0, 25, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhm5g"]
+atlas = ExtResource("4_d3gvi")
+region = Rect2(25, 0, 25, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obss1"]
+atlas = ExtResource("4_d3gvi")
+region = Rect2(50, 0, 25, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qrfu"]
+atlas = ExtResource("4_d3gvi")
+region = Rect2(75, 0, 25, 21)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qqxey"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_juk0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhm5g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obss1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qrfu")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="RocketExplode" type="Node2D" unique_id=716729150]
+z_index = -1
+texture_filter = 1
+script = ExtResource("1_wu0eo")
+
+[node name="RocketSprite" type="Sprite2D" parent="." unique_id=1585038252]
+texture_filter = 1
+position = Vector2(0, -3.5)
+texture = ExtResource("2_2h43s")
+
+[node name="RocketArea2D" type="Area2D" parent="RocketSprite" unique_id=509740936]
+
+[node name="RocketCollisionShape2D" type="CollisionShape2D" parent="RocketSprite/RocketArea2D" unique_id=579281765]
+shape = SubResource("RectangleShape2D_6i7jg")
+
+[node name="RocketPlayer" type="AudioStreamPlayer" parent="." unique_id=60932499]
+stream = ExtResource("3_1cujl")
+pitch_scale = 0.5
+
+[node name="ExplodeSprite" type="AnimatedSprite2D" parent="." unique_id=2129163879]
+visible = false
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_qqxey")
+
+[node name="RocketSoundPlayer" type="AudioStreamPlayer" parent="." unique_id=918887053]
+stream = ExtResource("5_1c427")
+volume_db = -20.0
+pitch_scale = 2.05
+
+[connection signal="body_entered" from="RocketSprite/RocketArea2D" to="." method="_on_rocket_area_2d_body_entered"]
+[connection signal="body_entered" from="RocketSprite/RocketArea2D" to="RocketSprite" method="_on_rocket_area_2d_body_entered"]

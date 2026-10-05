@@ -25,6 +25,15 @@ var skid_timer : float = 0.0
 var skid_min_duration : float = .2
 #endregion
 
+#region -- Extras Setup --
+const SMOKE_BOMB = preload("res://entities/ninja/smoke_bomb/scenes/smoke_bomb.tscn")
+#endregion
+
+#region -- Texture Setup --
+@onready var ninja_texture = preload("res://entities/ninja/art/ninja_sheet.png")
+@onready var ninja_snow_texture = preload("res://entities/ninja/art/ninja_snow_sheet.png")
+#endregion
+
 #region -- Animation Setup --
 ## The animation tree.
 ## [br] Used for the [state_machine]. 
@@ -50,13 +59,11 @@ func _physics_process(delta: float) -> void:
 		
 		_handle_animation()
 
-
 ## Handle player animation states.
 func _handle_animation():
 	if not is_on_floor():
 		if velocity.y < 0:  # Moving up = jumping
 			if state_machine.get_current_node() != "Jump":
-				$JumpPlayer.play()
 				state_machine.travel("Jump")
 		else:  # Moving down = falling
 			if state_machine.get_current_node() != "Fall":
@@ -106,9 +113,13 @@ func _set_direction(delta : float):
 			if direction < 0:
 				$PlayerSprite.flip_h = true
 				$CollisionShape2D.position.x = -1.5
+				$MixedAnimations.flip_h = true
+				$MixedAnimations.position.x = -4.0
 			elif direction > 0:
 				$PlayerSprite.flip_h = false
 				$CollisionShape2D.position.x = 1.5
+				$MixedAnimations.flip_h = false
+				$MixedAnimations.position.x = 4.0
 
 
 	if is_skidding:
@@ -117,11 +128,18 @@ func _set_direction(delta : float):
 
 ## Sets the movement speeds to the [speed_factor].
 func _set_speed():
-	max_walk_speed = 75.0 * speed_factor
-	max_run_speed = 135.0 * speed_factor
-	max_sprint_speed = 180.0 * speed_factor
-	walk_accel = 337.5 * speed_factor
-	stop_decel = 600.0 * speed_factor
+	if $PlayerSprite.texture == ninja_snow_texture:
+		max_walk_speed = (75.0 * speed_factor) * .5
+		max_run_speed = (135.0 * speed_factor) * .5
+		max_sprint_speed = (180.0 * speed_factor) * .5
+		walk_accel = (337.5 * speed_factor) * .5
+		stop_decel = (600.0 * speed_factor) * .5
+	else:
+		max_walk_speed = 75.0 * speed_factor
+		max_run_speed = 135.0 * speed_factor
+		max_sprint_speed = 180.0 * speed_factor
+		walk_accel = 337.5 * speed_factor
+		stop_decel = 600.0 * speed_factor
 
 
 ## Applies gravity if needed.
@@ -138,10 +156,12 @@ func _handle_jump():
 	if Input.is_action_just_pressed("ui_accept"):
 		if is_on_floor(): 
 			# Store the current horizontal speed when jumping
+			$JumpPlayer.play()
 			air_speed = abs(velocity.x)
 			velocity.y = _jump_speed()
 		elif !$CoyoteTimeTimer.is_stopped():
 			# Coyote jump - only if timer is active and we're falling
+			$JumpPlayer.play()
 			air_speed = abs(velocity.x)
 			velocity.y = _jump_speed()
 			PopupText.display_text("Coyote'd!", position, 32, 4)
@@ -160,6 +180,7 @@ func _handle_misc_jump(was_on_floor : bool):
 
 	if !was_on_floor && is_on_floor():
 		if jump_buffered:
+			$JumpPlayer.play()
 			jump_buffered = false
 			velocity.y = _jump_speed()
 			PopupText.display_text("Buffered!", position, 32, 4)
@@ -185,27 +206,52 @@ func reset_momentum():
 	velocity.x = 0
 	velocity.y = 0
 
+func snowball_hit() -> void:
+	$PlayerSprite.texture = ninja_snow_texture
+	$MixedAnimations.play("snowcloak")
+	$SnowTimer.start(1.0)
 
-## Bounces on Potato Bomb using [_jump_speed()].
-## [br] Used in [potato_bomb.gd].
-func bounce_on_potato_bomb():
-	velocity.y = _jump_speed() * 1.5
+func _on_snow_timer_timeout() -> void:
+	$PlayerSprite.texture = ninja_texture
+	$MixedAnimations.play("stopped")
 
+func snowegg_hit() -> void:
+	$PlayerSprite.texture = ninja_snow_texture
+	$MixedAnimations.play("snowcloak")
+	$SnowTimer.start(2.5)
 
-## Bounces on Potato Bomb using [_jump_speed()].
-## [br] Used in [potato_bomb_left_facing.gd].
-func bounce_on_potato_bomb_left_facing():
-	velocity.x = _jump_speed() * 1.5
-
-
-## Bounces on Potato Bomb using [_jump_speed()].
-## [br] Used in [potato_bomb_right_facing.gd].
-func bounce_on_potato_bomb_right_facing():
-	velocity.x = _jump_speed() * -1.5
-
+## Bounces on Spring using [_jump_speed()].
+## [br] Used in [spring.gd].
+func bounce_on_spring(direction: String) -> void:
+	match direction:
+		"up":
+			velocity.y = _jump_speed() * 1.5
+		"down":
+			velocity.y = _jump_speed() * -1.5
+		"left":
+			velocity.x = _jump_speed() * 1.5
+		"right":
+			velocity.x = _jump_speed() * -1.5
 
 ## Places player out of bounds to end level.
 ## [br] Used in [spike.gd].
 func enter_spike():
-	velocity.y = 0
+	GlobalScene.movement_enabled = false
+	reset_momentum()
+	$MixedAnimations.play("smokebomb")
+	$DeathSmokePlayer.play()
+	while $MixedAnimations.frame < 3:
+		await $MixedAnimations.frame_changed
+	$PlayerSprite.visible = false
+	await $MixedAnimations.animation_finished
 	position.y = 10000
+	$PlayerSprite.visible = true
+
+func start_smoke():
+	var smoke = SMOKE_BOMB.instantiate()
+	get_tree().current_scene.add_child(smoke)
+	smoke.global_position = global_position 
+	smoke.position.y += 28
+	$SmokePlayer.play()
+	await smoke.get_node('SmokeBombAnimated').animation_finished
+	smoke.queue_free()

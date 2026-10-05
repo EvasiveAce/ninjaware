@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://bgv0a8131v18h"]
+
+[ext_resource type="Script" uid="uid://cxcitkc33ta71" path="res://entities/stages/potatomous_stage/tile_obstacles/spring/scripts/spring.gd" id="1_bic35"]
+[ext_resource type="Texture2D" uid="uid://b37f0u58vblqu" path="res://entities/stages/potatomous_stage/tile_obstacles/spring/art/spring_sheet.png" id="2_cpj4x"]
+[ext_resource type="AudioStream" uid="uid://b4cijsl3fm214" path="res://entities/stages/potatomous_stage/tile_obstacles/spring/audio/spring.wav" id="3_tbunl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1kya"]
+atlas = ExtResource("2_cpj4x")
+region = Rect2(22, 0, 22, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6sc5"]
+atlas = ExtResource("2_cpj4x")
+region = Rect2(44, 0, 22, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqfit"]
+atlas = ExtResource("2_cpj4x")
+region = Rect2(66, 0, 22, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxdjd"]
+atlas = ExtResource("2_cpj4x")
+region = Rect2(0, 0, 22, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5i5e5"]
+animations = [{
+"frames": [{
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_m1kya")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_k6sc5")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_nqfit")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gxdjd")
+}],
+"loop": 0,
+"name": &"bounce",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gxdjd")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fqvp"]
+size = Vector2(22, 6)
+
+[node name="Spring" type="Node2D" unique_id=1785533398]
+rotation = -1.5707964
+script = ExtResource("1_bic35")
+
+[node name="SpringSprite" type="AnimatedSprite2D" parent="." unique_id=1513213503]
+texture_filter = 1
+position = Vector2(6.999998, 7.000001)
+rotation = 3.1415927
+sprite_frames = SubResource("SpriteFrames_5i5e5")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1335589170]
+position = Vector2(6.999998, 1.000001)
+rotation = 3.1415927
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2063795331]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_7fqvp")
+
+[node name="Spring" type="AudioStreamPlayer" parent="." unique_id=2132187348]
+stream = ExtResource("3_tbunl")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered" binds= ["right"]]

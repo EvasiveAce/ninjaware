@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bq0kdal6cp4xc"]
+
+[ext_resource type="Script" uid="uid://bre5nh6h1vsvy" path="res://entities/stages/dummy_stage/tile_obstacles/dummy/scripts/dummy.gd" id="1_fti1q"]
+[ext_resource type="Texture2D" uid="uid://b67sbjlc1aso4" path="res://entities/stages/dummy_stage/art/dummy.png" id="2_cs3jn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_waejo"]
+radius = 14.758472
+
+[node name="Dummy" type="Node2D" unique_id=2102229028]
+script = ExtResource("1_fti1q")
+
+[node name="DummySprite" type="Sprite2D" parent="." unique_id=1659547368]
+texture_filter = 1
+position = Vector2(6, 6)
+texture = ExtResource("2_cs3jn")
+hframes = 2
+
+[node name="DummyArea2D" type="Area2D" parent="DummySprite" unique_id=20486748]
+
+[node name="DummyCollisionShape2D" type="CollisionShape2D" parent="DummySprite/DummyArea2D" unique_id=1989965838]
+position = Vector2(1.75, 0)
+shape = SubResource("CircleShape2D_waejo")
+disabled = true
+
+[connection signal="body_entered" from="DummySprite/DummyArea2D" to="." method="_on_dummy_area_2d_body_entered"]

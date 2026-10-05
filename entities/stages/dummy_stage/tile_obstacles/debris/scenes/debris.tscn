@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cbieab1sjo32w"]
+
+[ext_resource type="Texture2D" uid="uid://dn71duvj1j68s" path="res://entities/stages/dummy_stage/tile_obstacles/debris/art/debris_sheet.png" id="1_r5puq"]
+
+[node name="Debris" type="Node2D" unique_id=976939367]
+texture_filter = 1
+
+[node name="DebrisSprite" type="Sprite2D" parent="." unique_id=86941777]
+texture = ExtResource("1_r5puq")

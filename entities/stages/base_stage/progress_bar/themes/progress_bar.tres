@@ -1,13 +1,13 @@
 [gd_resource type="Theme" format=3 uid="uid://tufc51t2fgr3"]
 
-[ext_resource type="Texture2D" uid="uid://ss0wmycgwuq0" path="res://entities/stages/base_stage/progress_bar/art/candy_cane_progress_bar.png" id="1_gyr6b"]
+[ext_resource type="Texture2D" uid="uid://cmd7dr643mbvx" path="res://entities/stages/base_stage/progress_bar/art/brick_progress_bar.png" id="1_rwvha"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbu2g"]
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w1jwd"]
-texture = ExtResource("1_gyr6b")
-axis_stretch_horizontal = 1
+texture = ExtResource("1_rwvha")
+axis_stretch_horizontal = 2
 
 [resource]
 ProgressBar/styles/background = SubResource("StyleBoxFlat_lbu2g")
