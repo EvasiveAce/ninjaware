@@ -49,26 +49,23 @@ var player_speed_default : float
 #endregion
 
 #region -- Transition Setup --
-## The transition scene animation tree.
-## [br] Used for the [animation_finished] signal.
-@onready var anim_tree : AnimationTree = $TransitionUI/AnimationTree
+## The shared TransitionUI (lives outside the stage, in the GameScaler's CanvasLayer).
+@onready var transition_ui: Node = get_parent().get_parent().get_node("CanvasLayer").get_node("TransitionUI")
 
-## State machine for the animation tree playback.
-## [br] Used for most animations. 
+## The transition scene animation tree.
+@onready var anim_tree : AnimationTree = transition_ui.get_node("AnimationTree")
+
 var state_machine : AnimationNodeStateMachinePlayback
 
-## Player HP Container for losing/adding health.
-@onready var player_hp_container = $TransitionUI/TransitionSprite/PlayerHPContainer
+@onready var player_hp_container = transition_ui.get_node("TransitionSprite/PlayerHPContainer")
+@onready var enemy_hp_container = transition_ui.get_node("TransitionSprite/EnemyHPContainer")
 
-## Enemy HP Container for losing/adding health.
-@onready var enemy_hp_container = $TransitionUI/TransitionSprite/EnemyHPContainer
-
-## Enemy Name for Transition UI
 var current_enemy : String
 #endregion
 
 func _ready() -> void:
 	state_machine = anim_tree.get("parameters/playback")
+	transition_ui.setup_enemy(current_enemy)
 	anim_tree.active = true
 	level_speed = level_speeds[0]
 	level_speed_default = level_speed
@@ -149,7 +146,7 @@ func _health_set_up(revival : bool):
 	for hp in player_hp:
 		await get_tree().create_timer(0.1).timeout
 		player_hp_container.add_child(player_hp_entity.instantiate())
-		$TransitionUI/LivesAdded.play()
+		transition_ui.get_node("LivesAdded").play()
 
 	var enemy_hp_difference = enemy_hp_container.get_child_count()
 	if !revival:
@@ -160,7 +157,7 @@ func _health_set_up(revival : bool):
 	for hp in (enemy_hp - enemy_hp_difference):
 		await get_tree().create_timer(0.1).timeout
 		enemy_hp_container.add_child(enemy_hp_entity.instantiate())
-		$TransitionUI/LivesEnemyAdded.play()
+		transition_ui.get_node("LivesEnemyAdded").play()
 
 
 	player.global_position = _find_start_point()

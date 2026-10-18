@@ -4,4 +4,6 @@
 
 [node name="NinjaHealthPoint" type="TextureRect" unique_id=872172480]
 texture_filter = 1
+offset_right = 20.0
+offset_bottom = 15.0
 texture = ExtResource("1_kwx36")

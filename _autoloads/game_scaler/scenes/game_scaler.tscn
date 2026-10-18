@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://b6kabjyp4uy1a"]
+
+[ext_resource type="PackedScene" uid="uid://bhknwy2pm2iro" path="res://entities/stages/potatomous_stage/scenes/potatomous_stage.tscn" id="1_sy2w3"]
+[ext_resource type="PackedScene" uid="uid://cxhirmhnvqi3c" path="res://ui/transition_ui/scenes/transition_ui.tscn" id="2_l1qx3"]
+
+[node name="GameScaler" type="SubViewportContainer" unique_id=523757208]
+texture_filter = 1
+custom_minimum_size = Vector2(480, 270)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1503467513]
+
+[node name="TransitionUI" parent="CanvasLayer" unique_id=1578950508 instance=ExtResource("2_l1qx3")]
+position = Vector2(240, 135)
+scale = Vector2(0.25, 0.25)
+
+[node name="GameViewport" type="SubViewport" parent="." unique_id=846602578]
+handle_input_locally = false
+size = Vector2i(480, 270)
+render_target_update_mode = 4
+
+[node name="PotatomousStage" parent="GameViewport" unique_id=2035529796 instance=ExtResource("1_sy2w3")]

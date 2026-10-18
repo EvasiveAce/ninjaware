@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfui2i8qtxeki"
-path="res://.godot/imported/potatomous_stage.png-97602c8ee62dc5bad299ac6cdc97b032.ctex"
+uid="uid://dcb5kt8kl8vwq"
+path="res://.godot/imported/potatomous_stage.png-0da4cd6bbb142bcd5ff4d56c371549f0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/stages/base_stage/art/potatomous_stage.png"
-dest_files=["res://.godot/imported/potatomous_stage.png-97602c8ee62dc5bad299ac6cdc97b032.ctex"]
+source_file="res://entities/stages/potatomous_stage/art/potatomous_stage.png"
+dest_files=["res://.godot/imported/potatomous_stage.png-0da4cd6bbb142bcd5ff4d56c371549f0.ctex"]
 
 [params]
 

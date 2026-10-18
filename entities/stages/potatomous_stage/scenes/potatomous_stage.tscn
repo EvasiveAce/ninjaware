@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c321ng1ti8w6q" path="res://entities/stages/potatomous_stage/scripts/potatomous_stage.gd" id="1_f5yus"]
 [ext_resource type="PackedScene" uid="uid://wsvdb4844wue" path="res://ui/transition_ui/health_points/ninja_health_point/scenes/ninja_health_point.tscn" id="2_vq27i"]
 [ext_resource type="PackedScene" uid="uid://dw4v8e4w3xev1" path="res://ui/transition_ui/health_points/potatomous_health_point/scenes/potatomous_health_point.tscn" id="3_x6nem"]
-[ext_resource type="Texture2D" uid="uid://bfui2i8qtxeki" path="res://entities/stages/base_stage/art/potatomous_stage.png" id="4_d1lwp"]
+[ext_resource type="Texture2D" uid="uid://dcb5kt8kl8vwq" path="res://entities/stages/potatomous_stage/art/potatomous_stage.png" id="4_d1lwp"]
 [ext_resource type="TileSet" uid="uid://iprq06yhedhc" path="res://entities/stages/base_stage/tile_maps/resources/ninja_ware_tile.tres" id="6_e76ca"]
 [ext_resource type="PackedScene" uid="uid://m7u5e3x6nme8" path="res://entities/ninja/scenes/player.tscn" id="7_62one"]
 [ext_resource type="PackedScene" uid="uid://civncv3kid6na" path="res://entities/stages/potatomous_stage/levels/level_1.tscn" id="9_wibnn"]
@@ -21,7 +21,6 @@
 [ext_resource type="Theme" uid="uid://tufc51t2fgr3" path="res://entities/stages/base_stage/progress_bar/themes/progress_bar.tres" id="21_0r1ep"]
 [ext_resource type="PackedScene" uid="uid://cc1cwsjxc3058" path="res://entities/stages/base_stage/progress_bar/scenes/bomb_timer.tscn" id="21_nkasq"]
 [ext_resource type="Texture2D" uid="uid://dr86ma3dvq415" path="res://entities/stages/potatomous_stage/art/level_border.png" id="22_d1lwp"]
-[ext_resource type="PackedScene" uid="uid://cxhirmhnvqi3c" path="res://ui/transition_ui/scenes/transition_ui.tscn" id="23_fb6le"]
 [ext_resource type="AudioStream" uid="uid://dji8gh03rwfg4" path="res://entities/stages/dummy_stage/audio/Boss (Sketch Demo).wav" id="24_d1lwp"]
 
 [node name="PotatomousStage" type="Node2D" unique_id=2035529796 groups=["Stage"]]
@@ -29,15 +28,14 @@ texture_filter = 1
 script = ExtResource("1_f5yus")
 player_hp_entity = ExtResource("2_vq27i")
 enemy_hp_entity = ExtResource("3_x6nem")
-level_speeds = Array[float]([14.0, 13.5, 13.0])
+level_speeds = Array[float]([1000.0, 13.5, 13.0])
 
 [node name="Background" type="Node2D" parent="." unique_id=454119908]
+position = Vector2(240, 135)
 
 [node name="Sewer" type="Sprite2D" parent="Background" unique_id=173630196]
 z_index = -1
 texture_filter = 1
-position = Vector2(960, 540)
-scale = Vector2(4, 4)
 texture = ExtResource("4_d1lwp")
 
 [node name="Timer" type="Timer" parent="." unique_id=1119057029]
@@ -45,11 +43,9 @@ one_shot = true
 
 [node name="Player" parent="." unique_id=1783784812 groups=["Player"] instance=ExtResource("7_62one")]
 position = Vector2(88, 764)
-scale = Vector2(4, 4)
 
 [node name="Stages" type="Node2D" parent="." unique_id=1229882531]
-position = Vector2(0, -8)
-scale = Vector2(4, 4)
+position = Vector2(0, -2)
 
 [node name="BaseLayer" type="TileMapLayer" parent="Stages" unique_id=998408035]
 texture_filter = 1
@@ -57,6 +53,7 @@ tile_map_data = PackedByteArray("AAD///r/CAAIAAQAAAD//xIACAAGAAIAAAAAAPv/CAAIAAE
 tile_set = ExtResource("6_e76ca")
 
 [node name="Level1" parent="Stages" unique_id=1628712841 instance=ExtResource("9_wibnn")]
+enabled = true
 
 [node name="Level2" parent="Stages" unique_id=2142167065 instance=ExtResource("10_srsfr")]
 
@@ -96,18 +93,14 @@ show_percentage = false
 
 [node name="BorderSprite" type="Sprite2D" parent="." unique_id=2138581003]
 texture_filter = 1
-position = Vector2(960, 540)
+position = Vector2(240, 135)
 texture = ExtResource("22_d1lwp")
 
 [node name="BombTimer" parent="." unique_id=1255960443 instance=ExtResource("21_nkasq")]
-offset_left = 108.0
-offset_top = 1066.0
-offset_right = 108.0
-offset_bottom = 1066.0
-scale = Vector2(4, 4)
-
-[node name="TransitionUI" parent="." unique_id=1390571896 instance=ExtResource("23_fb6le")]
-position = Vector2(960, 540)
+offset_left = 27.0
+offset_top = 266.0
+offset_right = 27.0
+offset_bottom = 266.0
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=29505471]
 stream = ExtResource("24_d1lwp")
