@@ -1,11 +1,11 @@
 [gd_scene format=4 uid="uid://c6ahriwt65j3v"]
 
 [ext_resource type="Script" uid="uid://x7n86vpq3thr" path="res://entities/stages/dummy_stage/scripts/dummy_stage.gd" id="1_oahpv"]
-[ext_resource type="Texture2D" uid="uid://kll6eu4dqu2" path="res://entities/stages/base_stage/art/snow_world_sky.png" id="2_585lx"]
+[ext_resource type="Texture2D" uid="uid://kll6eu4dqu2" path="res://entities/stages/dummy_stage/art/snow_world_sky.png" id="2_585lx"]
 [ext_resource type="PackedScene" uid="uid://wsvdb4844wue" path="res://ui/transition_ui/health_points/ninja_health_point/scenes/ninja_health_point.tscn" id="2_j6e4s"]
-[ext_resource type="Texture2D" uid="uid://c7bagfx6uqf4j" path="res://entities/stages/base_stage/art/snow_world_mountain.png" id="3_3cefq"]
+[ext_resource type="Texture2D" uid="uid://c7bagfx6uqf4j" path="res://entities/stages/dummy_stage/art/snow_world_mountain.png" id="3_3cefq"]
 [ext_resource type="PackedScene" uid="uid://c5r8q43l8n4wv" path="res://ui/transition_ui/health_points/dummy_health_point/scenes/dummy_health_point.tscn" id="3_j6e4s"]
-[ext_resource type="Texture2D" uid="uid://dp2nkj2u14jm3" path="res://entities/stages/base_stage/art/snow_world_tree.png" id="4_xkma6"]
+[ext_resource type="Texture2D" uid="uid://dp2nkj2u14jm3" path="res://entities/stages/dummy_stage/art/snow_world_tree.png" id="4_xkma6"]
 [ext_resource type="PackedScene" uid="uid://m7u5e3x6nme8" path="res://entities/ninja/scenes/player.tscn" id="5_j3x85"]
 [ext_resource type="PackedScene" uid="uid://byl54ccipdep8" path="res://entities/stages/dummy_stage/levels/level_1.tscn" id="7_7njk7"]
 [ext_resource type="PackedScene" uid="uid://dsq6mo513rph1" path="res://entities/stages/dummy_stage/levels/level_2.tscn" id="8_hwg0x"]
@@ -21,8 +21,8 @@
 [ext_resource type="PackedScene" uid="uid://c1475k8qier30" path="res://entities/stages/dummy_stage/levels/level_11.tscn" id="17_ylwt8"]
 [ext_resource type="PackedScene" uid="uid://cwkrlcnnlj43k" path="res://entities/stages/dummy_stage/levels/level_12.tscn" id="18_qnmv4"]
 [ext_resource type="Theme" uid="uid://tufc51t2fgr3" path="res://entities/stages/base_stage/progress_bar/themes/progress_bar.tres" id="19_2fs12"]
-[ext_resource type="PackedScene" uid="uid://cxhirmhnvqi3c" path="res://ui/transition_ui/scenes/transition_ui.tscn" id="20_v5h82"]
-[ext_resource type="Texture2D" uid="uid://05yn0aaq5m5x" path="res://entities/stages/base_stage/art/level_border.png" id="22_8sqik"]
+[ext_resource type="Texture2D" uid="uid://05yn0aaq5m5x" path="res://entities/stages/dummy_stage/art/level_border.png" id="22_8sqik"]
+[ext_resource type="PackedScene" uid="uid://cc1cwsjxc3058" path="res://entities/stages/base_stage/progress_bar/scenes/bomb_timer.tscn" id="23_trqsd"]
 [ext_resource type="AudioStream" uid="uid://dji8gh03rwfg4" path="res://entities/stages/dummy_stage/audio/Boss (Sketch Demo).wav" id="24_trqsd"]
 
 [node name="DummyStage" type="Node2D" unique_id=464841658 groups=["Stage"]]
@@ -32,26 +32,23 @@ enemy_hp_entity = ExtResource("3_j6e4s")
 level_speeds = Array[float]([14.0, 13.0, 12.5])
 
 [node name="Background" type="Node2D" parent="." unique_id=2102795158]
+position = Vector2(240, 135)
 
 [node name="NightSky" type="Sprite2D" parent="Background" unique_id=1844342670]
 z_index = -1
 texture_filter = 1
-position = Vector2(960, 416)
-scale = Vector2(4, 4)
+position = Vector2(0, -38)
 texture = ExtResource("2_585lx")
 
 [node name="Mountains" type="Sprite2D" parent="Background" unique_id=620352281]
 z_index = -1
 texture_filter = 1
-position = Vector2(960, 488)
-scale = Vector2(4, 4)
 texture = ExtResource("3_3cefq")
 
 [node name="Trees" type="Sprite2D" parent="Background" unique_id=1959895463]
 z_index = -1
 texture_filter = 1
-position = Vector2(960, 540)
-scale = Vector2(4, 4)
+position = Vector2(0, 32)
 texture = ExtResource("4_xkma6")
 
 [node name="Timer" type="Timer" parent="." unique_id=1053396947]
@@ -59,11 +56,9 @@ one_shot = true
 
 [node name="Player" parent="." unique_id=324587529 groups=["Player"] instance=ExtResource("5_j3x85")]
 position = Vector2(88, 316)
-scale = Vector2(4, 4)
 
 [node name="Stages" type="Node2D" parent="." unique_id=26047337]
-position = Vector2(0, -8)
-scale = Vector2(4, 4)
+position = Vector2(0, -2)
 
 [node name="BaseLayer" type="TileMapLayer" parent="Stages" unique_id=1054748281]
 texture_filter = 1
@@ -94,25 +89,29 @@ tile_set = ExtResource("8_trqsd")
 
 [node name="Level12" parent="Stages" unique_id=1923268689 instance=ExtResource("18_qnmv4")]
 
-[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1286421386]
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=661221101]
+visible = false
 texture_filter = 1
 offset_left = 26.0
-offset_top = 982.0
+offset_top = 980.0
 offset_right = 1894.0
-offset_bottom = 1054.0
+offset_bottom = 1052.0
 size_flags_vertical = 8
 theme = ExtResource("19_2fs12")
 show_percentage = false
 
-[node name="Timer" type="Timer" parent="ProgressBar" unique_id=682700893]
+[node name="Timer" type="Timer" parent="ProgressBar" unique_id=1780207577]
 
 [node name="BorderSprite" type="Sprite2D" parent="." unique_id=244172866]
 texture_filter = 1
 texture = ExtResource("22_8sqik")
 centered = false
 
-[node name="TransitionUI" parent="." unique_id=1578950508 instance=ExtResource("20_v5h82")]
-position = Vector2(960, 540)
+[node name="BombTimer" parent="." unique_id=1255960443 instance=ExtResource("23_trqsd")]
+offset_left = 27.0
+offset_top = 266.0
+offset_right = 27.0
+offset_bottom = 266.0
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=239846213]
 stream = ExtResource("24_trqsd")

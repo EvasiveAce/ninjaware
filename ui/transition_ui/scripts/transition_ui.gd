@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 #region -- Setup --
 ## Array to keep laughing markers.
@@ -16,24 +16,24 @@ var enemy_sprite : AnimatedSprite2D
 #endregion
 
 #region -- Node Setup --
-@onready var player_hp_container = $TransitionSprite/PlayerHPContainer
-@onready var enemy_hp_container = $TransitionSprite/EnemyHPContainer
+@onready var player_hp_container = $ScreenUI/PlayerHPContainer
+@onready var enemy_hp_container = $ScreenUI/EnemyHPContainer
 #endregion
 
 func setup_enemy(enemy_name: String) -> void:
 	enemy_to_use = enemy_name
 
 	# Hide whichever enemy the previous stage showed
-	for s in $TransitionSprite/EnemyContainer.get_children():
+	for s in $ScreenUI/EnemyContainer.get_children():
 		s.visible = false
 
 	match enemy_to_use:
 		"Dummy":
-			enemy_sprite = $TransitionSprite/EnemyContainer/DummyAnimatedSprite
+			enemy_sprite = $ScreenUI/EnemyContainer/DummyAnimatedSprite
 		"Potatomous":
-			enemy_sprite = $TransitionSprite/EnemyContainer/PotatomousAnimatedSprite
+			enemy_sprite = $ScreenUI/EnemyContainer/PotatomousAnimatedSprite
 		"Southerland":
-			enemy_sprite = $TransitionSprite/EnemyContainer/SoutherlandAnimatedSprite
+			enemy_sprite = $ScreenUI/EnemyContainer/SoutherlandAnimatedSprite
 
 	enemy_sprite.visible = true
 	markers_array = enemy_sprite.get_children()

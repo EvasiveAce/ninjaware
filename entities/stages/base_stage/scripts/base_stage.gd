@@ -36,6 +36,7 @@ static var array_of_levels : Array[Node]
 @onready var fuse = $BombTimer/Fuse
 @onready var fire = $BombTimer/Fire
 var fuse_max_width: float
+signal stage_cleared
 
 @export_group("Level Setup")
 ## The level timer in seconds.
@@ -57,8 +58,8 @@ var player_speed_default : float
 
 var state_machine : AnimationNodeStateMachinePlayback
 
-@onready var player_hp_container = transition_ui.get_node("TransitionSprite/PlayerHPContainer")
-@onready var enemy_hp_container = transition_ui.get_node("TransitionSprite/EnemyHPContainer")
+@onready var player_hp_container = transition_ui.get_node("ScreenUI/PlayerHPContainer")
+@onready var enemy_hp_container = transition_ui.get_node("ScreenUI/EnemyHPContainer")
 
 var current_enemy : String
 #endregion
@@ -227,7 +228,7 @@ func _find_start_point() -> Vector2:
 		array_of_levels[current_level].map_to_local(used_cells[0])
 	)
 
-	world_position.y -= 28
+	world_position.y -= 7
 
 	return world_position
 
@@ -386,9 +387,8 @@ func _on_enemy_enter() -> void:
 	if enemy_hp_container.get_child_count() == 1:
 		await _transition_out()
 		await _enemy_kill()
-		##await _revive_animation()
-		## Just to stop breaking between stages
-		await _health_set_up(true)
+		stage_cleared.emit()
+		return
 	else:
 		await _transition_out()
 		await _enemy_hit()

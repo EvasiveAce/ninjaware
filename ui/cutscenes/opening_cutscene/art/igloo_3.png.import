@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kll6eu4dqu2"
-path="res://.godot/imported/snow_world_sky.png-5c8e181dc8181b51350b338218f7108b.ctex"
+uid="uid://dqo8uvc3iwe5q"
+path="res://.godot/imported/igloo_3.png-409e6fea6e36645ba37380c75fdf81f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/stages/base_stage/art/snow_world_sky.png"
-dest_files=["res://.godot/imported/snow_world_sky.png-5c8e181dc8181b51350b338218f7108b.ctex"]
+source_file="res://ui/cutscenes/opening_cutscene/art/igloo_3.png"
+dest_files=["res://.godot/imported/igloo_3.png-409e6fea6e36645ba37380c75fdf81f1.ctex"]
 
 [params]
 

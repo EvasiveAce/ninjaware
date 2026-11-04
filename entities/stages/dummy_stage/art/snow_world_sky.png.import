@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7bagfx6uqf4j"
-path="res://.godot/imported/snow_world_mountain.png-77fa109f092c2bbf177a5ace19108b83.ctex"
+uid="uid://kll6eu4dqu2"
+path="res://.godot/imported/snow_world_sky.png-d8b7381815c4588781a5295fd4671232.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/stages/base_stage/art/snow_world_mountain.png"
-dest_files=["res://.godot/imported/snow_world_mountain.png-77fa109f092c2bbf177a5ace19108b83.ctex"]
+source_file="res://entities/stages/dummy_stage/art/snow_world_sky.png"
+dest_files=["res://.godot/imported/snow_world_sky.png-d8b7381815c4588781a5295fd4671232.ctex"]
 
 [params]
 

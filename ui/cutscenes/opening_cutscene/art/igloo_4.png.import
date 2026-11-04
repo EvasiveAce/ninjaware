@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgogltydvjxsm"
-path="res://.godot/imported/arcade_dummy.png-0acdbaf9c5291137e144f4c51f568012.ctex"
+uid="uid://b5nvrqrmguu3v"
+path="res://.godot/imported/igloo_4.png-4f364a61f41325490e62cd244577f25f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/stages/dummy_stage/art/arcade_dummy.png"
-dest_files=["res://.godot/imported/arcade_dummy.png-0acdbaf9c5291137e144f4c51f568012.ctex"]
+source_file="res://ui/cutscenes/opening_cutscene/art/igloo_4.png"
+dest_files=["res://.godot/imported/igloo_4.png-4f364a61f41325490e62cd244577f25f.ctex"]
 
 [params]
 

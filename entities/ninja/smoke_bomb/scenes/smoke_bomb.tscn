@@ -42,7 +42,6 @@ animations = [{
 }]
 
 [node name="SmokeBomb" type="Node2D" unique_id=1436265249]
-scale = Vector2(4, 4)
 
 [node name="SmokeBombAnimated" type="AnimatedSprite2D" parent="." unique_id=951292258]
 texture_filter = 1
