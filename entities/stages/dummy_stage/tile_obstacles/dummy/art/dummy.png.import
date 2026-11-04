@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b67sbjlc1aso4"
-path="res://.godot/imported/dummy.png-448b4f92108f0ab38ad31ee775e773e2.ctex"
+path="res://.godot/imported/dummy.png-a5eb087aa13e523e3575e4622cbef4e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/stages/dummy_stage/art/dummy.png"
-dest_files=["res://.godot/imported/dummy.png-448b4f92108f0ab38ad31ee775e773e2.ctex"]
+source_file="res://entities/stages/dummy_stage/tile_obstacles/dummy/art/dummy.png"
+dest_files=["res://.godot/imported/dummy.png-a5eb087aa13e523e3575e4622cbef4e7.ctex"]
 
 [params]
 

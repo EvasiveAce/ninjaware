@@ -10,12 +10,35 @@
 [ext_resource type="Texture2D" uid="uid://guj2i1a6edod" path="res://entities/stages/southerland_stage/southerland/art/arcade_southerland_sheet.png" id="6_m1cc1"]
 [ext_resource type="Shader" uid="uid://rjy4xp4r2u4h" path="res://ui/crt_filter/crt.gdshader" id="8_cbsv2"]
 [ext_resource type="LabelSettings" uid="uid://ep7go2kb7utp" path="res://ui/text_ui/resources/number_settings_number.tres" id="8_y2f0o"]
+[ext_resource type="FontFile" uid="uid://svp7pjc3hh05" path="res://ui/text_ui/fonts/PressStart2P-Regular.ttf" id="9_m1cc1"]
 [ext_resource type="AnimationLibrary" uid="uid://bp8d3cegfoocl" path="res://entities/stages/base_stage/animations/ArcadeLibrary.res" id="11_y2f0o"]
 [ext_resource type="AudioStream" uid="uid://hkaxu2tha43e" path="res://ui/transition_ui/audio/coin_inserted.wav" id="14_xojix"]
 [ext_resource type="AudioStream" uid="uid://bsffdgrgkmr6k" path="res://ui/transition_ui/audio/back_level.wav" id="17_m1cc1"]
 [ext_resource type="Texture2D" uid="uid://75es56r2om70" path="res://ui/transition_ui/art/arcade_screen_overlay.png" id="20_jwvd4"]
 [ext_resource type="AudioStream" uid="uid://dervq7k4dm652" path="res://ui/transition_ui/health_points/ninja_health_point/audio/player_health_point_added.wav" id="21_0nyji"]
 [ext_resource type="AudioStream" uid="uid://410jvja0wygg" path="res://ui/transition_ui/health_points/audio/enemy_health_point_added.wav" id="22_qjwl3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_36hpg"]
+shader = ExtResource("8_cbsv2")
+shader_parameter/panel_size = Vector2(256, 240)
+shader_parameter/enable_grain = true
+shader_parameter/enable_curving = false
+shader_parameter/enable_scanlines = true
+shader_parameter/enable_chromatic_aberration = false
+shader_parameter/enable_rgb_grid = false
+shader_parameter/enable_vhs_wiggle = false
+shader_parameter/enable_vignette = true
+shader_parameter/brightness_multiplier = 1.1499999966472
+shader_parameter/grain_strength = 0.02999999932944
+shader_parameter/curve_power = 1.02
+shader_parameter/vignette_size = 0.60000000894072
+shader_parameter/vignette_smoothness = 0.4
+shader_parameter/vignette_strength = 0.3999999910592
+shader_parameter/scanlines_interval = 2.0
+shader_parameter/scanline_opacity = 0.10000000149012
+shader_parameter/scanline_thickness = 1.0
+shader_parameter/chromatic_aberration_strength = 0.0
+shader_parameter/wiggle = 0.002
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r641t"]
 atlas = ExtResource("4_ei7vy")
@@ -325,9 +348,7 @@ animations = [{
 }]
 
 [sub_resource type="LabelSettings" id="LabelSettings_t8q51"]
-font = ExtResource("6_kf633")
-font_size = 72
-outline_size = 16
+font = ExtResource("9_m1cc1")
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_k5ous"]
@@ -336,38 +357,17 @@ font_size = 48
 outline_size = 16
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_owkr7"]
-font = ExtResource("6_kf633")
-font_size = 48
-outline_size = 16
+[sub_resource type="LabelSettings" id="LabelSettings_m1cc1"]
+font = ExtResource("9_m1cc1")
+font_size = 8
 outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_36hpg"]
-shader = ExtResource("8_cbsv2")
-shader_parameter/enable_grain = false
-shader_parameter/enable_curving = true
-shader_parameter/enable_scanlines = true
-shader_parameter/enable_chromatic_aberration = false
-shader_parameter/enable_rgb_grid = false
-shader_parameter/enable_vhs_wiggle = false
-shader_parameter/enable_vignette = false
-shader_parameter/brightness_multiplier = 1.05
-shader_parameter/grain_strength = 0.25
-shader_parameter/curve_power = 1.05
-shader_parameter/vignette_size = 0.4
-shader_parameter/vignette_smoothness = 0.4
-shader_parameter/scanlines_interval = 4.0
-shader_parameter/scanline_opacity = 0.25
-shader_parameter/scanline_thickness = 2.0
-shader_parameter/chromatic_aberration_strength = 1.0
-shader_parameter/wiggle = 0.002
 
 [sub_resource type="Animation" id="Animation_m1cc1"]
 resource_name = "RESET"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TransitionSprite/InsertCoin:visible")
+tracks/0/path = NodePath("ScreenUI/InsertCoin:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -379,7 +379,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("TransitionSprite/SubtitleLabel:visible")
+tracks/1/path = NodePath("ScreenUI/SubtitleLabel:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -391,7 +391,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("TransitionSprite/GameOverLabel:visible")
+tracks/2/path = NodePath("ScreenUI/GameOverLabel:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -403,7 +403,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("TransitionSprite/DeathSprite:visible")
+tracks/3/path = NodePath("ScreenUI/DeathSprite:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -427,7 +427,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("TransitionSprite/PlayerSprite:visible")
+tracks/5/path = NodePath("ScreenUI/PlayerSprite:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -439,7 +439,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("TransitionSprite/EnemyContainer:visible")
+tracks/6/path = NodePath("ScreenUI/EnemyContainer:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -451,7 +451,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("TransitionSprite/GameOverLabel:visible")
+tracks/7/path = NodePath("ScreenUI/GameOverLabel:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -463,7 +463,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("TransitionSprite/DeathSprite:visible")
+tracks/8/path = NodePath("ScreenUI/DeathSprite:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -487,7 +487,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("TransitionSprite/PlayerSprite:visible")
+tracks/10/path = NodePath("ScreenUI/PlayerSprite:visible")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -499,7 +499,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("TransitionSprite/SubtitleLabel:visible")
+tracks/11/path = NodePath("ScreenUI/SubtitleLabel:visible")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -511,7 +511,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("TransitionSprite/InsertCoin:visible")
+tracks/12/path = NodePath("ScreenUI/InsertCoin:visible")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -523,7 +523,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("TransitionSprite/PlayerSprite:frame")
+tracks/13/path = NodePath("ScreenUI/PlayerSprite:frame")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -535,7 +535,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("TransitionSprite/TextLabel:text")
+tracks/14/path = NodePath("ScreenUI/TextLabel:text")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -547,7 +547,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("TransitionSprite/TextLabel:text")
+tracks/15/path = NodePath("ScreenUI/TextLabel:text")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -571,7 +571,7 @@ tracks/16/keys = {
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("TransitionSprite/TextLabel:visible")
+tracks/17/path = NodePath("ScreenUI/TextLabel:visible")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
@@ -844,76 +844,77 @@ states/TransitionOut/position = Vector2(629, 281)
 transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_7by0j"), "RESET", "BattleStart", SubResource("AnimationNodeStateMachineTransition_ejcqh"), "BattleStart", "BattleIntro", SubResource("AnimationNodeStateMachineTransition_xojix"), "BattleIntro", "BattleTransitionIn", SubResource("AnimationNodeStateMachineTransition_2yby2"), "BattleTransitionIn", "TransitionOut", SubResource("AnimationNodeStateMachineTransition_iv6ni"), "TransitionOut", "LevelWin", SubResource("AnimationNodeStateMachineTransition_m1cc1"), "LevelWin", "TransitionIn", SubResource("AnimationNodeStateMachineTransition_hyh4t"), "TransitionIn", "TransitionOut", SubResource("AnimationNodeStateMachineTransition_xhnos"), "TransitionOut", "EnemyHit", SubResource("AnimationNodeStateMachineTransition_kqtx2"), "EnemyHit", "EnemyHitTransitionIn", SubResource("AnimationNodeStateMachineTransition_lpbi4"), "EnemyHitTransitionIn", "TransitionOut", SubResource("AnimationNodeStateMachineTransition_hlafk"), "TransitionOut", "PlayerHit", SubResource("AnimationNodeStateMachineTransition_bbuhj"), "PlayerHit", "PlayerHitTransitionIn", SubResource("AnimationNodeStateMachineTransition_qqyko"), "PlayerHitTransitionIn", "TransitionOut", SubResource("AnimationNodeStateMachineTransition_oe7x8"), "TransitionOut", "EnemyDeath", SubResource("AnimationNodeStateMachineTransition_0ociy"), "TransitionOut", "GameOver", SubResource("AnimationNodeStateMachineTransition_7faum"), "GameOver", "InsertCoin", SubResource("AnimationNodeStateMachineTransition_rqf7g"), "InsertCoin", "PlayerRevive", SubResource("AnimationNodeStateMachineTransition_56p0v"), "PlayerRevive", "BattleRevive", SubResource("AnimationNodeStateMachineTransition_0xcd3"), "BattleRevive", "BattleTransitionIn", SubResource("AnimationNodeStateMachineTransition_r641t")]
 graph_offset = Vector2(-132, -202)
 
-[node name="TransitionUI" type="Node2D" unique_id=1578950508]
+[node name="TransitionUI" type="Control" unique_id=708941421]
 texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_48e50")
-metadata/_edit_vertical_guides_ = [0.0, 512.0, 256.0, -512.0, -256.0]
-metadata/_edit_horizontal_guides_ = [0.0, 480.0, 240.0, -480.0, 0.0, -480.0, -240.0]
+metadata/_edit_vertical_guides_ = [-512.0, -256.0, 240.0, 112.0, 176.0, 368.0, 305.0]
+metadata/_edit_horizontal_guides_ = [0.0, 480.0, 480.0, -480.0, 0.0, -480.0, -240.0, 135.0, 15.0, 75.0, 255.0, 255.0, 195.0]
 
 [node name="TransitionSprite" type="Sprite2D" parent="." unique_id=791156981]
 texture_filter = 1
 texture = ExtResource("2_l4eru")
 hframes = 7
 
-[node name="PlayerHPContainer" type="HBoxContainer" parent="TransitionSprite" unique_id=1823692520]
+[node name="ScreenUI" type="Control" parent="." unique_id=671493059]
+anchors_preset = 0
+offset_left = -128.0
+offset_top = -120.0
+offset_right = 128.0
+offset_bottom = 120.0
+pivot_offset = Vector2(128, 120)
+offset_transform_visual_only = false
+
+[node name="CRTPanel" type="ColorRect" parent="ScreenUI" unique_id=333636847]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_36hpg")
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -488.0
-offset_top = -464.0
-offset_right = -2288.0
-offset_bottom = -1529.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(8, 8)
-alignment = 2
 
-[node name="EnemyHPContainer" type="HBoxContainer" parent="TransitionSprite" unique_id=1963269928]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -488.0
-offset_top = 312.0
-offset_right = -2288.0
-offset_bottom = -749.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(8, 8)
-
-[node name="PlayerSprite" type="Sprite2D" parent="TransitionSprite" unique_id=1710962071]
+[node name="PlayerSprite" type="Sprite2D" parent="ScreenUI" unique_id=1710962071]
 visible = false
-position = Vector2(-340, -244)
-scale = Vector2(8, 8)
+position = Vector2(55, 60)
 texture = ExtResource("3_p5bwo")
-hframes = 15
+hframes = 13
 
-[node name="EnemyContainer" type="Node2D" parent="TransitionSprite" unique_id=1664036693]
+[node name="EnemyContainer" type="Node2D" parent="ScreenUI" unique_id=1664036693]
 visible = false
+position = Vector2(-131, -36)
 
-[node name="DummyAnimatedSprite" type="AnimatedSprite2D" parent="TransitionSprite/EnemyContainer" unique_id=1874405502]
+[node name="DummyAnimatedSprite" type="AnimatedSprite2D" parent="ScreenUI/EnemyContainer" unique_id=1874405502]
 visible = false
 position = Vector2(348, 208)
-scale = Vector2(8, 8)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_7faum")
-animation = &"hit"
+animation = &"idle"
 autoplay = "idle"
 
-[node name="Marker2D3" type="Marker2D" parent="TransitionSprite/EnemyContainer/DummyAnimatedSprite" unique_id=1124985770]
+[node name="Marker2D3" type="Marker2D" parent="ScreenUI/EnemyContainer/DummyAnimatedSprite" unique_id=1124985770]
 position = Vector2(-24.875, -2)
 scale = Vector2(0.125, 0.125)
 
-[node name="Marker2D2" type="Marker2D" parent="TransitionSprite/EnemyContainer/DummyAnimatedSprite" unique_id=226039752]
+[node name="Marker2D2" type="Marker2D" parent="ScreenUI/EnemyContainer/DummyAnimatedSprite" unique_id=226039752]
 position = Vector2(1.875, -4.75)
 scale = Vector2(0.125, 0.125)
 
-[node name="Marker2D" type="Marker2D" parent="TransitionSprite/EnemyContainer/DummyAnimatedSprite" unique_id=602575068]
+[node name="Marker2D" type="Marker2D" parent="ScreenUI/EnemyContainer/DummyAnimatedSprite" unique_id=602575068]
 position = Vector2(-13.875, 15.75)
 scale = Vector2(0.125, 0.125)
 
-[node name="PotatomousAnimatedSprite" type="AnimatedSprite2D" parent="TransitionSprite/EnemyContainer" unique_id=1333325082]
+[node name="PotatomousAnimatedSprite" type="AnimatedSprite2D" parent="ScreenUI/EnemyContainer" unique_id=1333325082]
 visible = false
-position = Vector2(256, 240)
-scale = Vector2(8, 8)
+position = Vector2(324, 216)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_uucgy")
 animation = &"hit"
 autoplay = "idle"
@@ -921,22 +922,22 @@ frame = 9
 frame_progress = 1.0
 flip_h = true
 
-[node name="Marker2D3" type="Marker2D" parent="TransitionSprite/EnemyContainer/PotatomousAnimatedSprite" unique_id=974361601]
+[node name="Marker2D3" type="Marker2D" parent="ScreenUI/EnemyContainer/PotatomousAnimatedSprite" unique_id=974361601]
 position = Vector2(-9.125, -8.75)
 scale = Vector2(0.125, 0.125)
 
-[node name="Marker2D2" type="Marker2D" parent="TransitionSprite/EnemyContainer/PotatomousAnimatedSprite" unique_id=1053543830]
+[node name="Marker2D2" type="Marker2D" parent="ScreenUI/EnemyContainer/PotatomousAnimatedSprite" unique_id=1053543830]
 position = Vector2(10.125, -5.75)
 scale = Vector2(0.125, 0.125)
 
-[node name="Marker2D" type="Marker2D" parent="TransitionSprite/EnemyContainer/PotatomousAnimatedSprite" unique_id=844457230]
+[node name="Marker2D" type="Marker2D" parent="ScreenUI/EnemyContainer/PotatomousAnimatedSprite" unique_id=844457230]
 position = Vector2(-10.125, 2.75)
 scale = Vector2(0.125, 0.125)
 
-[node name="SoutherlandAnimatedSprite" type="AnimatedSprite2D" parent="TransitionSprite/EnemyContainer" unique_id=1116013028]
+[node name="SoutherlandAnimatedSprite" type="AnimatedSprite2D" parent="ScreenUI/EnemyContainer" unique_id=1116013028]
 visible = false
-position = Vector2(252, 196)
-scale = Vector2(8, 8)
+position = Vector2(324, 201)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_q8nxu")
 animation = &"hit"
 autoplay = "idle"
@@ -944,80 +945,117 @@ frame = 8
 frame_progress = 1.0
 flip_h = true
 
-[node name="Marker2D3" type="Marker2D" parent="TransitionSprite/EnemyContainer/SoutherlandAnimatedSprite" unique_id=654755920]
+[node name="Marker2D3" type="Marker2D" parent="ScreenUI/EnemyContainer/SoutherlandAnimatedSprite" unique_id=654755920]
 position = Vector2(-11.5, -1.75)
 scale = Vector2(0.125, 0.125)
 
-[node name="Marker2D2" type="Marker2D" parent="TransitionSprite/EnemyContainer/SoutherlandAnimatedSprite" unique_id=630421649]
+[node name="Marker2D2" type="Marker2D" parent="ScreenUI/EnemyContainer/SoutherlandAnimatedSprite" unique_id=630421649]
 position = Vector2(13, -5.5)
 scale = Vector2(0.125, 0.125)
 
-[node name="Marker2D" type="Marker2D" parent="TransitionSprite/EnemyContainer/SoutherlandAnimatedSprite" unique_id=277319643]
+[node name="Marker2D" type="Marker2D" parent="ScreenUI/EnemyContainer/SoutherlandAnimatedSprite" unique_id=277319643]
 position = Vector2(2.75, 10.5)
 scale = Vector2(0.125, 0.125)
 
-[node name="DeathSprite" type="Sprite2D" parent="TransitionSprite" unique_id=931012890]
+[node name="DeathSprite" type="Sprite2D" parent="ScreenUI" unique_id=931012890]
 visible = false
-position = Vector2(256, 240)
-scale = Vector2(8, 8)
+position = Vector2(193, 180)
+scale = Vector2(2, 2)
 texture = ExtResource("5_h36x7")
 hframes = 2
 vframes = 2
 
-[node name="GameOverLabel" type="Label" parent="TransitionSprite" unique_id=922625832]
+[node name="PlayerHPContainer" type="HBoxContainer" parent="ScreenUI" unique_id=1823692520]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 30.0
+grow_horizontal = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(-4, 4)
+alignment = 2
+
+[node name="EnemyHPContainer" type="HBoxContainer" parent="ScreenUI" unique_id=1963269928]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(4, -4)
+
+[node name="GameOverLabel" type="Label" parent="ScreenUI" unique_id=922625832]
 visible = false
 texture_filter = 1
-offset_left = -391.0
-offset_top = -352.0
-offset_right = 394.0
-offset_bottom = -229.0
-text = "GAME OVER!!!"
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -24.0
+offset_right = 80.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "G"
 label_settings = SubResource("LabelSettings_t8q51")
 horizontal_alignment = 1
 
-[node name="TextLabel" type="Label" parent="TransitionSprite" unique_id=934789295]
-custom_minimum_size = Vector2(128, 96)
-offset_left = -217.0
-offset_top = -59.0
-offset_right = 237.0
-offset_bottom = 64.0
+[node name="TextLabel" type="Label" parent="ScreenUI" unique_id=934789295]
+custom_minimum_size = Vector2(114, 31)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -15.5
+offset_right = 57.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
 label_settings = ExtResource("8_y2f0o")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SubtitleLabel" type="Label" parent="TransitionSprite" unique_id=1052728450]
+[node name="SubtitleLabel" type="Label" parent="ScreenUI" unique_id=1052728450]
 visible = false
 texture_filter = 1
-offset_left = -242.0
-offset_top = 22.0
-offset_right = 254.0
-offset_bottom = 145.0
+layout_mode = 0
+offset_left = -354.0
+offset_top = 7.0
+offset_right = 142.0
+offset_bottom = 130.0
 theme_override_font_sizes/font_size = 16
+text = "test"
 label_settings = SubResource("LabelSettings_k5ous")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="InsertCoin" type="Label" parent="TransitionSprite" unique_id=153642850]
+[node name="InsertCoin" type="Label" parent="ScreenUI" unique_id=153642850]
 visible = false
 texture_filter = 1
-offset_left = -807.0
-offset_top = -187.0
-offset_right = 809.0
-offset_bottom = 188.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 25.0
+offset_right = 100.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "INSERT CREDIT TO CONTINUE"
-label_settings = SubResource("LabelSettings_owkr7")
+label_settings = SubResource("LabelSettings_m1cc1")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="CRTPanel" type="ColorRect" parent="TransitionSprite" unique_id=333636847]
-z_index = 1
-texture_filter = 1
-material = SubResource("ShaderMaterial_36hpg")
-offset_left = -512.0
-offset_top = -480.0
-offset_right = 512.0
-offset_bottom = 480.0
-metadata/_edit_use_anchors_ = true
 
 [node name="LaughTimer" type="Timer" parent="." unique_id=888262657]
 unique_name_in_owner = true

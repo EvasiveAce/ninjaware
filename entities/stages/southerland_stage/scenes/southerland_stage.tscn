@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c8hwusg4bwifb" path="res://ui/transition_ui/health_points/southerland_health_point/scenes/southerland_health_point.tscn" id="3_jke8l"]
 [ext_resource type="Texture2D" uid="uid://dvs3dvd8ljwmd" path="res://entities/stages/base_stage/art/stage_3.png" id="4_p6wi1"]
 [ext_resource type="PackedScene" uid="uid://m7u5e3x6nme8" path="res://entities/ninja/scenes/player.tscn" id="5_6umha"]
-[ext_resource type="TileSet" uid="uid://csgeol2lhjxop" path="res://entities/stages/base_stage/tile_maps/snow/resources/ice_tile_sheet.tres" id="6_6umha"]
+[ext_resource type="TileSet" path="res://entities/stages/base_stage/tile_maps/snow/resources/ice_tile_sheet.tres" id="6_6umha"]
 [ext_resource type="PackedScene" uid="uid://b3df3a540bfq8" path="res://entities/stages/southerland_stage/levels/level_1.tscn" id="7_63owq"]
 [ext_resource type="PackedScene" uid="uid://br08ql70hdiro" path="res://entities/stages/southerland_stage/levels/level_2.tscn" id="8_kyaou"]
 [ext_resource type="PackedScene" uid="uid://djyec62lvrmyf" path="res://entities/stages/southerland_stage/levels/level_3.tscn" id="9_8sic6"]
@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://bewffxfxsxkec" path="res://entities/stages/southerland_stage/levels/level_11.tscn" id="17_o20vb"]
 [ext_resource type="PackedScene" uid="uid://cnyrm540s6c36" path="res://entities/stages/southerland_stage/levels/level_12.tscn" id="18_vbwtd"]
 [ext_resource type="Theme" uid="uid://tufc51t2fgr3" path="res://entities/stages/base_stage/progress_bar/themes/progress_bar.tres" id="21_dcmy6"]
-[ext_resource type="Texture2D" uid="uid://05yn0aaq5m5x" path="res://entities/stages/base_stage/art/level_border.png" id="22_p6wi1"]
+[ext_resource type="Texture2D" uid="uid://05yn0aaq5m5x" path="res://entities/stages/dummy_stage/art/level_border.png" id="22_p6wi1"]
 [ext_resource type="PackedScene" uid="uid://cxhirmhnvqi3c" path="res://ui/transition_ui/scenes/transition_ui.tscn" id="23_0ut1u"]
 [ext_resource type="AudioStream" uid="uid://dji8gh03rwfg4" path="res://entities/stages/dummy_stage/audio/Boss (Sketch Demo).wav" id="24_pa4q5"]
 

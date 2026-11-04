@@ -353,20 +353,20 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_rg7kn"]
 states/Fall/node = SubResource("AnimationNodeAnimation_bw35f")
-states/Fall/position = Vector2(754, 126)
+states/Fall/position = Vector2(796, 151)
 states/Idle/node = SubResource("AnimationNodeAnimation_52sos")
-states/Idle/position = Vector2(363, 174)
+states/Idle/position = Vector2(127, 277)
 states/Jump/node = SubResource("AnimationNodeAnimation_xwb2w")
-states/Jump/position = Vector2(650, 195)
+states/Jump/position = Vector2(662, 311)
 states/Run/node = SubResource("AnimationNodeBlendTree_omv0o")
-states/Run/position = Vector2(311, 51)
+states/Run/position = Vector2(241, 61)
 states/Skid/node = SubResource("AnimationNodeBlendTree_ucmnm")
 states/Skid/position = Vector2(466, -61)
-states/Start/position = Vector2(202, 100)
+states/Start/position = Vector2(-15, 122)
 states/Walk/node = SubResource("AnimationNodeBlendTree_xwb2w")
-states/Walk/position = Vector2(650, 39)
+states/Walk/position = Vector2(790, -40)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_rg7kn"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_52sos"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_xwb2w"), "Walk", "Run", SubResource("AnimationNodeStateMachineTransition_omv0o"), "Run", "Walk", SubResource("AnimationNodeStateMachineTransition_bw35f"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_qo0kk"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_2hb64"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_qsune"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_vov0p"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_yq18l"), "Fall", "Walk", SubResource("AnimationNodeStateMachineTransition_n8jjm"), "Fall", "Run", SubResource("AnimationNodeStateMachineTransition_b4k72"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_nhcly"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_2gkp7"), "Walk", "Fall", SubResource("AnimationNodeStateMachineTransition_dsnr8"), "Run", "Fall", SubResource("AnimationNodeStateMachineTransition_brmje"), "Jump", "Walk", SubResource("AnimationNodeStateMachineTransition_ju8fe"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_miu1y"), "Run", "Skid", SubResource("AnimationNodeStateMachineTransition_qbvq2"), "Skid", "Run", SubResource("AnimationNodeStateMachineTransition_rk3dc"), "Skid", "Walk", SubResource("AnimationNodeStateMachineTransition_ucmnm"), "Walk", "Skid", SubResource("AnimationNodeStateMachineTransition_q0l0r")]
-graph_offset = Vector2(90, -95)
+graph_offset = Vector2(-169, -132)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mje1m"]
 atlas = ExtResource("4_ucmnm")
@@ -488,16 +488,18 @@ position = Vector2(1.5, 0)
 shape = SubResource("RectangleShape2D_rg7kn")
 
 [node name="CoyoteTimeTimer" type="Timer" parent="." unique_id=1890381463]
-wait_time = 0.15
+wait_time = 0.1
+one_shot = true
 
 [node name="JumpBufferTimer" type="Timer" parent="." unique_id=1553853824]
-wait_time = 0.25
+wait_time = 0.1
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=13433253]
 libraries/ = SubResource("AnimationLibrary_52sos")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1291530166]
+callback_mode_process = 0
 tree_root = SubResource("AnimationNodeStateMachine_rg7kn")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Run/TimeScale/scale = 8.0

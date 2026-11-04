@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfui2i8qtxeki"
-path="res://.godot/imported/potatomous_stage.png-97602c8ee62dc5bad299ac6cdc97b032.ctex"
+uid="uid://dqo8uvc3iwe5q"
+path="res://.godot/imported/igloo_3.png-409e6fea6e36645ba37380c75fdf81f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/stages/base_stage/art/potatomous_stage.png"
-dest_files=["res://.godot/imported/potatomous_stage.png-97602c8ee62dc5bad299ac6cdc97b032.ctex"]
+source_file="res://ui/cutscenes/opening_cutscene/art/igloo_3.png"
+dest_files=["res://.godot/imported/igloo_3.png-409e6fea6e36645ba37380c75fdf81f1.ctex"]
 
 [params]
 

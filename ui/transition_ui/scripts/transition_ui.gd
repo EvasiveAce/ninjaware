@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 #region -- Setup --
 ## Array to keep laughing markers.
@@ -16,20 +16,25 @@ var enemy_sprite : AnimatedSprite2D
 #endregion
 
 #region -- Node Setup --
-@onready var player_hp_container = $TransitionSprite/PlayerHPContainer
-@onready var enemy_hp_container = $TransitionSprite/EnemyHPContainer
+@onready var player_hp_container = $ScreenUI/PlayerHPContainer
+@onready var enemy_hp_container = $ScreenUI/EnemyHPContainer
 #endregion
 
-func _ready() -> void:
-	enemy_to_use = get_parent().current_enemy
+func setup_enemy(enemy_name: String) -> void:
+	enemy_to_use = enemy_name
+
+	# Hide whichever enemy the previous stage showed
+	for s in $ScreenUI/EnemyContainer.get_children():
+		s.visible = false
+
 	match enemy_to_use:
 		"Dummy":
-			enemy_sprite = $TransitionSprite/EnemyContainer/DummyAnimatedSprite
+			enemy_sprite = $ScreenUI/EnemyContainer/DummyAnimatedSprite
 		"Potatomous":
-			enemy_sprite = $TransitionSprite/EnemyContainer/PotatomousAnimatedSprite
+			enemy_sprite = $ScreenUI/EnemyContainer/PotatomousAnimatedSprite
 		"Southerland":
-			enemy_sprite = $TransitionSprite/EnemyContainer/SoutherlandAnimatedSprite
-	
+			enemy_sprite = $ScreenUI/EnemyContainer/SoutherlandAnimatedSprite
+
 	enemy_sprite.visible = true
 	markers_array = enemy_sprite.get_children()
 	enemy_sprite.play("idle")
@@ -37,13 +42,13 @@ func _ready() -> void:
 ## Used to get parent to change a tiny bit earlier than in code
 ## [br] Used in [TransitionIn].
 func _start_audio():
-	get_parent().child_update_audio()
+	get_parent().get_parent().get_node("GameViewport").get_child(0).child_update_audio()
 
 func _stop_audio():
-	get_parent().child_stop_audio()
+	get_parent().get_parent().get_node("GameViewport").get_child(0).child_stop_audio()
 
 func _begin_audio():
-	get_parent().child_begin_audio()
+	get_parent().get_parent().get_node("GameViewport").get_child(0).child_begin_audio()
 
 func _reset_level():
 	lvlToUse = 0
